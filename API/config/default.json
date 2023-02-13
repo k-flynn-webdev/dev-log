@@ -1,0 +1,55 @@
+{
+  "host": "localhost",
+  "port": 3000,
+  "public": "./public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "postgresql": {
+    "client": "pg",
+    "connection": "postgres://user:password@host:port/app-short-cal-api"
+  },
+  "authentication": {
+    "entity": "user",
+    "service": "/api/users",
+    "secret": "JLYOLFtQOFFbPCtNLYfRhHLSIq/MCOBG",
+    "authStrategies": [
+      "jwt",
+      "local"
+    ],
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "usernameField": "email",
+      "passwordField": "password"
+    },
+    "oauth": {
+      "redirect": "http://host:port/login?",
+      "defaults": {
+        "prefix": "/api/oauth"
+      },
+      "github": {
+        "redirect_uri": "http://host:port/oauth/github/callback",
+        "key": "shortkeycode",
+        "secret": "longsecretcodehere",
+        "scope": ["openid"],
+        "nonce": true
+      },
+      "google": {
+        "redirect_uri": "http://host:port/oauth/google/callback",
+        "key": "shortkeycode",
+        "secret": "longsecretcodehere",
+        "scope": ["openid", "email"],
+        "nonce": true
+      }
+    }
+  }
+}
+

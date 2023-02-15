@@ -39,8 +39,8 @@ services:
     environment:
       - PORT=${APP_PORT}
     volumes:
+      - /client/public
       - /client/node_modules
-      - "./client/public:/usr/src/app/public/"
     networks:
       - shared-network
 
@@ -50,7 +50,6 @@ services:
     ports:
       - '${NGINX_PORT}:80'
     volumes:
-      - "./client/public:/usr/src/app/public"
       - "./nginx/nginx.conf:/etc/nginx/conf.d/default.conf"
     networks:
       - shared-network

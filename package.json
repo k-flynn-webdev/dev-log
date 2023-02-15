@@ -1,0 +1,20 @@
+{
+  "name": "your-app-name",
+  "description": "Your app description",
+  "version": "0.0.0",
+  "homepage": "",
+  "private": true,
+  "keywords": [],
+  "author": {},
+  "contributors": [],
+  "bugs": {},
+  "engines": {
+    "node": ">= 16.16.0"
+  },
+  "type": "module",
+  "scripts": {
+    "docker:dev": "docker-compose -f docker-compose.dev.yml up"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

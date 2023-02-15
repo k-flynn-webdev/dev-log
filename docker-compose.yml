@@ -38,12 +38,12 @@ services:
       - '${APP_PORT}:3001'
     environment:
       - PORT=${APP_PORT}
+      - WATCHPACK_POLLING=true
+      - CHOKIDAR_USEPOLLING=true
     volumes:
-      - /client/public
-      - /client/node_modules
+      - ./client/src:/client/src
     networks:
       - shared-network
-
 
   nginx-proxy:
     build: ./nginx

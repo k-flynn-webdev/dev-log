@@ -57,6 +57,18 @@ services:
       - api
       - client
 
+  admin:
+    image: adminer
+    restart: on-failure
+    depends_on:
+      - database
+    ports:
+      - '${ADMIN_PORT}:8080'
+    networks:
+      - shared-network
+#   Link: http://0.0.0.0:8023/?pgsql=database%3A5432&username=dbuser&db=dbname&ns=public
+
+
 volumes:
   api:
   client:

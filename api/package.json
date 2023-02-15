@@ -1,0 +1,88 @@
+{
+  "name": "your-app-name-api",
+  "description": "Your app description",
+  "version": "0.0.0",
+  "homepage": "",
+  "private": true,
+  "keywords": [
+    "feathers"
+  ],
+  "author": {},
+  "contributors": [],
+  "bugs": {},
+  "engines": {
+    "node": ">= 16.16.0"
+  },
+  "feathers": {
+    "language": "js",
+    "packager": "yarn",
+    "database": "postgresql",
+    "framework": "koa",
+    "transports": [
+      "rest",
+      "websockets"
+    ],
+    "schema": "json"
+  },
+  "directories": {
+    "lib": "src",
+    "test": "test"
+  },
+  "files": [
+    "lib/client.js",
+    "lib/**/*.d.ts"
+  ],
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon -e js,json,yml src/",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prettier": "npx prettier \"**/*.js\" --write",
+    "mocha": "cross-env NODE_ENV=test mocha test/ --recursive --exit",
+    "test": "cross-env NODE_ENV=test npm run migrate && npm run mocha",
+    "bundle:client": "npm pack --pack-destination ./public",
+    "migrate": "knex migrate:latest",
+    "migrate:make": "knex migrate:make",
+    "docker": "docker-compose -f docker-compose.yml up",
+    "docker:dev": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up"
+  },
+  "dependencies": {
+    "@feathersjs/adapter-commons": "^5.0.0-pre.34",
+    "@feathersjs/authentication": "^5.0.0-pre.34",
+    "@feathersjs/authentication-client": "^5.0.0-pre.34",
+    "@feathersjs/authentication-local": "^5.0.0-pre.34",
+    "@feathersjs/authentication-oauth": "^5.0.0-pre.34",
+    "@feathersjs/configuration": "^5.0.0-pre.34",
+    "@feathersjs/errors": "^5.0.0-pre.34",
+    "@feathersjs/feathers": "^5.0.0-pre.34",
+    "@feathersjs/knex": "^5.0.0-pre.34",
+    "@feathersjs/koa": "^5.0.0-pre.34",
+    "@feathersjs/schema": "^5.0.0-pre.34",
+    "@feathersjs/socketio": "^5.0.0-pre.34",
+    "@feathersjs/transport-commons": "^5.0.0-pre.34",
+    "dotenv": "^16.0.3",
+    "knex": "^2.3.0",
+    "pg": "^8.8.0",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "@feathersjs/cli": "^5.0.0-pre.34",
+    "@feathersjs/rest-client": "^5.0.0-pre.34",
+    "axios": "^1.2.2",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.0.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^24.0.1",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-security": "^1.4.0",
+    "husky": "^8.0.3",
+    "jest": "^29.3.1",
+    "mocha": "^10.2.0",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.1"
+  }
+}

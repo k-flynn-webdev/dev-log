@@ -1,0 +1,9 @@
+node_modules
+.git
+.gitignore
+
+npm-debug.log
+build
+**/.git
+**/.DS_Store
+**/node_modules

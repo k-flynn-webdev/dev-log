@@ -1,8 +1,8 @@
 FROM node:16-alpine
 
-RUN mkdir -p /app/ && chown -R node:node /app/
+RUN mkdir -p /api/ && chown -R node:node /api/
 
-WORKDIR /app
+WORKDIR /api
 
 USER node
 

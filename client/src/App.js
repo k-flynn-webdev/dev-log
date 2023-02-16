@@ -1,24 +1,21 @@
 import * as React from 'react'
 import { ChakraProvider } from '@chakra-ui/react'
-
+import { Box } from '@chakra-ui/react'
+import Main from './pages/Main';
 import useDocumentTitle from './hooks/use-document-title';
-import LogInput from './components/log-input';
-
 
 const TITLE = 'Dev Diary';
+
 
 function App() {
 	useDocumentTitle(TITLE);
 
 	return (
 	<ChakraProvider>
-		<div>
+		<Box>
 			<h1 className="text-center mt-4 text-5xl">{ TITLE }</h1>
-
-			<div>
-				<LogInput />
-			</div>
-		</div>
+			<Main />
+		</Box>
 	</ChakraProvider>
 	);
 }

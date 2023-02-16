@@ -1,22 +1,23 @@
 import * as React from 'react'
 import { useState } from 'react'
-import { Input, Box, Text, Button } from '@chakra-ui/react'
+import { Input, Box, Button } from '@chakra-ui/react'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { decrease, increase } from '../store/slices/counter'
+import { update } from '../store/slices/logInput'
 
 // todo: Make these a function that randomises and encourages
 const PLACE_HOLDER = "Todays Milestone?"
 
 function LogInput() {
-  const [value, setValue] = useState('')
-  const handleChange = (event) => setValue(event.target.value)
+  const handleChange = (event) => dispatch(update(event.target.value))
 
-	const count = useSelector(state => state.counter.value)
+	const value = useSelector(state => state.logInput.value)
 	const dispatch = useDispatch()
 
 	return (
 		<Box>
+
+			<p>{value}</p>
 
 			<Input
 				type="text"
@@ -24,16 +25,6 @@ function LogInput() {
 				value={value}
         onChange={handleChange}
 			/>
-
-			<div>
-					<Button onClick={() => dispatch(increase())}>
-						Increase
-					</Button>
-					<p>{count}</p>
-					<Button onClick={() => dispatch(decrease())}>
-						Decrease
-					</Button>
-			</div>
 
 		</Box>
 	);

@@ -49,6 +49,9 @@ html, body {
       background-color: $mid-color;
     }
 
+    &__tags { z-index: 1; }
+
+
     &__input {
       background-color: $mid-color;
       overflow: hidden;

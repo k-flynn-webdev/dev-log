@@ -14,7 +14,6 @@ function App() {
 	useDocumentTitle(TITLE);
 
 	return (
-
 	<ChakraProvider>
 		<Box className="dev-diary">
 			<h1 className="title text-center my-4 text-5xl">

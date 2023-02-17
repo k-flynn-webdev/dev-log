@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { parseTags } from '../../helpers/parse-tags'
 
 export const logs = createSlice({
   name: 'logs',
@@ -20,7 +21,8 @@ export const logs = createSlice({
     create: (state, action) => {
       const newLog = {
         id: Date.now(),
-        value: action.payload
+        value: action.payload,
+        tags: parseTags(action.payload)
       }
       state.unshift(newLog)
     },
@@ -35,6 +37,7 @@ export const logs = createSlice({
       if (log) {
         log.id = action.payload.id
         log.value = action.payload.value
+        log.tags = action.payload.tags
       }
     },
     /**

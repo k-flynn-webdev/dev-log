@@ -1,9 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { parseTags } from '../../helpers/parse-tags'
 
 export const logInput = createSlice({
   name: 'logInput',
   initialState: {
-    value: ""
+    value: "",
+    tags: []
   },
   reducers: {
     /**
@@ -14,9 +16,11 @@ export const logInput = createSlice({
      */
     reset: (state) => {
       state.value = ""
+      state.tags = []
     },
     update: (state, action) => {
       state.value = action.payload
+      state.tags = parseTags(action.payload)
     },
   }
 })

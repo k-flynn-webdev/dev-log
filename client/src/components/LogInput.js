@@ -1,7 +1,8 @@
 import * as React from 'react'
-import {Input, Card, Button, Hide} from '@chakra-ui/react';
+import { Input, Card, Button } from '@chakra-ui/react';
 
 import LogInputLength from './LogInputLength';
+import LogTags from './LogTags';
 
 import { useSelector, useDispatch } from 'react-redux'
 import { reset, update } from '../store/slices/log-input'
@@ -14,6 +15,7 @@ const ADD = "Add"
 function LogInput() {
 	const dispatch = useDispatch()
 	const logValue = useSelector(state => state.logInput.value)
+	const logTags = useSelector(state => state.logInput.tags)
 
 	const handleChange = (event) => dispatch(update(event.target.value))
 
@@ -50,6 +52,8 @@ function LogInput() {
 				</Button>
 
 			</form>
+
+			<LogTags tags={logTags} />
 		</Card>
 	)
 }

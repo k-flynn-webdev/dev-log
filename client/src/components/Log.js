@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Card, CardBody } from '@chakra-ui/react'
+import LogTags from './LogTags';
 
 function Log({ value }) {
 	return (
@@ -10,6 +11,8 @@ function Log({ value }) {
 					<div>
 						<p>{ value.value }</p>
 					</div>
+
+					<LogTags tags={value.tags} />
 				</CardBody>
 			</Card>
 	)

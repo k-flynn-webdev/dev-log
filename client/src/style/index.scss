@@ -1,0 +1,83 @@
+$border-color: #353434;
+$mid-color: #faf5f5;
+$progress-color: #86ec86;
+
+html, body {
+  //background-color: $bg-color !important;
+}
+
+.dev-diary {
+
+
+  $breakpoints:(
+    xl: 'max-width: 80em',
+    lg: 'max-width: 62em',
+    md: 'max-width: 48em',
+    sm: 'max-width: 30em',
+    xs: 'max-width: 20em',
+  );
+  @each $key,$val in $breakpoints{
+    @media (#{$val}) {
+      .#{$key}-hidden {
+        display: none;
+      }
+    }
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .block {
+    display: block;
+  }
+
+  .dev-diary-border {
+    border: 0.66px solid $border-color;
+  }
+
+  input {
+    @extend .dev-diary-border;
+    background-color: white;
+  }
+
+
+
+  .log {
+    &__card {
+      background-color: $mid-color;
+    }
+
+    &__input {
+      background-color: $mid-color;
+      overflow: hidden;
+      position: relative;
+      border-radius: 0.5rem;
+
+      input, button { z-index: 1; }
+
+      &-progress {
+        opacity: 0.9;
+        pointer-events: none;
+        transition: width 0.3s ease-out, background-color 1.5s;
+          background-color: $progress-color;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 100%;
+        z-index: 0;
+
+        &.min {
+          background-color: red;
+        }
+      }
+    }
+  }
+}
+
+.warning {
+  background-color: darkorange !important;
+}
+.danger {
+  background-color: red !important;
+}

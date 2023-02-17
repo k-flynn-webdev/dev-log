@@ -16,7 +16,7 @@ function App() {
 	return (
 
 	<ChakraProvider>
-		<Box>
+		<Box className="dev-diary">
 			<h1 className="title text-center my-4 text-5xl">
 				{ TITLE }
 			</h1>

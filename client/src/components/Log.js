@@ -4,7 +4,8 @@ import { Card, CardBody } from '@chakra-ui/react'
 function Log({ value }) {
 	return (
 			<Card
-					className="mb-3">
+					size="sm"
+					className="log__card mb-3">
 				<CardBody>
 					<div>
 						<p>{ value.value }</p>

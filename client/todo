@@ -1,10 +1,14 @@
 MINITASK:
 
+EN-GB:
+    Move all text values into a en-gb const file
 LOG:
     CREATE:
         Submit Log Input to store
         Input character length warning - max - component - validation
         Input parse for common words - tags - component - ghosted
+        PLACEHOLDER:
+            Encourage User with randomized messages for Placeholder - messages
     STORE:
         CREATE:
             Create a local Log Form

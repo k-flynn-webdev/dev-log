@@ -5,9 +5,8 @@ import { Input, Box, Button } from '@chakra-ui/react'
 import { useSelector, useDispatch } from 'react-redux'
 import { update } from '../store/slices/logInput'
 
-// todo: Make these a function that randomises and encourages
-const PLACE_HOLDER = "Todays Milestone?"
 const LOG_INPUT_MIN_LENGTH = 10;
+const PLACE_HOLDER = "Todays Milestone?"
 
 function LogInput() {
  	const value = useSelector(state => state.logInput.value)

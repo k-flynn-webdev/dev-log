@@ -5,14 +5,14 @@ export const logs = createSlice({
   initialState: [],
   reducers: {
     /**
-     * Reset Logs
+     * Reset State
      *
      * @param state
      * @param action
      */
     reset: () => [],
     /**
-     * Create Log
+     * Creates a new Log
      *
      * @param state
      * @param action
@@ -22,10 +22,10 @@ export const logs = createSlice({
         id: Date.now(),
         value: action.payload
       }
-      state.push(newLog)
+      state.unshift(newLog)
     },
     /**
-     * Patch Log
+     * Patch existing Log
      *
      * @param state
      * @param action
@@ -38,7 +38,7 @@ export const logs = createSlice({
       }
     },
     /**
-     * Remove Log
+     * Remove existing Log
      *
      * @param state
      * @param action

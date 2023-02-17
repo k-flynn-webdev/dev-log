@@ -1,17 +1,16 @@
 import * as React from 'react'
 import { Box } from '@chakra-ui/react'
+import Log from './Log'
 
 import { useSelector } from 'react-redux'
 
 function Logs() {
 	const logs = useSelector(state => state.logs)
-	const logsList = logs.map((item) => <li key={item.id}>{ item.value }</li>)
+	const LogList = logs.map((item) => <Log key={item.id} value={item} />)
 
 	return (
 		<Box>
-			<ul>
-				{logsList}
-			</ul>
+			{LogList}
 		</Box>
 	)
 }

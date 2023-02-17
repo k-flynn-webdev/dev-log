@@ -1,15 +1,19 @@
 MINITASK:
+DONE:
+- Submit Log Input to store
+- Create Log value in store
+- Input character length warning - visual
+- Create a store local Log Form
+- Show LIST/Log content
 
 LOG:
     CREATE:
-        Submit Log Input to store
-        Input character length warning - max - component - validation
+
+        Input character length warning - max validation
         Input parse for common words - tags - component - ghosted
         PLACEHOLDER:
             Encourage User with randomized messages for Placeholder - messages
     STORE:
-        CREATE:
-            Create a local Log Form
         PATCH:
             Be able to edit a local Log Form
         RESET:
@@ -24,13 +28,11 @@ LOG:
 LOGS:
     VIEW:
         EACH:
-            Show Log content
             Show Log tags (parsed)
             Show a update button
             Show a delete button with warning
     STORE:
         EACH:
-            LOG add (local)
             LOG patch (local)
             LOG delete (local)
     STORE-API:

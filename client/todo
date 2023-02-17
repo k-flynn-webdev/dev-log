@@ -1,0 +1,65 @@
+MINITASK:
+
+LOG:
+    CREATE:
+        Submit Log Input to store
+        Input character length warning - max - component - validation
+        Input parse for common words - tags - component - ghosted
+    STORE:
+        CREATE:
+            Create a local Log Form
+        PATCH:
+            Be able to edit a local Log Form
+        RESET:
+            Be able to reset local Log Form?
+    STORE-API:
+        CREATE:
+            Create a API Log
+        PATCH:
+            Be able to edit a API Log
+        DELETE:
+            Be able to delete a Log via API
+LOGS:
+    VIEW:
+        EACH:
+            Show Log content
+            Show Log tags (parsed)
+            Show a update button
+            Show a delete button with warning
+    STORE:
+        EACH:
+            LOG add (local)
+            LOG patch (local)
+            LOG delete (local)
+    STORE-API:
+        EACH:
+            LOG add (local)
+            LOG patch (local)
+            LOG delete (local)
+        LIST:
+            GET Logs
+USER:
+    LOGIN:
+        Submit Input to store
+        Input warnings - validation
+    SIGNUP:
+        Submit Input to store
+        Input warnings - validation
+    STORE:
+        CREATE:
+            Create a local User
+        PATCH:
+            Be able to edit a local User
+        LOGIN:
+            Be able to login a local User
+        SIGNUP:
+            Be able to Signup a local User
+    STORE-API:
+        CREATE:
+            Create a API User
+        PATCH:
+            Be able to edit a API User
+        LOGIN:
+            Be able to login a API User
+        SIGNUP:
+            Be able to Signup a API User

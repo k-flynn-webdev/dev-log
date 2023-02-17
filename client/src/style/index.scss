@@ -1,5 +1,6 @@
 $border-color: #353434;
-$mid-color: #faf5f5;
+$mid-color: #eaebee;
+$danger-color: #e53939;
 $progress-color: #86ec86;
 
 html, body {
@@ -68,7 +69,7 @@ html, body {
         z-index: 0;
 
         &.min {
-          background-color: red;
+          background-color: $danger-color;
         }
       }
     }
@@ -79,5 +80,5 @@ html, body {
   background-color: darkorange !important;
 }
 .danger {
-  background-color: red !important;
+  background-color: $danger-color;
 }

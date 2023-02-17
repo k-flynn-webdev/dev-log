@@ -27,7 +27,7 @@ function LogInput() {
 		<Card className="log__input mb-3">
 			<form id='logForm'
 						onSubmit={handleSubmit}
-						className='flex flex-row flex-wrap'
+						className='flex flex-row flex-wrap m-1'
 			>
 				<div className='flex-grow m-1'>
 					<Input 	id='logInput'

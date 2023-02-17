@@ -1,7 +1,5 @@
 MINITASK:
 
-EN-GB:
-    Move all text values into a en-gb const file
 LOG:
     CREATE:
         Submit Log Input to store
@@ -67,3 +65,5 @@ USER:
             Be able to login a API User
         SIGNUP:
             Be able to Signup a API User
+EN-GB:
+    Move all text values into a en-gb const file

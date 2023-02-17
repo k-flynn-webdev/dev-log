@@ -6,6 +6,15 @@ export const logInput = createSlice({
     value: ""
   },
   reducers: {
+    /**
+     * Reset Log Input
+     *
+     * @param state
+     * @param action
+     */
+    reset: (state) => {
+      state.value = ""
+    },
     update: (state, action) => {
       state.value = action.payload
     },
@@ -13,6 +22,6 @@ export const logInput = createSlice({
 })
 
 // each case under reducers becomes an action
-export const { update } = logInput.actions
+export const { reset, update } = logInput.actions
 
 export default logInput.reducer

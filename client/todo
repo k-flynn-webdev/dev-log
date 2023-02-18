@@ -1,0 +1,70 @@
+MINITASK:
+DONE:
+- Submit Log Input to store
+- Create Log value in store
+- Input character length warning - visual
+- Create a store local Log Form
+- Show LIST/Log content
+
+LOG:
+    CREATE:
+        Input character length warning - max validation
+        Input parse for common words - tags - component - ghosted
+        PLACEHOLDER:
+            Encourage User with randomized messages for Placeholder - messages
+    STORE:
+        PATCH:
+            Be able to edit a local Log Form
+        RESET:
+            Be able to reset local Log Form?
+    STORE-API:
+        CREATE:
+            Create a API Log
+        PATCH:
+            Be able to edit a API Log
+        DELETE:
+            Be able to delete a Log via API
+LOGS:
+    VIEW:
+        EACH:
+            Show Log tags (parsed)
+            Show a update button
+            Show a delete button with warning
+    STORE:
+        EACH:
+            LOG patch (local)
+            LOG delete (local)
+    STORE-API:
+        EACH:
+            LOG add (local)
+            LOG patch (local)
+            LOG delete (local)
+        LIST:
+            GET Logs
+USER:
+    LOGIN:
+        Submit Input to store
+        Input warnings - validation
+    SIGNUP:
+        Submit Input to store
+        Input warnings - validation
+    STORE:
+        CREATE:
+            Create a local User
+        PATCH:
+            Be able to edit a local User
+        LOGIN:
+            Be able to login a local User
+        SIGNUP:
+            Be able to Signup a local User
+    STORE-API:
+        CREATE:
+            Create a API User
+        PATCH:
+            Be able to edit a API User
+        LOGIN:
+            Be able to login a API User
+        SIGNUP:
+            Be able to Signup a API User
+EN-GB:
+    Move all text values into a en-gb const file

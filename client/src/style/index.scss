@@ -47,7 +47,11 @@ html, body {
   .log {
     &__card {
       background-color: $mid-color;
+
+      &-text { cursor: default; }
     }
+
+    &__tag { cursor: default; }
 
     &__tags { z-index: 1; }
 

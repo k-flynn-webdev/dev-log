@@ -9,11 +9,9 @@ DONE:
 - Show each Log tags (parsed)
 - Input character length warning - max validation
 - Input parse for common words - tags - component - ghosted
+- Encourage User with randomized messages for Placeholder
 
 LOG:
-    CREATE:
-        PLACEHOLDER:
-            Encourage User with randomized messages for Placeholder - messages
     STORE:
         PATCH:
             Be able to edit a local Log Form

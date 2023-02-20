@@ -1,30 +1,10 @@
-const LANGUAGES = [
-		'python',
-		'bash',
-		'javascript',
-		'js'
-];
-const TOOLS = [
-		'docker',
-		'ci/cd',
-		'container'
-];
-const METHODS = [
-		'scrum',
-		'agile',
-		'test',
-		'tdd',
-		'bdd',
-		'design'
-];
+import { LANGUAGES, TOOLS, METHODS } from '../lang/en-gb';
 
 const TAG_TYPES = {
 	LANGUAGES,
 	TOOLS,
 	METHODS,
 };
-
-
 
 export const parseTags = (log) => {
 	const tags = [];

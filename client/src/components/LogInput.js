@@ -7,10 +7,9 @@ import Tags from './Tags';
 import { useSelector, useDispatch } from 'react-redux'
 import { reset, update } from '../store/slices/log-input'
 import { create } from '../store/slices/logs'
-import { isValidLogLength, LOG_INPUT_MIN_LENGTH, LOG_INPUT_MAX_LENGTH } from '../helpers/log-input';
+import { randomPlaceholder, isValidLogLength, LOG_INPUT_MIN_LENGTH, LOG_INPUT_MAX_LENGTH } from '../helpers/log-input';
 
-const PLACE_HOLDER = "Todays Milestone?"
-const ADD = "Add"
+import { ADD } from '../lang/en-gb';
 
 function LogInput() {
 	const dispatch = useDispatch()
@@ -36,7 +35,7 @@ function LogInput() {
 					<Input 	id='logInput'
 									width='100%'
 									type='text'
-									placeholder={PLACE_HOLDER}
+									placeholder={randomPlaceholder()}
 									isRequired
 									minLength={LOG_INPUT_MIN_LENGTH}
 									maxLength={LOG_INPUT_MAX_LENGTH}

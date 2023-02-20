@@ -2,15 +2,14 @@ import * as React from 'react'
 import { Input, Card, Button } from '@chakra-ui/react';
 
 import LogInputLength from './LogInputLength';
-import LogTags from './LogTags';
+import Tags from './Tags';
 
 import { useSelector, useDispatch } from 'react-redux'
 import { reset, update } from '../store/slices/log-input'
 import { create } from '../store/slices/logs'
-import { isValidLogLength, LOG_INPUT_MIN_LENGTH, LOG_INPUT_MAX_LENGTH } from '../helpers/log-input';
+import { randomPlaceholder, isValidLogLength, LOG_INPUT_MIN_LENGTH, LOG_INPUT_MAX_LENGTH } from '../helpers/log-input';
 
-const PLACE_HOLDER = "Todays Milestone?"
-const ADD = "Add"
+import { ADD } from '../lang/en-gb';
 
 function LogInput() {
 	const dispatch = useDispatch()
@@ -27,16 +26,16 @@ function LogInput() {
 	}
 
 	return (
-		<Card className="log__input mb-3">
+		<Card className="log__input p-2 mb-3">
 			<form id='logForm'
 						onSubmit={handleSubmit}
-						className='flex flex-row flex-wrap m-1'
+						className='flex flex-row flex-wrap'
 			>
-				<div className='flex-grow m-1'>
+				<div className='flex-grow'>
 					<Input 	id='logInput'
 									width='100%'
 									type='text'
-									placeholder={PLACE_HOLDER}
+									placeholder={randomPlaceholder()}
 									isRequired
 									minLength={LOG_INPUT_MIN_LENGTH}
 									maxLength={LOG_INPUT_MAX_LENGTH}
@@ -49,13 +48,13 @@ function LogInput() {
 				<Button type='submit'
 								colorScheme="green"
 								isDisabled={!isValid}
-								className='m-1 xs-hidden'>
+								className='xs-hidden ml-1'>
 					{ADD}
 				</Button>
 
 			</form>
 
-			<LogTags tags={logTags} />
+			<Tags tags={logTags} />
 		</Card>
 	)
 }

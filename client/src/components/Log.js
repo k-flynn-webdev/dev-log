@@ -1,18 +1,19 @@
 import * as React from 'react'
 import { Card, CardBody } from '@chakra-ui/react'
-import LogTags from './LogTags';
+import Tags from './Tags';
 
 function Log({ value }) {
 	return (
 			<Card
 					size="sm"
-					className="log__card mb-3">
+					className="log__card mb-2"
+					title={value.value}>
 				<CardBody>
-					<div>
+					<div className="log__card-text">
 						<p>{ value.value }</p>
 					</div>
 
-					<LogTags tags={value.tags} />
+					<Tags tags={value.tags} />
 				</CardBody>
 			</Card>
 	)

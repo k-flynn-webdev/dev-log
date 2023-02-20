@@ -1,28 +1,20 @@
 import * as React from 'react'
-
 import { useSelector } from 'react-redux'
+import { progressValue, isValidLogLength } from '../helpers/log-input';
 
-const LOG_INPUT_MIN_LENGTH = 10;
-const LOG_INPUT_MAX_LENGTH = 100;
-
-const progressValue = (input) => {
-	return (input / (LOG_INPUT_MAX_LENGTH)) * 100
-}
-const progressClass = (input) => {
-	return `log__input-progress ${input < LOG_INPUT_MIN_LENGTH ? 'min' : '' }`
-}
 
 function LogInputLength() {
 	const logValueLength = useSelector(state => state.logInput.value).length || 0
 	const value = progressValue(logValueLength)
-	const classNames = progressClass(logValueLength)
+	const isValidClass = isValidLogLength(logValueLength) ? '' : 'invalid'
 
 	return (
 		<div
-				className={classNames}
+				className={`log__input-progress ${isValidClass}`}
 				style={{ width: `${value}%` }}
 		/>
 	)
 }
 
 export default LogInputLength;
+

@@ -7,8 +7,8 @@ import LogTags from './LogTags';
 import { useSelector, useDispatch } from 'react-redux'
 import { reset, update } from '../store/slices/log-input'
 import { create } from '../store/slices/logs'
+import { isValidLogLength, LOG_INPUT_MIN_LENGTH, LOG_INPUT_MAX_LENGTH } from '../helpers/log-input';
 
-const LOG_INPUT_MIN_LENGTH = 10;
 const PLACE_HOLDER = "Todays Milestone?"
 const ADD = "Add"
 
@@ -16,6 +16,7 @@ function LogInput() {
 	const dispatch = useDispatch()
 	const logValue = useSelector(state => state.logInput.value)
 	const logTags = useSelector(state => state.logInput.tags)
+	const isValid = isValidLogLength(logValue.length)
 
 	const handleChange = (event) => dispatch(update(event.target.value))
 
@@ -38,6 +39,7 @@ function LogInput() {
 									placeholder={PLACE_HOLDER}
 									isRequired
 									minLength={LOG_INPUT_MIN_LENGTH}
+									maxLength={LOG_INPUT_MAX_LENGTH}
 									onChange={handleChange}
 									value={logValue}
 					/>
@@ -46,7 +48,7 @@ function LogInput() {
 
 				<Button type='submit'
 								colorScheme="green"
-								isDisabled={logValue.length < LOG_INPUT_MIN_LENGTH }
+								isDisabled={!isValid}
 								className='m-1 xs-hidden'>
 					{ADD}
 				</Button>

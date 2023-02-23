@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Provider } from 'react-redux'
 import { ChakraProvider } from '@chakra-ui/react'
 import { Box } from '@chakra-ui/react'
-import { Switch, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import store from './store/store.js'
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -22,10 +22,10 @@ function App() {
 
 			<Provider store={store}>
 				<main>
-					<Switch>
-						<Route path="/" component={Home} exact />
-						<Route path="/login" component={Login} />
-					</Switch>
+					<Routes>
+						<Route path="/" element={<Home />} exact />
+						<Route path="/login" element={<Login />} />
+					</Routes>
 				</main>
 			</Provider>
 		</Box>

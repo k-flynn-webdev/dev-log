@@ -1,3 +1,4 @@
+export const TITLE = 'Dev Diary';
 export const ADD = "Add"
 
 export const LOG_PLACEHOLDERS = [

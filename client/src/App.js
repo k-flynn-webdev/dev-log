@@ -6,9 +6,7 @@ import store from './store/store.js'
 import Main from './pages/Main';
 import useDocumentTitle from './hooks/use-document-title';
 
-
-const TITLE = 'Dev Diary';
-
+import { TITLE } from './lang/en-gb';
 
 function App() {
 	useDocumentTitle(TITLE);

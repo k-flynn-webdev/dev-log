@@ -4,7 +4,7 @@ import { Container } from '@chakra-ui/react'
 import LogInput from '../components/LogInput'
 import Logs from '../components/Logs'
 
-function Main() {
+function Home() {
 
 	return (
 		<Container>
@@ -14,4 +14,4 @@ function Main() {
 	);
 }
 
-export default Main;
+export default Home;

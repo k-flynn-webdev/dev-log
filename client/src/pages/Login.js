@@ -4,9 +4,7 @@ import { Container } from '@chakra-ui/react'
 function Login() {
 
 	return (
-		<Container>
-			<div>Login Page</div>
-		</Container>
+		<div>Login Page</div>
 	);
 }
 

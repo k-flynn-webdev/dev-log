@@ -10,7 +10,7 @@ function Header({ title, className }) {
 	return (
 		<div className={`${className ? className : ''} flex flex-row`}>
 			<div className='flex-grow'>
-				<h1 className="title text-center my-4 text-5xl">
+				<h1 className="title text-center mb-4 text-5xl">
 					{ title || TITLE }
 				</h1>
 			</div>

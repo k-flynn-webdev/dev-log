@@ -12,7 +12,16 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       { path: "", element: <Home /> },
-      { path: "login", element: <Login /> },
+    ],
+  },
+  {
+    path: "login",
+    element: <Root />,
+    errorElement: <Error />,
+    children: [
+      { path: "", element: <Login /> },
+      { path: "register", element: <Login /> },
+      { path: "verify/:token", element: <Login /> },
     ],
   },
 ]);

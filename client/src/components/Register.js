@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react'
 import { Button } from '@chakra-ui/react';
 
-import { REGISTER, LOGIN, EMAIL, EMAIL_PLACEHOLDER, PASSWORD, PASSWORD_PLACEHOLDER } from '../lang/en-gb';
+import { CREATE, LOGIN, EMAIL, EMAIL_PLACEHOLDER, PASSWORD, PASSWORD_PLACEHOLDER } from '../lang/en-gb';
 import { validEmail, validPassword } from '../helpers/authentication';
 
 import FormInput from './FormInput';
 
-function Login() {
+function Register() {
 	const [emailValue, setEmail] = useState('')
 	const [emailIsValid, setEmailIsValid] = useState(true)
 	const [passwordValue, setPassword] = useState('')
@@ -69,18 +69,18 @@ function Login() {
 								colorScheme="green"
 								isDisabled={!formIsValid}
 						>
-							{LOGIN}
+							{CREATE}
 						</Button>
 					</div>
 			</form>
 
 			<div>
-				<p>Dont have an account?
-					<Link className="link ml-1" to="/login/register">{REGISTER}</Link>
+				<p>Already have an account?
+					<Link className="link ml-1" to="/login">{LOGIN}</Link>
 				</p>
 			</div>
 		</div>
 	)
 }
 
-export default Login;
+export default Register;

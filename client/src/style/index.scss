@@ -2,6 +2,7 @@ $border-color: #353434;
 $mid-color: #eaebee;
 $danger-color: #e53939;
 $progress-color: #86ec86;
+$link-color: #86ec86;
 
 html, body {
   //background-color: $bg-color !important;
@@ -47,6 +48,9 @@ html, body {
     background-color: white;
   }
 
+  a, .link {
+    text-decoration: underline solid $link-color;
+  }
 
 
   .log {

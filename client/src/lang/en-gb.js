@@ -1,6 +1,8 @@
 export const TITLE = 'Dev Diary';
 export const ADD = "Add"
 export const LOGIN = "Login"
+export const REGISTER = "Register"
+export const CREATE = "Create"
 export const EMAIL = "Email"
 export const EMAIL_PLACEHOLDER = "test@test.com"
 export const PASSWORD = "Password"

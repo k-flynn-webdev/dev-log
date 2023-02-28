@@ -18,7 +18,7 @@ function Header({ title, className }) {
 				</Link>
 			</div>
 			<div>
-				<Link to='login'>
+				<Link to='/login'>
 					<p>User</p>
 				</Link>
 			</div>

@@ -1,5 +1,10 @@
 export const TITLE = 'Dev Diary';
 export const ADD = "Add"
+export const LOGIN = "Login"
+export const EMAIL = "Email"
+export const EMAIL_PLACEHOLDER = "test@test.com"
+export const PASSWORD = "Password"
+export const PASSWORD_PLACEHOLDER = "*******"
 
 export const LOG_PLACEHOLDERS = [
 		"Today's milestone?",

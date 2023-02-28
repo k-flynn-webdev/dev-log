@@ -7,9 +7,13 @@ html, body {
   //background-color: $bg-color !important;
 }
 
-.dev-diary {
-  margin-top: 0.75rem;
 
+.dev-diary {
+
+  &.chakra-container {
+    margin-top: 0.75rem;
+    padding: 0;
+  }
 
   $breakpoints:(
     xl: 'max-width: 80em',

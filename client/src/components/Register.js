@@ -74,10 +74,9 @@ function Register() {
 					</div>
 			</form>
 
-			<div>
-				<p>Already have an account?
-					<Link className="link ml-1" to="/login">{LOGIN}</Link>
-				</p>
+			<div className="mt-4">
+				<span className="mr-1">Already have an account?</span>
+				<Link className="link" to="/login">{LOGIN}</Link>
 			</div>
 		</div>
 	)

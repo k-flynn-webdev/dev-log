@@ -74,10 +74,9 @@ function Login() {
 					</div>
 			</form>
 
-			<div>
-				<p>Dont have an account?
-					<Link className="link ml-1" to="/login/register">{REGISTER}</Link>
-				</p>
+			<div className="mt-4">
+				<span className="mr-1">Dont have an account?</span>
+				<Link className="link" to="/login/register">{REGISTER}</Link>
 			</div>
 		</div>
 	)

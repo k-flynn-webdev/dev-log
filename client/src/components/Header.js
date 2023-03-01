@@ -11,15 +11,15 @@ function Header({ title, className }) {
 	return (
 		<div className={`${className ? className : ''} flex flex-row`}>
 			<div className='flex-grow'>
-				<Link to='/'>
-					<h1 className="title text-center mb-4 text-5xl">
+				<div className="text-center mb-4">
+					<Link className="title text-5xl" to='/'>
 						{ title || TITLE }
-					</h1>
-				</Link>
+					</Link>
+				</div>
 			</div>
 			<div>
 				<Link to='/login'>
-					<p>User</p>
+					User
 				</Link>
 			</div>
 		</div>

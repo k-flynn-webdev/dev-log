@@ -1,4 +1,4 @@
-export const USER_TOKEN = "accessToken";
+export const USER_TOKEN = "access_token";
 
 export const MIN_EMAIL = 5;
 export const MIN_PASSWORD = 5;

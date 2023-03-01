@@ -16,6 +16,7 @@ function LoginPage() {
 	const form = (isLogin || isRegister) ?
 			<LoginRegister isLogin={isLogin} /> : "";
 
+
 	return (
 			<Box className="login">
 				<Card maxW='sm' className="login__card mb-2 mx-auto">
@@ -34,7 +35,7 @@ function LoginPage() {
 							<LoginGithub />
 						</div>
 
-						<hr className="solid mb-4" />
+						<hr className="solid my-8" />
 
 						<div>
 							{form}

@@ -12,13 +12,13 @@ function Header({ title, className }) {
 		<div className={`${className ? className : ''} flex flex-row`}>
 			<div className='flex-grow'>
 				<div className="text-center mb-4">
-					<Link className="title text-5xl" to='/'>
+					<Link className="title text-5xl link" to='/'>
 						{ title || TITLE }
 					</Link>
 				</div>
 			</div>
 			<div>
-				<Link to='/login'>
+				<Link to='/login' className="link">
 					User
 				</Link>
 			</div>

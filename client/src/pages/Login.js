@@ -1,8 +1,10 @@
 import * as React from 'react'
 import { useLocation } from 'react-router-dom';
-import { Box, Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
+import { Box, Card, CardHeader, CardBody, CardFooter, Flex } from '@chakra-ui/react'
 import { REGISTER, LOGIN } from '../lang/en-gb';
 import Login from '../components/Login';
+import LoginGoogle from '../components/LoginGoogle';
+import LoginGithub from '../components/LoginGithub';
 import Register from '../components/Register';
 
 
@@ -23,7 +25,18 @@ function LoginPage() {
 					</CardHeader>
 
 					<CardBody>
-						{Form}
+
+						<div className="socials-bar mb-4">
+							<LoginGoogle />
+							<LoginGithub />
+						</div>
+
+						<hr className="solid mb-4" />
+
+						<div>
+							{Form}
+						</div>
+
 					</CardBody>
 				</Card>
 			</Box>

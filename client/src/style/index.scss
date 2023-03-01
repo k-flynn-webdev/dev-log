@@ -10,16 +10,7 @@ html, body {
 
 
 .dev-diary {
-  &.chakra-container {
-    margin-top: 0.75rem;
-    padding: 0;
-  }
-
-  .chakra-card {
-    box-shadow: 0 5px 8px 2px rgba(0, 0, 0, 0.15);
-  }
-
-  $breakpoints:(
+    $breakpoints:(
     xl: 'max-width: 80em',
     lg: 'max-width: 62em',
     md: 'max-width: 48em',
@@ -28,15 +19,37 @@ html, body {
   );
   @each $key,$val in $breakpoints{
     @media (#{$val}) {
-      .#{$key}-hidden {
+      .#{$key}\:hide {
         display: none;
+      }
+
+      .#{$key}\:full {
+        width: 100%;
       }
     }
   }
 
-  .hidden {
+  .hide {
     display: none;
   }
+
+
+
+  &.chakra-container {
+    margin-top: 0.75rem;
+    padding: 0;
+  }
+
+  .chakra-card {
+    box-shadow: 0 5px 8px 2px rgba(0, 0, 0, 0.15);
+
+    .action {
+      display: block;
+      margin-left: auto;
+    }
+  }
+
+
 
   .block {
     display: block;

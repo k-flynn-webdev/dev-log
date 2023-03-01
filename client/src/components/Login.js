@@ -61,10 +61,9 @@ function Login() {
 							onChange={handlePassword}
 					/>
 
-					<div className="flex flex-row">
-						<div className="flex-grow" />
+					<div>
 						<Button
-								className="mt-5"
+								className="mt-5 action xs:full"
 								type="submit"
 								colorScheme="green"
 								isDisabled={!formIsValid}

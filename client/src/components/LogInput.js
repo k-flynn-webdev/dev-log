@@ -45,10 +45,10 @@ function LogInput() {
 					<LogInputLength />
 				</div>
 
-				<Button type='submit'
+				<Button type="submit"
 								colorScheme="green"
 								isDisabled={!isValid}
-								className='xs-hidden ml-1'>
+								className="xs:hide ml-1">
 					{ADD}
 				</Button>
 

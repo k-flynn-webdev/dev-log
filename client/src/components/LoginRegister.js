@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react'
 import { Button } from '@chakra-ui/react';
 
-import { REGISTER, LOGIN, EMAIL, EMAIL_PLACEHOLDER, PASSWORD, PASSWORD_PLACEHOLDER } from '../lang/en-gb';
+import { REGISTER, LOGIN, EMAIL, EMAIL_PLACEHOLDER, PASSWORD, PASSWORD_PLACEHOLDER, NO_ACCOUNT, HAVE_ACCOUNT } from '../lang/en-gb';
 import { validEmail, validPassword } from '../helpers/authentication';
 
 import FormInput from './FormInput';
 
-function Login() {
+function LoginRegister({ isLogin }) {
 	const [emailValue, setEmail] = useState('')
 	const [emailIsValid, setEmailIsValid] = useState(true)
 	const [passwordValue, setPassword] = useState('')
@@ -41,7 +41,7 @@ function Login() {
 	}
 
 	return (
-		<div className="login__input p-2 mb-3">
+		<div className="login__input">
 			<form id='loginForm' onSubmit={handleSubmit}>
 					<FormInput
 							label={EMAIL}
@@ -68,17 +68,24 @@ function Login() {
 								colorScheme="green"
 								isDisabled={!formIsValid}
 						>
-							{LOGIN}
+							{isLogin ? LOGIN : REGISTER}
 						</Button>
 					</div>
 			</form>
 
+			<br/>
+
 			<div className="mt-4">
-				<span className="mr-1">Dont have an account?</span>
-				<Link className="link" to="/login/register">{REGISTER}</Link>
+				<span className="mr-1">
+					{isLogin ? NO_ACCOUNT : HAVE_ACCOUNT}
+				</span>
+				<Link className="link"
+							to={isLogin ? '/login/register' : '/login'}>
+					{isLogin ? REGISTER : LOGIN}
+				</Link>
 			</div>
 		</div>
 	)
 }
 
-export default Login;
+export default LoginRegister;

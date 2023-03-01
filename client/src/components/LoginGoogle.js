@@ -7,8 +7,8 @@ function LoginGoogle() {
 
 	return (
 		<Button>
-			<Link to={socialLogin}>
-				<Icon className="icon" boxSize={8}>
+			<a href={socialLogin}>
+				<Icon className="icon mr-2" boxSize={8}>
 					<svg viewBox="0 0 48 48">
 						<defs>
 							<path id="a" d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/>
@@ -22,8 +22,8 @@ function LoginGoogle() {
 						<path clipPath="url(#b)" fill="#4285F4" d="M48 48L17 24l-4-3 35-10z"/>
 					</svg>
 				</Icon>
-				<span> Google</span>
-			</Link>
+				<span>Google</span>
+			</a>
 		</Button>
 	)
 }

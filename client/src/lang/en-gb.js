@@ -7,6 +7,10 @@ export const EMAIL = "Email"
 export const EMAIL_PLACEHOLDER = "your-email@email.com"
 export const PASSWORD = "Password"
 export const PASSWORD_PLACEHOLDER = "*******"
+export const NO_ACCOUNT = "Don't have an account?"
+export const HAVE_ACCOUNT = "Already have an account?"
+
+
 
 export const LOG_PLACEHOLDERS = [
 		"Today's milestone?",

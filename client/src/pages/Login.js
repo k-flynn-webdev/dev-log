@@ -1,30 +1,33 @@
 import * as React from 'react'
 import { useLocation } from 'react-router-dom';
-import { Box, Card, CardHeader, CardBody, CardFooter, Flex } from '@chakra-ui/react'
+import { Box, Card, CardHeader, CardBody } from '@chakra-ui/react'
 import { REGISTER, LOGIN } from '../lang/en-gb';
-import Login from '../components/Login';
+import LoginRegister from '../components/LoginRegister';
 import LoginGoogle from '../components/LoginGoogle';
 import LoginGithub from '../components/LoginGithub';
-import Register from '../components/Register';
+
 
 
 function LoginPage() {
 	const location = useLocation().pathname;
 	const isLogin = location === '/login'
+	const isRegister = location === '/login/register'
 
-	const title = isLogin ? LOGIN : REGISTER
-	const Form = isLogin ? <Login /> : <Register />
-
+	const form = (isLogin || isRegister) ?
+			<LoginRegister isLogin={isLogin} /> : "";
 
 	return (
 			<Box className="login">
 				<Card maxW='sm' className="login__card mb-2 mx-auto">
 
 					<CardHeader>
-						<h1 className="text-center text-3xl">{title}</h1>
+						<h1 className="text-center text-3xl">
+							{isLogin && LOGIN}
+							{isRegister && REGISTER}
+						</h1>
 					</CardHeader>
 
-					<CardBody>
+					<CardBody className="p-4">
 
 						<div className="socials-bar mb-4">
 							<LoginGoogle />
@@ -34,7 +37,7 @@ function LoginPage() {
 						<hr className="solid mb-4" />
 
 						<div>
-							{Form}
+							{form}
 						</div>
 
 					</CardBody>

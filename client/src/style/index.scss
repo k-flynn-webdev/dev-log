@@ -10,10 +10,13 @@ html, body {
 
 
 .dev-diary {
-
   &.chakra-container {
     margin-top: 0.75rem;
     padding: 0;
+  }
+
+  .chakra-card {
+    box-shadow: 0 5px 8px 2px rgba(0, 0, 0, 0.15);
   }
 
   $breakpoints:(
@@ -49,9 +52,8 @@ html, body {
   }
 
   a, .link {
-    text-decoration: underline solid $link-color;
+    text-decoration: underline solid $link-color 0.3rem;
   }
-
 
   .log {
     &__card {
@@ -92,6 +94,8 @@ html, body {
     }
   }
 }
+
+
 
 .warning {
   background-color: darkorange !important;

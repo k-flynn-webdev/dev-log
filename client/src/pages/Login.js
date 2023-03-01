@@ -18,7 +18,7 @@ function LoginPage() {
 
 	return (
 			<Box className="login">
-				<Card className="login__card mb-2">
+				<Card maxW='sm' className="login__card mb-2 mx-auto">
 
 					<CardHeader>
 						<h1 className="text-center text-3xl">{title}</h1>

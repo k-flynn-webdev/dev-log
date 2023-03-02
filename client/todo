@@ -12,6 +12,8 @@ DONE:
 - Encourage User with randomized messages for Placeholder
 
 LOG:
+    CREATE:
+        Split hashtags out as tags to be sent back to server?
     STORE:
         PATCH:
             Be able to edit a local Log Form

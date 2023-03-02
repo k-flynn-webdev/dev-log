@@ -21,7 +21,7 @@ export const logs = createSlice({
     create: (state, action) => {
       const newLog = {
         id: Date.now(),
-        value: action.payload,
+        value: action.payload.trim(),
         tags: parseTags(action.payload)
       }
       state.unshift(newLog)
@@ -36,7 +36,7 @@ export const logs = createSlice({
       const log = state.find((log) => log.id !== action.payload.id)
       if (log) {
         log.id = action.payload.id
-        log.value = action.payload.value
+        log.value = action.payload.value.trim()
         log.tags = action.payload.tags
       }
     },

@@ -1,4 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { get, post, remove } from "../../plugins/http";
+
+export const getUserAPI = async (dispatch) => {
+  get('users')
+    .then(({ data }) => {
+      dispatch({ type: 'user/update', payload: data })
+      return data
+    })
+    .catch((error) => {
+      console.log(error)
+      throw error;
+    })
+};
 
 export const user = createSlice({
   name: 'user',
@@ -22,10 +35,12 @@ export const user = createSlice({
       state.meta = '';
     },
     update: (state, action) => {
-      state.id = action.id;
-      state.name = action.name;
-      state.email = action.email;
-      state.meta = action.meta;
+      const keys = ['id','name','email','meta'];
+      Object.keys(action).forEach((key) => {
+        if(keys.includes(key)) {
+          state[key] = action[key];
+        }
+      })
     },
   }
 })

@@ -22,6 +22,7 @@ const router = createBrowserRouter([
       { path: "", element: <LoginPage /> },
       { path: "register", element: <LoginPage /> },
       { path: "verify/:token", element: <LoginPage /> },
+      { path: "recover", element: <LoginPage /> },
     ],
   },
 ]);

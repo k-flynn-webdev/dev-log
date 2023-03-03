@@ -1,10 +1,12 @@
 import * as React from 'react'
 import Header from "../components/Header";
 import { Outlet } from "react-router-dom";
-import useUserMount from "../hooks/use-user-mount"
+import useMountUser from "../hooks/use-mount-user"
+import useAccessTokenURL from "../hooks/use-access-token-url"
 
 const Root = () => {
-	useUserMount();
+	useMountUser();
+	useAccessTokenURL();
 
   return (
 		<>

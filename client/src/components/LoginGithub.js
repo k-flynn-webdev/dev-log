@@ -1,12 +1,10 @@
 import * as React from 'react'
-import { Icon, Button } from '@chakra-ui/react';
-import { Link } from "react-router-dom";
+import { Icon } from '@chakra-ui/react';
 
 function LoginGithub() {
 	const socialLogin = process.env.REACT_APP_GITHUB_LOGIN;
 
 	return (
-		<Button>
 			<a href={socialLogin}>
 				<Icon className="icon mr-2" boxSize={8}>
 					<svg viewBox="0 0 1024 1024" fill="none">
@@ -15,7 +13,6 @@ function LoginGithub() {
 				</Icon>
 				<span>Github</span>
 			</a>
-		</Button>
 	)
 }
 

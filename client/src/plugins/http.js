@@ -1,14 +1,6 @@
 import axios from "axios";
 import { getStorageAccessToken } from "../helpers/authentication";
 
-export const authSet = (accessToken) => {
-  axiosInstance.defaults.headers["Authorization"] = `Bearer ${accessToken}`;
-};
-
-export const authRemove = () => {
-  axiosInstance.defaults.headers["Authorization"] = null;
-};
-
 export const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   timeout: 1000,
@@ -20,6 +12,14 @@ export const axiosInstance = axios.create({
     "X-Requested-With": "XMLHttpRequest",
   },
 });
+
+export const authSet = (accessToken) => {
+  axiosInstance.defaults.headers["Authorization"] = `Bearer ${accessToken}`;
+};
+
+export const authRemove = () => {
+  axiosInstance.defaults.headers["Authorization"] = null;
+};
 
 export const get = (url, params) => {
   return axiosInstance.get(url, params);

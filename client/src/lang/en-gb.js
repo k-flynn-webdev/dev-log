@@ -18,18 +18,27 @@ export const LOG_PLACEHOLDERS = [
 		"A new accomplishment?",
 		"Today's progress?",
 		"Today's completed task?",
+		"Today's goal?",
+		"Today's success?",
+		"What's new?",
 ];
 
 export const LANGUAGES = [
 		'python',
 		'bash',
 		'javascript',
-		'js'
+		'js',
+		'java',
+		'c#',
+		'c++',
 ];
 export const TOOLS = [
 		'docker',
 		'ci/cd',
-		'container'
+		'container',
+		'react',
+		'vue',
+		'angular',
 ];
 export const METHODS = [
 		'scrum',
@@ -37,5 +46,6 @@ export const METHODS = [
 		'test',
 		'tdd',
 		'bdd',
-		'design'
+		'design',
+		'time',
 ];

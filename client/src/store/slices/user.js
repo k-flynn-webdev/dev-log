@@ -23,14 +23,19 @@ export const isLoggedIn = state => state.user.id !== null
 export const getUserID = state => state.user.id || null
 export const getUserName = state => state.user.name.split(' ')[0] || state.user.email.split('@')[0].split(' ')[0]
 
-export const user = createSlice({
-  name: 'user',
-  initialState: {
+const initUser = () => {
+  console.log('init user')
+  return {
     id: null,
     name: '',
     email: '',
     meta: ''
-  },
+  }
+}
+
+export const user = createSlice({
+  name: 'user',
+  initialState: initUser(),
   reducers: {
     /**
      * Reset User
@@ -38,12 +43,7 @@ export const user = createSlice({
      * @param state
      * @param action
      */
-    reset: (state) => {
-      state.id = null;
-      state.name = '';
-      state.email = '';
-      state.meta = '';
-    },
+    reset: (state) => initUser(),
     update: (state, { payload }) => {
       const keys = ['id','name','email','meta'];
       const payLoadKeys = Object.keys(payload)

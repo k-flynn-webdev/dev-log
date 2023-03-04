@@ -1,19 +1,20 @@
 import * as React from 'react'
-import { useSelector } from 'react-redux'
-import { getUserName } from '../store/slices/user'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { getUserName, reset } from '../store/slices/user'
 import { Button, Menu, MenuList, MenuButton, MenuItem } from '@chakra-ui/react'
 import { authRemove } from '../plugins/http';
 import { clearStorageAccessToken } from '../helpers/authentication';
-import { reset } from '../store/slices/user';
 import { LOGOUT } from '../lang/en-gb';
 
 function Header() {
+	const dispatch = useDispatch();
 	const userName = useSelector(getUserName)
 
 	const logoutUser = () => {
 		authRemove();
 		clearStorageAccessToken();
-		reset();
+		dispatch(reset());
 	}
 
 	return (

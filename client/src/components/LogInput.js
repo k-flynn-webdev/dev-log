@@ -5,8 +5,8 @@ import LogInputLength from './LogInputLength';
 import Tags from './Tags';
 
 import { useSelector, useDispatch } from 'react-redux'
-import { reset, update, logValue, logTags } from '../store/slices/log-input'
-import { create } from '../store/slices/logs'
+import { reset, update, logValue, logTags, create } from '../store/slices/log-input'
+// import { create } from '../store/slices/logs'
 import { randomPlaceholder, isValidLogLength, LOG_INPUT_MIN_LENGTH, LOG_INPUT_MAX_LENGTH } from '../helpers/log-input';
 
 import { ADD } from '../lang/en-gb';
@@ -21,7 +21,7 @@ function LogInput() {
 
 	const handleSubmit = (event) => {
 		event.preventDefault()
-		dispatch(create(propLogValue))
+		dispatch(create())
 		dispatch(reset())
 	}
 

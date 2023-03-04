@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { parseTags } from '../../helpers/parse-tags'
+import { post } from '../../plugins/http';
 
 const initLog = () => {
   return {
@@ -11,6 +12,17 @@ const initLog = () => {
 
 export const logValue = state => state.logInput.value
 export const logTags = state => state.logInput.tags
+
+export const create = createAsyncThunk(
+  'logInput/create',
+  async (arg, thunkAPI) => {
+    return post('log', {
+      data: logValue(thunkAPI.getState())
+    })
+  }
+)
+
+// todo: combine logs and log states for ease of future data
 
 export const logInput = createSlice({
   name: 'logInput',

@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, use } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { get, post, remove } from "../../plugins/http";
 
 export const fetchUser = createAsyncThunk(

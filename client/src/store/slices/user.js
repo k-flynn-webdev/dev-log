@@ -24,7 +24,6 @@ export const getUserID = state => state.user.id || null
 export const getUserName = state => state.user.name.split(' ')[0] || state.user.email.split('@')[0].split(' ')[0]
 
 const initUser = () => {
-  console.log('init user')
   return {
     id: null,
     name: '',

@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, use } from '@reduxjs/toolkit'
 import { get, post, remove } from "../../plugins/http";
 
 export const fetchUser = createAsyncThunk(
@@ -17,10 +17,14 @@ export const fetchUser = createAsyncThunk(
   }
 )
 
+export const isLoggedIn = state => state.user.id !== null
+export const getUserID = state => state.user.id || null
+export const getUserName = state => state.user.name.split(' ')[0] || state.user.email.split('@')[0].split(' ')[0]
+
 export const user = createSlice({
   name: 'user',
   initialState: {
-    id: '',
+    id: null,
     name: '',
     email: '',
     meta: ''
@@ -54,4 +58,4 @@ export const user = createSlice({
 // each case under reducers becomes an action
 export const { reset, update } = user.actions
 
-export default user.reducer
+export default user.reducer;

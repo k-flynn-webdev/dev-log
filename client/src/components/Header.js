@@ -1,12 +1,18 @@
 import * as React from 'react'
 import { Link } from "react-router-dom"
+import { useSelector } from 'react-redux'
+import { isLoggedIn } from '../store/slices/user'
 
 import useDocumentTitle from '../hooks/use-document-title';
 import { TITLE } from '../lang/en-gb';
 
+import HeaderMenu from './HeaderMenu';
+
 
 function Header({ title, className }) {
 	useDocumentTitle(title || TITLE)
+
+	const userLoggedIn = useSelector(isLoggedIn)
 
 	return (
 		<div className={`${className ? className : ''} flex flex-row`}>
@@ -18,9 +24,14 @@ function Header({ title, className }) {
 				</div>
 			</div>
 			<div>
-				<Link to='/login' className="link">
-					User
-				</Link>
+				{userLoggedIn &&
+					<HeaderMenu style={{ position: 'relative', zIndex: '100' }} />
+				}
+				{!userLoggedIn &&
+					<Link to='/login' className="link">
+						User
+					</Link>
+				}
 			</div>
 		</div>
 	)

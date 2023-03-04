@@ -6,8 +6,6 @@ import LoginRegister from '../components/LoginRegister';
 import LoginGoogle from '../components/LoginGoogle';
 import LoginGithub from '../components/LoginGithub';
 
-
-
 function LoginPage() {
 	const location = useLocation().pathname;
 	const isLogin = location === '/login'

@@ -1,6 +1,7 @@
 export const TITLE = 'Dev Diary';
 export const ADD = "Add"
 export const LOGIN = "Login"
+export const LOGOUT = "Logout"
 export const REGISTER = "Register"
 export const CREATE = "Create"
 export const EMAIL = "Email"

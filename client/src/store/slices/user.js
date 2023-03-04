@@ -14,6 +14,8 @@ export const fetchUser = createAsyncThunk(
           thunkAPI.dispatch({ type: 'user/update', payload: user })
           return user
     })
+    // todo: enable throw error in react??
+    // todo: error not being serializable breaks this with catch(e) ?
   }
 )
 

@@ -21,6 +21,14 @@ function useWatchURLToken() {
 		isClosable: true,
 	})
 
+	// const errToast = (err) =>
+	// 	useToast({
+	// 		position: 'top',
+	// 		title: err.message,
+	// 		isClosable: true,
+	// 	});
+
+
 	useEffect(() => {
 		if (!effectRan.current) {
 			if (accessTokenURL && accessTokenURL.length) {
@@ -32,6 +40,7 @@ function useWatchURLToken() {
 
 				dispatch(fetchUser())
 				.then(() => successToast())
+				// .catch((err) => errToast(err))
 
 				return () => { effectRan.current = true; }
 			}

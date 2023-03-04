@@ -22,7 +22,7 @@ function Header() {
 				{userName}
 			</MenuButton>
 
-			<MenuList style={{ position: 'relative', zIndex: '100' }}>
+			<MenuList rootProps={{ position: 'relative', zIndex: '100' }}>
 				<MenuItem onClick={logoutUser}>{LOGOUT}</MenuItem>
 			</MenuList>
 		</Menu>

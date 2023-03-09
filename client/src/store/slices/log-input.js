@@ -19,6 +19,12 @@ export const create = createAsyncThunk(
     return post('log', {
       data: logValue(thunkAPI.getState())
     })
+    .catch((err) => {
+      thunkAPI.dispatch({
+        type: 'error/setError',
+        payload: err.response.data,
+      })
+    })
   }
 )
 

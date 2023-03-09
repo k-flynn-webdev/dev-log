@@ -6,7 +6,7 @@ import Tags from './Tags';
 
 import { useSelector, useDispatch } from 'react-redux'
 import { reset, update, logValue, logTags, create } from '../store/slices/log-input'
-import { setError, clearError } from '../store/slices/error'
+import { clearError } from '../store/slices/error'
 import { randomPlaceholder, isValidLogLength, LOG_INPUT_MIN_LENGTH, LOG_INPUT_MAX_LENGTH } from '../helpers/log-input';
 
 import { ADD } from '../lang/en-gb';
@@ -21,6 +21,7 @@ function LogInput() {
 
 	const handleSubmit = (event) => {
 		event.preventDefault()
+		dispatch(clearError())
 		dispatch(create())
 		dispatch(reset())
 	}

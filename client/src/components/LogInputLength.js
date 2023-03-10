@@ -4,7 +4,7 @@ import { progressValue, isValidLogLength } from '../helpers/log-input';
 
 
 function LogInputLength() {
-	const logValueLength = useSelector(state => state.logInput.value).length || 0
+	const logValueLength = useSelector(state => state.logInput.value).trim().length || 0
 	const value = progressValue(logValueLength)
 	const isValidClass = isValidLogLength(logValueLength) ? '' : 'invalid'
 

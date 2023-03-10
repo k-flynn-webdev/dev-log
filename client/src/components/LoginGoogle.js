@@ -1,13 +1,12 @@
 import * as React from 'react'
-import { Icon, Button } from '@chakra-ui/react';
-import { Link } from "react-router-dom";
+import { Icon } from '@chakra-ui/react';
 
 function LoginGoogle() {
 	const socialLogin = process.env.REACT_APP_GOOGLE_LOGIN;
+	const socialLoginDescription = "Google link"
 
 	return (
-		<Button>
-			<a href={socialLogin}>
+			<a href={socialLogin} className="social" aria-label={socialLoginDescription} title={socialLoginDescription}>
 				<Icon className="icon mr-2" boxSize={8}>
 					<svg viewBox="0 0 48 48">
 						<defs>
@@ -24,7 +23,6 @@ function LoginGoogle() {
 				</Icon>
 				<span>Google</span>
 			</a>
-		</Button>
 	)
 }
 

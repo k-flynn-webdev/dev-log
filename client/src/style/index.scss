@@ -41,9 +41,12 @@ html, body {
     display: flex;
     flex-wrap: wrap;
 
-    button {
+    .social {
       flex: 1 1 auto;
       margin: 0.25rem 0.5rem;
+      padding: 0.3rem 0.8rem;
+      background-color: rgba(0,0,0,0.1);
+      border-radius: 0.2rem;
     }
   }
 

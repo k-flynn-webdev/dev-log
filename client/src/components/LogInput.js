@@ -5,24 +5,27 @@ import LogInputLength from './LogInputLength';
 import Tags from './Tags';
 
 import { useSelector, useDispatch } from 'react-redux'
-import { reset, update } from '../store/slices/log-input'
-import { create } from '../store/slices/logs'
+import { reset, update, logValue, logTags, create } from '../store/slices/log-input'
+import { clearError } from '../store/slices/error'
 import { randomPlaceholder, isValidLogLength, LOG_INPUT_MIN_LENGTH, LOG_INPUT_MAX_LENGTH } from '../helpers/log-input';
 
 import { ADD } from '../lang/en-gb';
 
 function LogInput() {
 	const dispatch = useDispatch()
-	const logValue = useSelector(state => state.logInput.value)
-	const logTags = useSelector(state => state.logInput.tags)
-	const isValid = isValidLogLength(logValue.length)
+	const propLogValue = useSelector(logValue)
+	const propLogTags = useSelector(logTags)
+	const isValid = isValidLogLength(propLogValue.length)
 
 	const handleChange = (event) => dispatch(update(event.target.value))
 
 	const handleSubmit = (event) => {
 		event.preventDefault()
-		dispatch(create(logValue))
-		dispatch(reset())
+	 	dispatch(clearError())
+
+		dispatch(create())
+		 .unwrap()
+		 .then(() => dispatch(reset()))
 	}
 
 	return (
@@ -40,7 +43,7 @@ function LogInput() {
 									minLength={LOG_INPUT_MIN_LENGTH}
 									maxLength={LOG_INPUT_MAX_LENGTH}
 									onChange={handleChange}
-									value={logValue}
+									value={propLogValue}
 					/>
 					<LogInputLength />
 				</div>
@@ -54,7 +57,7 @@ function LogInput() {
 
 			</form>
 
-			<Tags tags={logTags} />
+			<Tags tags={propLogTags} />
 		</Card>
 	)
 }

@@ -21,9 +21,11 @@ function LogInput() {
 
 	const handleSubmit = (event) => {
 		event.preventDefault()
-		dispatch(clearError())
+	 	dispatch(clearError())
+
 		dispatch(create())
-		dispatch(reset())
+		 .unwrap()
+		 .then(() => dispatch(reset()))
 	}
 
 	return (

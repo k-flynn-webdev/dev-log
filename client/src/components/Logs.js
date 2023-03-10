@@ -2,11 +2,23 @@ import * as React from 'react'
 import { Box } from '@chakra-ui/react'
 import Log from './Log'
 
-import { useSelector } from 'react-redux'
+import { getLogs } from '../store/slices/logs'
+
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react';
 
 function Logs() {
+	const dispatch = useDispatch();
 	const logs = useSelector(state => state.logs)
-	const LogList = logs.map((item) => <Log key={item.id} value={item} />)
+	const LogList = logs.map((item) => <Log key={item.id} log={item} />)
+
+	useEffect(() => {
+		dispatch(getLogs())
+				.unwrap()
+				.then((res) => 'then')
+				.catch((err) => console.log('err', err))
+
+	}, [])
 
 	return (
 		<Box>

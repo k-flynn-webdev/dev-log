@@ -7,7 +7,7 @@ function Log({ log }) {
 	return (
 			<Card
 					size="sm"
-					className="log__card mb-2"
+					className="log__card mb-4"
 					title={log.value}>
 				<CardBody>
 					<div className="log__card-text">

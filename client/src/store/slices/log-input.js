@@ -16,13 +16,13 @@ export const logTags = state => state.logInput.tags
 export const create = createAsyncThunk(
   'logInput/create',
   async (arg, thunkAPI) => {
-    return post('log', {
-      data: logValue(thunkAPI.getState())
+    return post('logs', {
+      value: logValue(thunkAPI.getState())
     })
     .then((res) => {
       thunkAPI.dispatch({
         type: 'logs/create',
-        payload: res.body.data,
+        payload: res.data,
       })
     })
     .catch((err) => {

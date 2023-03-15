@@ -4,8 +4,8 @@ import { passwordHash } from '@feathersjs/authentication-local'
 import { dataValidator, queryValidator } from '../../validators.js'
 
 // Main data model schema
-export const logSchema = {
-  $id: 'Log',
+export const tagSchema = {
+  $id: 'Tag',
   type: 'object',
   additionalProperties: false,
   required: ['id'],
@@ -20,44 +20,44 @@ export const logSchema = {
     deleted_at: { type: 'string', format: 'date-time', nullable: true },
   }
 }
-export const logResolver = resolve({})
+export const tagResolver = resolve({})
 
-export const logExternalResolver = resolve({})
+export const tagExternalResolver = resolve({})
 
-// Schema for creating new logs
-export const logDataSchema = {
-  $id: 'LogData',
+// Schema for creating new tags
+export const tagDataSchema = {
+  $id: 'TagData',
   type: 'object',
   additionalProperties: false,
   required: [],
   properties: {
-    ...logSchema.properties
+    ...tagSchema.properties
   }
 }
-export const logDataValidator = getValidator(logDataSchema, dataValidator)
-export const logDataResolver = resolve({})
+export const tagDataValidator = getValidator(tagDataSchema, dataValidator)
+export const tagDataResolver = resolve({})
 
-// Schema for updating existing logs
-export const logPatchSchema = {
-  $id: 'LogPatch',
+// Schema for updating existing tags
+export const tagPatchSchema = {
+  $id: 'TagPatch',
   type: 'object',
   additionalProperties: false,
   required: [],
   properties: {
-    ...logSchema.properties
+    ...tagSchema.properties
   }
 }
-export const logPatchValidator = getValidator(logPatchSchema, dataValidator)
-export const logPatchResolver = resolve({})
+export const tagPatchValidator = getValidator(tagPatchSchema, dataValidator)
+export const tagPatchResolver = resolve({})
 
 // Schema for allowed query properties
-export const logQuerySchema = {
-  $id: 'LogQuery',
+export const tagQuerySchema = {
+  $id: 'TagQuery',
   type: 'object',
   additionalProperties: false,
   properties: {
-    ...querySyntax(logSchema.properties)
+    ...querySyntax(tagSchema.properties)
   }
 }
-export const logQueryValidator = getValidator(logQuerySchema, queryValidator)
-export const logQueryResolver = resolve({})
+export const tagQueryValidator = getValidator(tagQuerySchema, queryValidator)
+export const tagQueryResolver = resolve({})

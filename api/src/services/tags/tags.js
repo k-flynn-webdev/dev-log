@@ -17,7 +17,6 @@ import {
   tagQueryResolver
 } from './tags.schema.js'
 import { TagService, getOptions } from './tags.class.js'
-import {Tag} from '@chakra-ui/react';
 
 export * from './tags.class.js'
 export * from './tags.schema.js'
@@ -47,7 +46,6 @@ export const tag = (app) => {
       all: [
         schemaHooks.validateQuery(tagQueryValidator),
         schemaHooks.resolveQuery(tagQueryResolver),
-        limitToUser
       ],
       find: [],
       get: [],
@@ -61,7 +59,9 @@ export const tag = (app) => {
         schemaHooks.resolveData(tagPatchResolver),
         timeStamp('updated_at')
       ],
-      remove: []
+      remove: [
+        limitToUser
+      ]
     },
     after: {
       all: []

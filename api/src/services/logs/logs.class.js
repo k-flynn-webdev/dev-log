@@ -15,7 +15,7 @@ export class LogService extends KnexService {
 
   async getReducedTags(tagIds) {
     const tagsFound = await this.db()
-      .select('created_at', 'value', 'id', 'type' )
+      .select('value', 'id', 'type' )
       .from('tags')
       .whereIn('tags.id', tagIds)
 

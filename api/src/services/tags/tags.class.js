@@ -22,6 +22,6 @@ export const getOptions = (app) => {
   return {
     paginate: app.get('paginate'),
     Model: app.get('postgresqlClient'),
-    name: 'tags'
+    name: 'tag'
   }
 }

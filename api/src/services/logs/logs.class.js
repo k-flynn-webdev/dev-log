@@ -13,36 +13,49 @@ export class LogService extends KnexService {
     return result
   }
 
-  async find(params) {
-    const res = await super.find(params);
-    const all_log_ids = res.data.map((log) => log.id)
-
-    const log_to_tag_columns = await this.db()
-      .from('log_tags')
-      .select('*')
-      .whereIn('log_tags.log_id', all_log_ids)
-
-    const all_tag_ids = []
-    const all_log_to_tags_acc = []
-
-    log_to_tag_columns.forEach((row) => {
-      if (!all_tag_ids.includes(row.tag_id)) all_tag_ids.push(row.tag_id)
-      if (!all_log_to_tags_acc[row.log_id]) all_log_to_tags_acc[row.log_id] = []
-
-      all_log_to_tags_acc[row.log_id].push(row.tag_id)
-    })
-
-    const tags_for_logs = await this.db()
+  async getReducedTags(tagIds) {
+    const tagsFound = await this.db()
       .select('created_at', 'value', 'id', 'type' )
       .from('tags')
-      .whereIn('tags.id', all_tag_ids)
+      .whereIn('tags.id', tagIds)
+
+    return tagsFound
+  }
+
+  async getLogToTagRows(logIds) {
+    const logToColumns = await this.db()
+      .from('log_tags')
+      .select('*')
+      .whereIn('log_tags.log_id', logIds)
+
+    return logToColumns
+  }
+
+  getLogToTagIdsObject(logTagRows) {
+    return logTagRows.reduce((acc, row) => {
+      if (!acc.tagIds.includes(row.tag_id)) acc.tagIds.push(row.tag_id)
+      if (!acc.logIds[row.log_id]) acc.logIds[row.log_id] = []
+
+      acc.logIds[row.log_id].push(row.tag_id)
+
+      return acc
+    }, { tagIds: [], logIds: {}})
+  }
+
+  async find(params) {
+    const res = await super.find(params);
+    const logIds = res.data.map((log) => log.id)
+
+    const logToTagRows = await this.getLogToTagRows(logIds)
+    const logTagIdData = this.getLogToTagIdsObject(logToTagRows)
+    const tagsRelated = await this.getReducedTags(logTagIdData.tagIds)
 
     res.data.forEach((_item, idx) => {
       res.data[idx].tags = []
 
-      if (all_log_to_tags_acc[res.data[idx].id]) {
-        res.data[idx].tags = all_log_to_tags_acc[res.data[idx].id]
-        .map((tagId) => tags_for_logs.find((tag) => tag.id === tagId))
+      if (logTagIdData.logIds[res.data[idx].id]) {
+        res.data[idx].tags = logTagIdData.logIds[res.data[idx].id]
+        .map((tagId) => tagsRelated.find((tag) => tag.id === tagId))
       }
     })
 

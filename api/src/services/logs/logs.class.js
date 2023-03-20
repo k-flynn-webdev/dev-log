@@ -16,17 +16,17 @@ export class LogService extends KnexService {
   async getReducedTags(tagIds) {
     const tagsFound = await this.db()
       .select('value', 'id', 'type' )
-      .from('tags')
-      .whereIn('tags.id', tagIds)
+      .from('tag')
+      .whereIn('tag.id', tagIds)
 
     return tagsFound
   }
 
   async getLogToTagRows(logIds) {
     const logToColumns = await this.db()
-      .from('log_tags')
+      .from('log_tag')
       .select('*')
-      .whereIn('log_tags.log_id', logIds)
+      .whereIn('log_tag.log_id', logIds)
 
     return logToColumns
   }
@@ -74,6 +74,6 @@ export const getOptions = (app) => {
   return {
     paginate: app.get('paginate'),
     Model: app.get('postgresqlClient'),
-    name: 'logs'
+    name: 'log'
   }
 }

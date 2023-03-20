@@ -20,16 +20,6 @@ export const logSchema = {
   }
 }
 export const logResolver = resolve({})
-// export const logResolver = resolve({
-//   tags: virtual(async (log, context) => {
-//     const query = await context.app.get('postgresqlClient')
-//     .from('log_tags')
-//     .select('log_tags.tag_id')
-//     .where('log_tags.log_id' , log.id)
-//
-//     return( query.map((item) => item.tag_id))
-//   })
-// })
 
 export const logExternalResolver = resolve({})
 

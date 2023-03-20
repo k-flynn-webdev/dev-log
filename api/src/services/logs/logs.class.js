@@ -53,8 +53,11 @@ export class LogService extends KnexService {
     res.data.forEach((_item, idx) => {
       res.data[idx].tags = []
 
-      if (logTagIdData.logIds[res.data[idx].id]) {
-        res.data[idx].tags = logTagIdData.logIds[res.data[idx].id]
+      const currentDataLogId = res.data[idx].id
+      const currentDataTagIds = logTagIdData.logIds[currentDataLogId]
+
+      if (currentDataTagIds) {
+        res.data[idx].tags = currentDataTagIds
         .map((tagId) => tagsRelated.find((tag) => tag.id === tagId))
       }
     })

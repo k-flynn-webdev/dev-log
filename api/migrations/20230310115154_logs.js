@@ -10,7 +10,7 @@ export async function up(knex) {
 			.references('id')
 			.inTable('users')
 	  table.timestamps(false, true)
-		table.timestamp('deleted_at');
+		table.timestamp('deleted_at').nullable()
   })
 }
 

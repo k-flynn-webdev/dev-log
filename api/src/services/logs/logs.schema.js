@@ -1,6 +1,5 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/service.schemas.html
-import { resolve, querySyntax, getValidator } from '@feathersjs/schema'
-import { passwordHash } from '@feathersjs/authentication-local'
+import { resolve, querySyntax, getValidator, virtual } from '@feathersjs/schema'
 import { dataValidator, queryValidator } from '../../validators.js'
 
 // Main data model schema
@@ -21,6 +20,16 @@ export const logSchema = {
   }
 }
 export const logResolver = resolve({})
+// export const logResolver = resolve({
+//   tags: virtual(async (log, context) => {
+//     const query = await context.app.get('postgresqlClient')
+//     .from('log_tags')
+//     .select('log_tags.tag_id')
+//     .where('log_tags.log_id' , log.id)
+//
+//     return( query.map((item) => item.tag_id))
+//   })
+// })
 
 export const logExternalResolver = resolve({})
 
@@ -60,13 +69,4 @@ export const logQuerySchema = {
   }
 }
 export const logQueryValidator = getValidator(logQuerySchema, queryValidator)
-export const logQueryResolver = resolve({
-  // If there is a log (e.g. with authentication), they are only allowed to see their own data
-  id: async (value, log, context) => {
-    if (context.params.log) {
-      return context.params.log.user_id
-    }
-
-    return value
-  }
-})
+export const logQueryResolver = resolve({})

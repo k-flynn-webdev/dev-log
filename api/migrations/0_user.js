@@ -7,7 +7,6 @@ export async function up(knex) {
     table.string('githubId').unique().nullable()
     table.string('googleId').unique().nullable()
 		table.timestamp('last_login').nullable()
-		table.timestamp('created_at').defaultTo(knex.fn.now())
 	  table.timestamps(false, true)
 		table.timestamp('deleted_at').defaultTo(null).nullable()
   })

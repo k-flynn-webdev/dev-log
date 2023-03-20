@@ -60,7 +60,8 @@ html, body {
   }
 
   .chakra-card {
-    box-shadow: 0 5px 8px 2px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(100,100,100,0.2);
 
     .action {
       display: block;
@@ -68,8 +69,6 @@ html, body {
       padding: 0 1.5rem;
     }
   }
-
-
 
   .block {
     display: block;
@@ -80,7 +79,7 @@ html, body {
   }
 
   input {
-    @extend .dev-diary-border;
+    //@extend .dev-diary-border;
     background-color: white;
   }
 

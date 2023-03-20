@@ -3,14 +3,16 @@
  * @returns { Promise<void> }
  */
 export async function up(knex) {
-  await knex.schema.createTable('logs', function (table) {
+	await knex.schema.createTable('tag', function (table) {
 		table.increments('id').primary()
-	  table.string('value', 150)
-	  table.integer('user_id')
+	  table.string('value', 20).unique().index()
+	  table.string('type', 20)
+		table.integer('user_id').unsigned()
+		table.foreign('user_id')
 			.references('id')
-			.inTable('users')
+			.inTable('user')
 	  table.timestamps(false, true)
-		table.timestamp('deleted_at').nullable()
+		table.timestamp('deleted_at').defaultTo(null).nullable()
   })
 }
 
@@ -19,5 +21,5 @@ export async function up(knex) {
  * @returns { Promise<void> }
  */
 export async function down(knex) {
-  await knex.schema.dropTable('logs')
+  await knex.schema.dropTable('tag')
 }

@@ -27,7 +27,7 @@ export class LogService extends KnexService {
 
     log_to_tag_columns.forEach((row) => {
       if (!all_tag_ids.includes(row.tag_id)) all_tag_ids.push(row.tag_id)
-      if(!all_log_to_tags_acc[row.log_id]) all_log_to_tags_acc[row.log_id] = []
+      if (!all_log_to_tags_acc[row.log_id]) all_log_to_tags_acc[row.log_id] = []
 
       all_log_to_tags_acc[row.log_id].push(row.tag_id)
     })

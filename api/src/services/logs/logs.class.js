@@ -14,35 +14,37 @@ export class LogService extends KnexService {
   }
 
   async find(params) {
-
     const res = await super.find(params);
-    const logIds = res.data.map((log) => log.id)
+    const all_log_ids = res.data.map((log) => log.id)
 
-    const log_tags = await this.db()
+    const log_to_tag_columns = await this.db()
       .from('log_tags')
       .select('*')
-      .whereIn('log_tags.log_id', logIds)
+      .whereIn('log_tags.log_id', all_log_ids)
 
-    const log_tags_acc = log_tags.reduce((acc, current) => {
-      if (!acc[current.log_id]) acc[current.log_id] = []
+    const all_tag_ids = []
+    const all_log_to_tags_acc = []
 
-      acc[current.log_id].push(current.tag_id)
-      if (!acc.tag_ids.includes(current.tag_id)) acc.tag_ids.push(current.tag_id)
+    log_to_tag_columns.forEach((row) => {
+      if (!all_tag_ids.includes(row.tag_id)) all_tag_ids.push(row.tag_id)
+      if(!all_log_to_tags_acc[row.log_id]) all_log_to_tags_acc[row.log_id] = []
 
-      return acc
-    }, { tag_ids: []})
+      all_log_to_tags_acc[row.log_id].push(row.tag_id)
+    })
 
-    const tags_used = await this.db()
+    const tags_for_logs = await this.db()
+      .select('created_at', 'value', 'id', 'type' )
       .from('tags')
-      .select('*')
-      .whereIn('tags.id', log_tags_acc.tag_ids)
+      .whereIn('tags.id', all_tag_ids)
 
-    res.tags = tags_used.reduce((acc, current) => {
-      if (!acc[current.id]) acc[current.id] = current
+    res.data.forEach((_item, idx) => {
+      res.data[idx].tags = []
 
-      return acc
-    }, {})
-
+      if (all_log_to_tags_acc[res.data[idx].id]) {
+        res.data[idx].tags = all_log_to_tags_acc[res.data[idx].id]
+        .map((tagId) => tags_for_logs.find((tag) => tag.id === tagId))
+      }
+    })
 
     return res
   }

@@ -1,6 +1,6 @@
 import { KnexService } from '@feathersjs/knex'
 import { NotFound } from '@feathersjs/errors'
-import { REDUCED_TAGS_ALIAS } from '../../constants/global';
+import { REDUCED_TAGS_ALIAS } from '../../constants/global.js';
 
 // By default calls the standard Knex adapter service methods but can be customized with your own functionality.
 export class LogService extends KnexService {

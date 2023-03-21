@@ -1,5 +1,6 @@
 import { KnexService } from '@feathersjs/knex'
 import { NotFound } from '@feathersjs/errors'
+import { REDUCED_TAGS_ALIAS } from '../../constants/global';
 
 // By default calls the standard Knex adapter service methods but can be customized with your own functionality.
 export class LogService extends KnexService {
@@ -13,22 +14,40 @@ export class LogService extends KnexService {
     return result
   }
 
+  async create(data, params) {
+    const log = await super.create(data, params)
+
+    if (params.logTagsFound) {
+      const logTagRows = params.logTagsFound.map((tag) => {
+        return {
+          log_id: log.id,
+          tag_id: tag.id
+        }
+      })
+
+      await this.db()
+        .from('log_tag')
+        .insert(logTagRows)
+    }
+
+    return {
+      ...log,
+      tags: params.logTagsFound ? params.logTagsFound : []
+    }
+  }
+
   async getReducedTags(tagIds) {
-    const tagsFound = await this.db()
-      .select('value', 'id', 'type' )
+    return this.db()
+      .select(...REDUCED_TAGS_ALIAS)
       .from('tag')
       .whereIn('tag.id', tagIds)
-
-    return tagsFound
   }
 
   async getLogToTagRows(logIds) {
-    const logToColumns = await this.db()
-      .from('log_tag')
+    return this.db()
       .select('*')
+      .from('log_tag')
       .whereIn('log_tag.log_id', logIds)
-
-    return logToColumns
   }
 
   getLogToTagIdsObject(logTagRows) {

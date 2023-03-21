@@ -5,7 +5,8 @@ import { addApiPrefix } from '../../helpers/add-api-prefix.js'
 import { timeStamp } from '../../hooks/time-stamp.js'
 import { setUserIDFromUser } from '../../hooks/set-user-id-from-user.js'
 import { limitToUser } from '../../hooks/limit-to-user.js'
-import { parseLogIntoWords } from '../../hooks/parse-log-into-words.js';
+import { cleanLogValue } from '../../hooks/clean-log-value.js';
+import { createNewTags } from '../../hooks/create-new-tags.js';
 import { parseLogForTags } from '../../hooks/parse-log-for-tags.js';
 
 import {
@@ -56,7 +57,8 @@ export const log = (app) => {
         schemaHooks.validateData(logDataValidator),
         schemaHooks.resolveData(logDataResolver),
         setUserIDFromUser,
-        parseLogIntoWords,
+        cleanLogValue,
+        createNewTags,
         parseLogForTags,
       ],
       patch: [

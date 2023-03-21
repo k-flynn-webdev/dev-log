@@ -1,11 +1,11 @@
 const REPLACE_CHARS = ['.', '#', '   ', '  ']
 
 /**
- * Clean Log input into a large cleaned string `context.data.logClean`
+ * Clean Log input into a large cleaned string `context.params.logClean`
  *
  * @return {function(*): *}
  */
-export const parseLogIntoWords = (context) => {
+export const cleanLogValue = (context) => {
   context.params.logClean = []
 
   if (!context.data.value) return context

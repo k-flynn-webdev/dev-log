@@ -13,6 +13,7 @@ export const tagSchema = {
       type: 'number'
     },
     value: { type: 'string' },
+    type: { type: 'string' },
     user_id: { type: 'number' },
     created_at: { type: 'string', format: 'date-time', nullable: true },
     updated_at: { type: 'string', format: 'date-time', nullable: true },

@@ -15,9 +15,6 @@ function Logs() {
 	useEffect(() => {
 		dispatch(getLogs())
 				.unwrap()
-				.then((res) => 'then')
-				.catch((err) => console.log('err', err))
-
 	}, [])
 
 	return (

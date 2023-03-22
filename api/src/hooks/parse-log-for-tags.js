@@ -11,7 +11,13 @@ export const parseLogForTags = async (context) => {
   const allTags = await context.app.service(addApiPrefix(context.app, 'tags')).getAll()
 
   context.params.logTagsFound = allTags.reduce((acc, tag) => {
-    if (context.params.logClean.includes(tag.value)) acc.push(tag)
+    const tagValueCheck = tag.value.replace('#', '')
+
+    if (context.params.logClean.includes(tagValueCheck)) acc.push(tag)
+
+    // remove duplicates from custom tags
+    context.params.logTagsCustom = context.params.logTagsCustom
+      .filter((item) => item !== `#${tagValueCheck}`)
 
     return acc
   }, [])

@@ -7,9 +7,9 @@ export const parseCustomLogTags = (context) => {
   context.params.logTagsCustom = []
 
   if (!context.data.value || !context.params.logClean) return context
-  if (!context.params.logClean.includes('#')) return context
+  if (!context.data.value.includes('#')) return context
 
-  const tagsByHash = context.params.logClean.match(/#[a-z0-9_]+/g)
+  const tagsByHash = context.data.value.match(/#[a-z0-9_]+/g)
 
   tagsByHash.forEach((tag) => {
     context.params.logTagsCustom.push(tag.trim())

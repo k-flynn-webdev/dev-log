@@ -8,6 +8,7 @@ import { limitToUser } from '../../hooks/limit-to-user.js'
 import { cleanLogValue } from '../../hooks/clean-log-value.js';
 import { parseCustomLogTags } from '../../hooks/parse-custom-log-tags.js';
 import { parseLogForTags } from '../../hooks/parse-log-for-tags.js';
+import { createCustomTags } from '../../hooks/create-custom-tags.js';
 
 import {
   logDataValidator,
@@ -60,10 +61,15 @@ export const log = (app) => {
         cleanLogValue,
         parseCustomLogTags,
         parseLogForTags,
+        createCustomTags,
       ],
       patch: [
         schemaHooks.validateData(logPatchValidator),
         schemaHooks.resolveData(logPatchResolver),
+        cleanLogValue,
+        parseCustomLogTags,
+        parseLogForTags,
+        createCustomTags,
         timeStamp('updated_at')
       ],
       remove: []

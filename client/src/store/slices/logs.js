@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { parseTags } from '../../helpers/parse-tags'
 import { get } from '../../plugins/http';
 
 const ITEM_LIMIT = 50
@@ -17,7 +16,7 @@ export const getLogs = createAsyncThunk(
     return get('logs', { params: { ...defaultPaginate, ...arg } })
     .then((res) => {
       thunkAPI.dispatch({
-        type: 'logs/list',
+        type: 'logs/listLogs',
         payload: res.data.data,
       })
     })
@@ -31,6 +30,9 @@ export const getLogs = createAsyncThunk(
     })
   }
 )
+
+export const logList = state => state.logs
+
 
 export const logs = createSlice({
   name: 'logs',
@@ -88,6 +90,6 @@ export const logs = createSlice({
 })
 
 // each case under reducers becomes an action
-export const { reset, create, list, patch, remove } = logs.actions
+export const { resetLogs, listLogs, addLog, patchLog, removeLog } = logs.actions
 
 export default logs.reducer

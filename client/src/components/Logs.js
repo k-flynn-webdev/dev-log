@@ -1,25 +1,32 @@
 import * as React from 'react'
+import { useEffect, useRef } from 'react';
 import { Box } from '@chakra-ui/react'
 import Log from './Log'
 
-import { getLogs } from '../store/slices/logs'
+import { getLogs, logList } from '../store/slices/logs'
+import { getUserID } from '../store/slices/user';
 
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react';
 
 function Logs() {
 	const dispatch = useDispatch();
-	const logs = useSelector(state => state.logs)
-	const LogList = logs.map((item) => <Log key={item.id} log={item} />)
+	const effectRan = useRef(false)
+	const userId = useSelector(getUserID)
+	const logs = useSelector(logList)
+	const LogListRender = logs.map((item) => <Log key={item.id} log={item} />)
 
 	useEffect(() => {
-		dispatch(getLogs())
+		if (!effectRan.current) {
+			dispatch(getLogs())
 				.unwrap()
-	}, [])
+
+			return () => { effectRan.current = true; }
+		}
+	}, [userId])
 
 	return (
 		<Box>
-			{LogList}
+			{LogListRender}
 		</Box>
 	)
 }

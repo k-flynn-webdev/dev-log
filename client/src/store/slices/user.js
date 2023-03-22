@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { get, post, remove } from "../../plugins/http";
 
 export const fetchUser = createAsyncThunk(
-  'user/update',
+  'user/updateUser',
   async (arg, thunkAPI) => {
     return get('users')
         .then(({ data }) => {
@@ -11,7 +11,7 @@ export const fetchUser = createAsyncThunk(
             user = data.data[0]
           }
           if (!user) throw('no user found')
-          thunkAPI.dispatch({ type: 'user/update', payload: user })
+          thunkAPI.dispatch({ type: 'user/updateUser', payload: user })
           return user
       })
       .catch((err) => {
@@ -51,7 +51,7 @@ export const user = createSlice({
      * @param _state
      * @param action
      */
-    resetUser: (_state) => initUser(),
+    resetUser: (state) => initUser(),
     /**
      * Update User local data
      *

@@ -1,4 +1,4 @@
-const REPLACE_CHARS = ['.', '#', '   ', '  ']
+const REPLACE_CHARS = ['.', '   ', '  ']
 
 /**
  * Clean Log input into a large cleaned string `context.params.logClean`

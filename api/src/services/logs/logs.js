@@ -6,7 +6,7 @@ import { timeStamp } from '../../hooks/time-stamp.js'
 import { setUserIDFromUser } from '../../hooks/set-user-id-from-user.js'
 import { limitToUser } from '../../hooks/limit-to-user.js'
 import { cleanLogValue } from '../../hooks/clean-log-value.js';
-import { createNewTags } from '../../hooks/create-new-tags.js';
+import { parseCustomLogTags } from '../../hooks/parse-custom-log-tags.js';
 import { parseLogForTags } from '../../hooks/parse-log-for-tags.js';
 
 import {
@@ -58,7 +58,7 @@ export const log = (app) => {
         schemaHooks.resolveData(logDataResolver),
         setUserIDFromUser,
         cleanLogValue,
-        createNewTags,
+        parseCustomLogTags,
         parseLogForTags,
       ],
       patch: [

@@ -46,13 +46,19 @@ export const user = createSlice({
   initialState: initUser(),
   reducers: {
     /**
-     * Reset User
+     * Reset User local data
+     *
+     * @param _state
+     * @param action
+     */
+    resetUser: (_state) => initUser(),
+    /**
+     * Update User local data
      *
      * @param state
      * @param action
      */
-    reset: (state) => initUser(),
-    update: (state, { payload }) => {
+    updateUser: (state, { payload }) => {
       const keys = ['id','name','email','meta'];
       const payLoadKeys = Object.keys(payload)
 
@@ -66,6 +72,6 @@ export const user = createSlice({
 })
 
 // each case under reducers becomes an action
-export const { reset, update } = user.actions
+export const { resetUser, updateUser } = user.actions
 
 export default user.reducer;

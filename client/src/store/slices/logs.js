@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { parseTags } from '../../helpers/parse-tags'
 import { get } from '../../plugins/http';
 
 const ITEM_LIMIT = 50
@@ -17,7 +16,7 @@ export const getLogs = createAsyncThunk(
     return get('logs', { params: { ...defaultPaginate, ...arg } })
     .then((res) => {
       thunkAPI.dispatch({
-        type: 'logs/list',
+        type: 'logs/listLogs',
         payload: res.data.data,
       })
     })
@@ -32,6 +31,9 @@ export const getLogs = createAsyncThunk(
   }
 )
 
+export const logList = state => state.logs
+
+
 export const logs = createSlice({
   name: 'logs',
   initialState: [],
@@ -42,14 +44,14 @@ export const logs = createSlice({
      * @param state
      * @param action
      */
-    reset: () => [],
+    resetLogs: () => [],
     /**
      * Replaces state with list of Logs
      *
      * @param state
      * @param action
      */
-    list: (state, action) => {
+    listLogs: (state, action) => {
       return action.payload
     },
     /**
@@ -58,7 +60,7 @@ export const logs = createSlice({
      * @param state
      * @param action
      */
-    create: (state, action) => {
+    addLog: (state, action) => {
       state.unshift(action.payload)
     },
     /**
@@ -67,7 +69,7 @@ export const logs = createSlice({
      * @param state
      * @param action
      */
-    patch: (state, action) => {
+    patchLog: (state, action) => {
       const log = state.find((log) => log.id !== action.payload.id)
       if (log) {
         log.id = action.payload.id
@@ -81,13 +83,13 @@ export const logs = createSlice({
      * @param state
      * @param action
      */
-    remove: (state, action) => {
+    removeLog: (state, action) => {
       return state.filter((log) => log.id !== action.payload.id)
     },
   }
 })
 
 // each case under reducers becomes an action
-export const { reset, create, list, patch, remove } = logs.actions
+export const { resetLogs, listLogs, addLog, patchLog, removeLog } = logs.actions
 
 export default logs.reducer

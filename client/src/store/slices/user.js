@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { get, post, remove } from "../../plugins/http";
 
 export const fetchUser = createAsyncThunk(
-  'user/update',
+  'user/updateUser',
   async (arg, thunkAPI) => {
     return get('users')
         .then(({ data }) => {
@@ -11,9 +11,18 @@ export const fetchUser = createAsyncThunk(
             user = data.data[0]
           }
           if (!user) throw('no user found')
-          thunkAPI.dispatch({ type: 'user/update', payload: user })
+          thunkAPI.dispatch({ type: 'user/updateUser', payload: user })
           return user
-    })
+      })
+      .catch((err) => {
+        thunkAPI.dispatch({
+          type: 'error/setError',
+          payload: err.response.data,
+        })
+
+        throw thunkAPI.rejectWithValue(err.response.data)
+      })
+
     // todo: enable throw error in react??
     // todo: error not being serializable breaks this with catch(e) ?
   }
@@ -37,13 +46,19 @@ export const user = createSlice({
   initialState: initUser(),
   reducers: {
     /**
-     * Reset User
+     * Reset User local data
+     *
+     * @param _state
+     * @param action
+     */
+    resetUser: (state) => initUser(),
+    /**
+     * Update User local data
      *
      * @param state
      * @param action
      */
-    reset: (state) => initUser(),
-    update: (state, { payload }) => {
+    updateUser: (state, { payload }) => {
       const keys = ['id','name','email','meta'];
       const payLoadKeys = Object.keys(payload)
 
@@ -57,6 +72,6 @@ export const user = createSlice({
 })
 
 // each case under reducers becomes an action
-export const { reset, update } = user.actions
+export const { resetUser, updateUser } = user.actions
 
 export default user.reducer;

@@ -16,6 +16,7 @@ function Logs() {
 	const LogListRender = logs.map((item) => <Log key={item.id} log={item} />)
 
 	useEffect(() => {
+		if (!userId) return
 		if (!effectRan.current) {
 			dispatch(getLogs())
 				.unwrap()

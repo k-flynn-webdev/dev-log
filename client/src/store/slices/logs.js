@@ -42,14 +42,14 @@ export const logs = createSlice({
      * @param state
      * @param action
      */
-    reset: () => [],
+    resetLogs: () => [],
     /**
      * Replaces state with list of Logs
      *
      * @param state
      * @param action
      */
-    list: (state, action) => {
+    listLogs: (state, action) => {
       return action.payload
     },
     /**
@@ -58,7 +58,7 @@ export const logs = createSlice({
      * @param state
      * @param action
      */
-    create: (state, action) => {
+    addLog: (state, action) => {
       state.unshift(action.payload)
     },
     /**
@@ -67,7 +67,7 @@ export const logs = createSlice({
      * @param state
      * @param action
      */
-    patch: (state, action) => {
+    patchLog: (state, action) => {
       const log = state.find((log) => log.id !== action.payload.id)
       if (log) {
         log.id = action.payload.id
@@ -81,7 +81,7 @@ export const logs = createSlice({
      * @param state
      * @param action
      */
-    remove: (state, action) => {
+    removeLog: (state, action) => {
       return state.filter((log) => log.id !== action.payload.id)
     },
   }

@@ -12,11 +12,13 @@ import { LOGOUT } from '../lang/en-gb';
 function Header() {
 	const dispatch = useDispatch();
 	const userName = useSelector(getUserName)
+	const navigate = useNavigate()
 
 	const logoutUser = () => {
 		authRemove();
 		clearStorageAccessToken();
 		dispatch(resetUser());
+		dispatch(resetLogs());
 		navigate('/')
 	}
 

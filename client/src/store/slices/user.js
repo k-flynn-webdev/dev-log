@@ -13,7 +13,16 @@ export const fetchUser = createAsyncThunk(
           if (!user) throw('no user found')
           thunkAPI.dispatch({ type: 'user/update', payload: user })
           return user
-    })
+      })
+      .catch((err) => {
+        thunkAPI.dispatch({
+          type: 'error/setError',
+          payload: err.response.data,
+        })
+
+        throw thunkAPI.rejectWithValue(err.response.data)
+      })
+
     // todo: enable throw error in react??
     // todo: error not being serializable breaks this with catch(e) ?
   }

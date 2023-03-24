@@ -21,7 +21,7 @@ export const create = createAsyncThunk(
     })
     .then((res) => {
       thunkAPI.dispatch({
-        type: 'logs/create',
+        type: 'logs/addLog',
         payload: res.data,
       })
     })

@@ -17,7 +17,7 @@ export class LogService extends KnexService {
   async create(data, params) {
     const log = await super.create(data, params)
 
-    if (params.logTagsFound) {
+    if (params.logTagsFound.length > 0) {
       const logTagRows = params.logTagsFound.map((tag) => {
         return {
           log_id: log.id,

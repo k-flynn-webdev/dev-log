@@ -19,6 +19,7 @@ function useWatchURLToken() {
 		position: 'top',
 		title: 'Login was successful.',
 		isClosable: true,
+		duration: 2500
 	})
 
 	useEffect(() => {

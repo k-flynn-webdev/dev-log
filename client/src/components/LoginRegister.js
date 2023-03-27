@@ -1,19 +1,41 @@
 import * as React from 'react'
-import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react'
-import { Button } from '@chakra-ui/react';
-
-import { REGISTER, LOGIN, EMAIL, EMAIL_PLACEHOLDER, PASSWORD, PASSWORD_PLACEHOLDER, NO_ACCOUNT, HAVE_ACCOUNT } from '../lang/en-gb';
+import { Link, useNavigate } from "react-router-dom";
+import { Button, useToast } from '@chakra-ui/react';
+import { useDispatch } from 'react-redux'
 import { validEmail, validPassword } from '../helpers/authentication';
-
 import FormInput from './FormInput';
+import { createUser, loginUser } from '../store/slices/user';
+
+import {
+	REGISTER,
+	LOGIN,
+	EMAIL,
+	EMAIL_PLACEHOLDER,
+	PASSWORD,
+	PASSWORD_PLACEHOLDER,
+	NO_ACCOUNT,
+	HAVE_ACCOUNT,
+	LOGIN_SUCCESS,
+	REGISTER_SUCCESS,
+} from '../lang/en-gb';
+
 
 function LoginRegister({ isLogin }) {
+	const navigate = useNavigate()
+	const dispatch = useDispatch()
 	const [emailValue, setEmail] = useState('')
 	const [emailIsValid, setEmailIsValid] = useState(true)
 	const [passwordValue, setPassword] = useState('')
 	const [passwordIsValid, setPasswordIsValid] = useState(true)
 	const [formIsValid, setFormIsValid] = useState(false)
+
+	const successToast = useToast({
+		position: 'top',
+		title: isLogin ? LOGIN_SUCCESS : REGISTER_SUCCESS,
+		isClosable: true,
+		duration: 2500
+	})
 
 	useEffect(() => updateForm(), [emailValue, passwordValue])
 
@@ -36,8 +58,26 @@ function LoginRegister({ isLogin }) {
 				passwordValue && passwordIsValid)
 	}
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault()
+		if (!formIsValid) return
+
+		const userDetails = { email: emailValue, password: passwordValue }
+
+		if (!isLogin) {
+			await dispatch(createUser(userDetails))
+				.unwrap()
+				.catch((e) => {
+					throw(e)
+				})
+		}
+
+		await dispatch(loginUser(userDetails))
+			.unwrap()
+			.then(() => {
+				successToast()
+				navigate('/')
+			})
 	}
 
 	return (
@@ -77,11 +117,11 @@ function LoginRegister({ isLogin }) {
 
 			<div className="mt-4">
 				<span className="mr-1">
-					{isLogin ? NO_ACCOUNT : HAVE_ACCOUNT}
+					{!isLogin ? HAVE_ACCOUNT : NO_ACCOUNT}
 				</span>
 				<Link className="link"
-							to={isLogin ? '/login/register' : '/login'}>
-					{isLogin ? REGISTER : LOGIN}
+							to={!isLogin ? '/login' : '/login/register' }>
+					{!isLogin ? LOGIN : REGISTER }
 				</Link>
 			</div>
 		</div>

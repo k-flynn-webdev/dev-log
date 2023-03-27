@@ -1,9 +1,9 @@
-import { LANGUAGES, TOOLS, METHODS } from '../lang/en-gb';
+// import { LANGUAGES, TOOLS, METHODS } from '../lang/en-gb';
 
 const TAG_TYPES = {
-	LANGUAGES,
-	TOOLS,
-	METHODS,
+	// LANGUAGES,
+	// TOOLS,
+	// METHODS,
 };
 
 export const parseTags = (log) => {

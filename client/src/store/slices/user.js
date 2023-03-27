@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { get, post, remove } from "../../plugins/http";
+import { authSet, get, post, remove} from '../../plugins/http';
+import { setStorageAccessToken } from '../../helpers/authentication';
 
 export const fetchUser = createAsyncThunk(
   'user/updateUser',
@@ -22,11 +23,52 @@ export const fetchUser = createAsyncThunk(
 
         throw thunkAPI.rejectWithValue(err.response.data)
       })
-
-    // todo: enable throw error in react??
-    // todo: error not being serializable breaks this with catch(e) ?
   }
 )
+
+export const loginUser = createAsyncThunk(
+  'user/loginUser',
+  async (arg, thunkAPI) => {
+    return post('authentication', { strategy: 'local', ...arg })
+        .then(({ data }) => {
+          let user = data?.user ? data.user : null;
+          if (!user) throw('no user found')
+          thunkAPI.dispatch({ type: 'user/updateUser', payload: user })
+          authSet(data.accessToken);
+          setStorageAccessToken(data.accessToken);
+          return user
+      })
+      .catch((err) => {
+        thunkAPI.dispatch({
+          type: 'error/setError',
+          payload: err.response.data,
+        })
+
+        throw thunkAPI.rejectWithValue(err.response.data)
+      })
+  }
+)
+
+export const createUser = createAsyncThunk(
+  'user/createUser',
+  async (arg, thunkAPI) => {
+    return post('users', { ...arg })
+        .then(({ data }) => {
+          let user = data ? data : null;
+          if (!user) throw('no user found')
+          return user
+      })
+      .catch((err) => {
+        thunkAPI.dispatch({
+          type: 'error/setError',
+          payload: err.response.data,
+        })
+
+        throw thunkAPI.rejectWithValue(err.response.data)
+      })
+  }
+)
+
 
 export const isLoggedIn = state => state.user.id !== null
 export const getUserID = state => state.user.id || null
@@ -49,9 +91,8 @@ export const user = createSlice({
      * Reset User local data
      *
      * @param _state
-     * @param action
      */
-    resetUser: (state) => initUser(),
+    resetUser: (_state) => initUser(),
     /**
      * Update User local data
      *

@@ -6,6 +6,7 @@ import { USER_TOKEN, setStorageAccessToken } from '../helpers/authentication';
 import { authSet } from "../plugins/http";
 import { useDispatch } from 'react-redux';
 import { fetchUser } from '../store/slices/user'
+import { LOGIN_SUCCESS } from '../lang/en-gb'
 
 function useWatchURLToken() {
 	const dispatch = useDispatch()
@@ -17,7 +18,7 @@ function useWatchURLToken() {
 
 	const successToast = useToast({
 		position: 'top',
-		title: 'Login was successful.',
+		title: LOGIN_SUCCESS,
 		isClosable: true,
 		duration: 2500
 	})
@@ -32,8 +33,10 @@ function useWatchURLToken() {
 				setSearchParams(searchParams);
 
 				dispatch(fetchUser())
-				.then(() => successToast())
-				.then(() => navigate('/'))
+				.then(() => {
+					successToast();
+					navigate('/');
+				})
 
 				return () => { effectRan.current = true; }
 			}

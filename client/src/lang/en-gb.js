@@ -10,6 +10,8 @@ export const PASSWORD = "Password"
 export const PASSWORD_PLACEHOLDER = "*******"
 export const NO_ACCOUNT = "Don't have an account?"
 export const HAVE_ACCOUNT = "Already have an account?"
+export const LOGIN_SUCCESS = "Login was successful."
+export const REGISTER_SUCCESS = "Register was successful."
 
 export const SPLASH_CONTENT_LOG = "Create daily short Logs to document your development progress"
 export const SPLASH_CONTENT_TAG = "Mention common processes, tools or methods to add specific #Tags"

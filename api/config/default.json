@@ -8,7 +8,7 @@
   },
   "postgresql": {
     "client": "pg",
-    "connection": "postgres://user:password@host:port/app-short-cal-api"
+    "connection": "postgres://user:password@host:port/app-api"
   },
   "authentication": {
     "entity": "user",

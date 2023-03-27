@@ -15,7 +15,7 @@ root.render(
  		<Provider store={store}>
       <ChakraProvider>
         <Box className="md:px-4">
-          <Container className="dev-diary">
+          <Container className="dev-log">
             <App />
           </Container>
         </Box>

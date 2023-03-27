@@ -1,4 +1,4 @@
-export const TITLE = 'Dev Diary';
+export const TITLE = 'Dev Log';
 export const ADD = "Add"
 export const LOGIN = "Login"
 export const LOGOUT = "Logout"

@@ -9,7 +9,7 @@ html, body {
 }
 
 
-.dev-diary {
+.dev-log {
     $breakpoints:(
     xl: 'max-width: 80em',
     lg: 'max-width: 62em',
@@ -74,12 +74,12 @@ html, body {
     display: block;
   }
 
-  .dev-diary-border {
+  .dev-log-border {
     border: 0.66px solid $border-color;
   }
 
   input {
-    //@extend .dev-diary-border;
+    //@extend .dev-log-border;
     background-color: white;
   }
 

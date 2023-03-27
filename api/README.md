@@ -1,5 +1,5 @@
 # BACKEND / API
-# DEV-DIARY
+# DEV-LOG
 
 ## Basic API to include features:
 - Docker environment

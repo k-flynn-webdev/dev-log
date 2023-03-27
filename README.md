@@ -1,4 +1,4 @@
-# DEV-DIARY
+# DEV-LOG
 A simple app to log daily developer progress & achievements
 
 - Log:

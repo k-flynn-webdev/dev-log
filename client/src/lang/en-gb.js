@@ -30,29 +30,4 @@ export const LOG_PLACEHOLDERS = [
 		"What's new?",
 ];
 
-export const LANGUAGES = [
-		'python',
-		'bash',
-		'javascript',
-		'js',
-		'java',
-		'c#',
-		'c++',
-];
-export const TOOLS = [
-		'docker',
-		'ci/cd',
-		'container',
-		'react',
-		'vue',
-		'angular',
-];
-export const METHODS = [
-		'scrum',
-		'agile',
-		'test',
-		'tdd',
-		'bdd',
-		'design',
-		'time',
-];
+

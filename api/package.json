@@ -45,6 +45,7 @@
     "bundle:client": "npm pack --pack-destination ./public",
     "migrate": "knex migrate:latest",
     "migrate:make": "knex migrate:make",
+    "seed": "knex seed:run",
     "docker": "docker-compose -f docker-compose.yml up",
     "docker:dev": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up"
   },

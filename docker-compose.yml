@@ -39,6 +39,9 @@ services:
       - PORT=${APP_PORT}
       - WATCHPACK_POLLING=true
       - CHOKIDAR_USEPOLLING=true
+      - REACT_APP_API_URL=${APP_API_URL}
+      - REACT_APP_GITHUB_LOGIN=${APP_GITHUB_LOGIN}
+      - REACT_APP_GOOGLE_LOGIN=${APP_GOOGLE_LOGIN}
     volumes:
       - ./client/src:/client/src
     networks:

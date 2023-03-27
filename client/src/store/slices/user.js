@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { authSet, get, post, remove} from '../../plugins/http';
+import { authSet, get, post, remove } from '../../plugins/http';
 import { setStorageAccessToken } from '../../helpers/authentication';
 
 export const fetchUser = createAsyncThunk(

@@ -117,11 +117,11 @@ function LoginRegister({ isLogin }) {
 
 			<div className="mt-4">
 				<span className="mr-1">
-					{isLogin ? NO_ACCOUNT : HAVE_ACCOUNT}
+					{!isLogin ? HAVE_ACCOUNT : NO_ACCOUNT}
 				</span>
 				<Link className="link"
-							to={isLogin ? '/login/register' : '/login'}>
-					{isLogin ? REGISTER : LOGIN}
+							to={!isLogin ? '/login' : '/login/register' }>
+					{!isLogin ? LOGIN : REGISTER }
 				</Link>
 			</div>
 		</div>

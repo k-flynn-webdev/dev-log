@@ -11,7 +11,9 @@ export const parseLogForTags = async (context) => {
   const allTags = await context.app.service(addApiPrefix(context.app, 'tags')).getAll()
 
   context.params.logTagsFound = allTags.reduce((acc, tag) => {
-    const tagValueCheck = tag.value.replace('#', '')
+    const tagValueCheck = tag.value.startsWith('#') ?
+        tag.value.replace('#', '') :
+        tag.value
 
     if (context.params.logClean.includes(tagValueCheck)) acc.push(tag)
 

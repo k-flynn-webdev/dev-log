@@ -1,26 +1,43 @@
 import * as React from 'react'
-import { Card, CardBody } from '@chakra-ui/react'
 import Tags from './Tags';
+
+import { DATE_MONTHS } from '../lang/en-gb';
+
+const getDateShort = (input) => {
+	if (!input) return ''
+
+	const dateObj = new Date(input)
+	const AM_PM = dateObj.getHours() < 13 ? 'AM' : 'PM'
+	return `${dateObj.getDate()} ${DATE_MONTHS[dateObj.getMonth()]} ${AM_PM}`
+}
 
 function Log({ log }) {
 
 	return (
-			<Card
-					size="sm"
-					className="log__card mb-4"
+			<div
+					className="logs__log"
 					title={log.value}>
-				<CardBody>
-					<div className="log__card-text">
+				<div>
+					<div className="logs__log-text">
 						<p>{ log.value }</p>
 					</div>
 
-					{ log?.tags?.length ?
-						(<Tags tags={log.tags} />) :
-						null
-					}
+					<div className="logs__log-tags">
+						<Tags tags={log.tags} />
+					</div>
 
-				</CardBody>
-			</Card>
+					<div className="logs__log-date">
+						{ getDateShort(log.created_at) }
+					</div>
+
+					<div className="logs__log-menu">
+						<button>
+							...
+						</button>
+					</div>
+
+				</div>
+			</div>
 	)
 }
 

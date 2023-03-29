@@ -1,22 +1,34 @@
+$bg-color: hsl(228,10,88);
+$mid-color: hsl(222,10,34);
+$fore-color: hsl(228,20,97);
+$tag-color: hsl(91,19,54);
+
 $border-color: #353434;
-$mid-color: #eaebee;
 $danger-color: #e53939;
 $progress-color: #86ec86;
 $link-color: #86ec86;
 
+$log-spacing: 0.5rem;
+
+$text-size-small: 0.7rem;
+$text-size: 1.5rem;
+
+$border-radius: 0.4rem;
+
 html, body {
-  //background-color: $bg-color !important;
+  background-color: $bg-color !important;
 }
 
 
 .dev-log {
-    $breakpoints:(
+  $breakpoints:(
     xl: 'max-width: 80em',
     lg: 'max-width: 62em',
     md: 'max-width: 48em',
     sm: 'max-width: 30em',
     xs: 'max-width: 20em',
   );
+
   @each $key,$val in $breakpoints{
     @media (#{$val}) {
       .#{$key}\:hide {
@@ -29,115 +41,176 @@ html, body {
     }
   }
 
-  .alert {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    right: 2rem;
-    z-index: 100;
-  }
-
-  .socials-bar {
-    display: flex;
-    flex-wrap: wrap;
-
-    .social {
-      flex: 1 1 auto;
-      margin: 0.25rem 0.5rem;
-      padding: 0.3rem 0.8rem;
-      background-color: rgba(0,0,0,0.1);
-      border-radius: 0.2rem;
-    }
-  }
-
-  .hide {
-    display: none;
-  }
-
-  &.chakra-container {
-    margin-top: 0.75rem;
-    padding: 0;
-  }
-
-  .chakra-card {
-    box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(100,100,100,0.2);
-
-    .action {
-      display: block;
-      margin-left: auto;
-      padding: 0 1.5rem;
-    }
-  }
-
-  .block {
-    display: block;
-  }
-
-  .dev-log-border {
-    border: 0.66px solid $border-color;
-  }
-
-  input {
-    //@extend .dev-log-border;
-    background-color: white;
-  }
-
-  .link {
-    box-shadow: inset 0 -0.2rem 0 0 $link-color;
-    transition: 100ms;
-
-    &:hover {
-      box-shadow: inset 0 -0.6rem 0 0 $link-color;
-    }
-  }
-
-
-  .log {
-    &__card {
-      //background-color: $mid-color;
-
-      &-text { cursor: default; }
-    }
-
-    &__tag { cursor: default; }
-
-    &__tags { z-index: 1; }
-
-
-    &__input {
+  .logs {
+    &__log {
+      margin: 1rem 0;
+      padding: $log-spacing;
+      padding-right: ($log-spacing * 2);
+      color: $fore-color;
       background-color: $mid-color;
-      overflow: hidden;
+      border-radius: $border-radius;
+      border-top-right-radius: 0;
+
       position: relative;
-      border-radius: 0.5rem;
 
-      input, button { z-index: 1; }
+      &-text {
+        word-wrap: break-word;
+        text-overflow: ellipsis;
+        margin-bottom: ($log-spacing * 2);
+      }
 
-      &-progress {
-        opacity: 0.9;
-        pointer-events: none;
-        transition: width 0.3s ease-out, background-color 1.5s;
-        background-color: $progress-color;
+      &-tags {
         position: absolute;
-        left: 0;
-        bottom: 0;
-        height: 100%;
-        z-index: 0;
+        right: 0;
+        bottom: -0.66rem;
 
-        &.invalid {
-          opacity: 0.66;
-          background-color: $danger-color;
+        .tags {
+          display: inline-block;
+          margin-right: $log-spacing;
+
+          .tag {
+            display: inline-block;
+            margin: ($log-spacing * 0.3) ($log-spacing * 0.6);
+            padding: 0.1rem 0.5rem;
+            background-color: $tag-color;
+            border-radius: $border-radius;
+
+            &:last-of-type {
+              margin: 0;
+            }
+          }
         }
+      }
+
+      &-date {
+        position: absolute;
+        left: $log-spacing;
+        bottom: ($log-spacing * 0.5);
+        font-size: $text-size-small;
+        font-weight: bold;
+        opacity: 0.7;
+      }
+
+      &-menu {
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: $text-size;
       }
     }
   }
-}
 
-
-
-.warning {
-  background-color: darkorange !important;
+  //
+  //
+  //.alert {
+  //  position: absolute;
+  //  top: 1rem;
+  //  left: 1rem;
+  //  right: 2rem;
+  //  z-index: 100;
+  //}
+  //
+  //.socials-bar {
+  //  display: flex;
+  //  flex-wrap: wrap;
+  //
+  //  .social {
+  //    flex: 1 1 auto;
+  //    margin: 0.25rem 0.5rem;
+  //    padding: 0.3rem 0.8rem;
+  //    background-color: rgba(0,0,0,0.1);
+  //    border-radius: 0.2rem;
+  //  }
+  //}
+  //
+  //.hide {
+  //  display: none;
+  //}
+  //
+  //&.chakra-container {
+  //  margin-top: 0.75rem;
+  //  padding: 0;
+  //}
+  //
+  //.chakra-card {
+  //  box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.1);
+  //  border: 1px solid rgba(100,100,100,0.2);
+  //
+  //  .action {
+  //    display: block;
+  //    margin-left: auto;
+  //    padding: 0 1.5rem;
+  //  }
+  //}
+  //
+  //.block {
+  //  display: block;
+  //}
+  //
+  //.dev-log-border {
+  //  border: 0.66px solid $border-color;
+  //}
+  //
+  //input {
+  //  //@extend .dev-log-border;
+  //  background-color: white;
+  //}
+  //
+  //.link {
+  //  box-shadow: inset 0 -0.2rem 0 0 $link-color;
+  //  transition: 100ms;
+  //
+  //  &:hover {
+  //    box-shadow: inset 0 -0.6rem 0 0 $link-color;
+  //  }
+  //}
+  //
+  //
+  //.log {
+  //  &__card {
+  //    //background-color: $mid-color;
+  //
+  //    &-text { cursor: default; }
+  //  }
+  //
+  //  &__tag { cursor: default; }
+  //
+  //  &__tags { z-index: 1; }
+  //
+  //
+  //  &__input {
+  //    background-color: $mid-color;
+  //    overflow: hidden;
+  //    position: relative;
+  //    border-radius: 0.5rem;
+  //
+  //    input, button { z-index: 1; }
+  //
+  //    &-progress {
+  //      opacity: 0.9;
+  //      pointer-events: none;
+  //      transition: width 0.3s ease-out, background-color 1.5s;
+  //      background-color: $progress-color;
+  //      position: absolute;
+  //      left: 0;
+  //      bottom: 0;
+  //      height: 100%;
+  //      z-index: 0;
+  //
+  //      &.invalid {
+  //        opacity: 0.66;
+  //        background-color: $danger-color;
+  //      }
+  //    }
+  //  }
+  //}
 }
-.danger {
-  background-color: $danger-color;
-}
+//
+//
+//
+//.warning {
+//  background-color: darkorange !important;
+//}
+//.danger {
+//  background-color: $danger-color;
+//}

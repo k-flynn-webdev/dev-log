@@ -32,3 +32,5 @@ export const LOG_PLACEHOLDERS = [
 
 
 export const DATE_MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUg', 'SEP', 'OCT', 'NOV', 'DEC'];
+export const TIME_AM = 'AM'
+export const TIME_PM = 'PM'

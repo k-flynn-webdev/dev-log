@@ -45,7 +45,8 @@ html, body {
     &__log {
       margin: 1rem 0;
       padding: $log-spacing;
-      padding-right: ($log-spacing * 2);
+      padding-top: ($log-spacing * 0.25);
+      padding-right: ($log-spacing * 3);
       color: $fore-color;
       background-color: $mid-color;
       border-radius: $border-radius;

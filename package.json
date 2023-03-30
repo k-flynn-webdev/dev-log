@@ -14,8 +14,15 @@
   "type": "module",
   "scripts": {
     "docker:dev": "docker-compose -f docker-compose.yml up -d",
-    "docker:dev:rebuild": "docker compose -f docker-compose.yml up -d --build --force-recreate"
+    "docker:dev:rebuild": "docker compose -f docker-compose.yml up -d --build --force-recreate",
+    "lint": "eslint *.js",
+    "format": "prettier --ignore-path .gitignore --write ."
   },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^8.37.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.7"
+  }
 }

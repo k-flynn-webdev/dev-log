@@ -181,62 +181,73 @@ body {
     }
   }
 
-  .logs {
-    &__log {
-      margin: 1rem 0;
-      padding: $log-spacing;
-      padding-top: ($log-spacing * 0.25);
-      padding-right: ($log-spacing * 3);
-      color: $fore-color;
-      background-color: $mid-color;
-      border-radius: $border-radius;
-      border-top-right-radius: 0;
+  .log {
+    margin: 1rem 0;
+    padding: $log-spacing;
+    padding-top: ($log-spacing * 0.25);
+    padding-right: ($log-spacing * 3);
+    color: $fore-color;
+    background-color: $mid-color;
+    border-radius: $border-radius;
+    border-top-right-radius: 0;
 
-      position: relative;
+    position: relative;
 
-      &-text {
-        word-wrap: break-word;
-        text-overflow: ellipsis;
-        margin-bottom: ($log-spacing * 2);
-      }
+    &-text {
+      word-wrap: break-word;
+      text-overflow: ellipsis;
+      margin-bottom: ($log-spacing * 2);
+    }
 
-      &-tags {
-        position: absolute;
-        right: 0;
-        bottom: -0.66rem;
+    &-tags {
+      position: absolute;
+      right: 0;
+      bottom: -0.66rem;
 
-        .tags {
+      .tags {
+        display: inline-block;
+        margin-right: $log-spacing;
+
+        .tag {
           display: inline-block;
-          margin-right: $log-spacing;
+          margin: ($log-spacing * 0.3) ($log-spacing * 0.6);
+          padding: 0.1rem 0.5rem;
+          background-color: $tag-color;
+          border-radius: $border-radius;
 
-          .tag {
-            display: inline-block;
-            margin: ($log-spacing * 0.3) ($log-spacing * 0.6);
-            padding: 0.1rem 0.5rem;
-            background-color: $tag-color;
-            border-radius: $border-radius;
-
-            &:last-of-type {
-              margin: 0;
-            }
+          &:last-of-type {
+            margin: 0;
           }
         }
       }
+    }
 
-      &-date {
-        position: absolute;
-        left: $log-spacing;
-        bottom: ($log-spacing * 0.5);
-        font-size: $text-size-small;
-        font-weight: bold;
-        opacity: 0.7;
-      }
+    &-date {
+      position: absolute;
+      left: $log-spacing;
+      bottom: ($log-spacing * 0.5);
+      font-size: $text-size-small;
+      font-weight: bold;
+      opacity: 0.7;
+    }
 
-      &-menu {
-        position: absolute;
-        right: 0;
-        top: 0;
-        font-size: $text-size;
+    &-menu {
+      position: absolute;
+      right: ($log-spacing * 0.5);
+      top: ($log-spacing * 0.5);
+
+      color: $fore-color;
+      background-color: unset;
+      fill: $fore-color;
+
+      margin: 0;
+      padding: 0;
+      border-radius: unset;
+
+      .icon {
+        width: 0.75rem;
+        height: 0.75rem;
+        vertical-align: top;
       }
     }
   }

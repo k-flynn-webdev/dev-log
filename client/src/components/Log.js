@@ -13,23 +13,25 @@ const getDateShort = input => {
 
 function Log({ log }) {
   return (
-    <div className="logs__log" title={log.value}>
+    <div className="log" title={log.value}>
       <div>
-        <div className="logs__log-text">
+        <div className="log-text">
           <p>{log.value}</p>
         </div>
 
-        <div className="logs__log-tags">
+        <div className="log-tags">
           <Tags tags={log.tags} />
         </div>
 
-        <div className="logs__log-date" title={log.created_at}>
+        <div className="log-date" title={log.created_at}>
           {getDateShort(log.created_at)}
         </div>
 
-        <div className="logs__log-menu">
-          <button>...</button>
-        </div>
+        <button className="log-menu">
+          <svg viewBox="0 0 32 32" className="icon" aria-hidden="true">
+            <path d="M1 7.5h30V1.9H1v5.6zm0 22.6h30v-5.6H1v5.6zm0-11.3h30v-5.6H1v5.6z"></path>
+          </svg>
+        </button>
       </div>
     </div>
   )

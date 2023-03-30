@@ -1,7 +1,7 @@
-$bg-color: hsl(228,10,88);
-$mid-color: hsl(222,10,34);
-$fore-color: hsl(228,20,97);
-$tag-color: hsl(91,19,54);
+$bg-color: hsl(228, 10, 88);
+$mid-color: hsl(222, 10, 34);
+$fore-color: hsl(228, 20, 97);
+$tag-color: hsl(91, 19, 54);
 
 $border-color: #353434;
 $danger-color: #e53939;
@@ -15,21 +15,21 @@ $text-size: 1.5rem;
 
 $border-radius: 0.4rem;
 
-html, body {
+html,
+body {
   background-color: $bg-color !important;
 }
 
-
 .dev-log {
-  $breakpoints:(
-    xl: 'max-width: 80em',
-    lg: 'max-width: 62em',
-    md: 'max-width: 48em',
-    sm: 'max-width: 30em',
-    xs: 'max-width: 20em',
+  $breakpoints: (
+    xl: "max-width: 80em",
+    lg: "max-width: 62em",
+    md: "max-width: 48em",
+    sm: "max-width: 30em",
+    xs: "max-width: 20em",
   );
 
-  @each $key,$val in $breakpoints{
+  @each $key, $val in $breakpoints {
     @media (#{$val}) {
       .#{$key}\:hide {
         display: none;

@@ -40,7 +40,7 @@ function LogInput() {
   }
 
   return (
-    <Card className="log__input p-2 mb-3">
+    <Card className="card log__input p-2 mb-3">
       <form
         id="logForm"
         onSubmit={handleSubmit}

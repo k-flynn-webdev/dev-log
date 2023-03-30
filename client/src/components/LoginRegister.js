@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { Button, useToast } from "@chakra-ui/react"
+import { useToast } from "@chakra-ui/react"
 import { useDispatch } from "react-redux"
 import { validEmail, validPassword } from "../helpers/authentication"
 import FormInput from "./FormInput"
@@ -84,7 +84,7 @@ function LoginRegister({ isLogin }) {
     <div className="login__input">
       <form id="loginForm" onSubmit={handleSubmit}>
         <FormInput
-          label={EMAIL}
+          labelText={EMAIL}
           placeholder={EMAIL_PLACEHOLDER}
           value={emailValue}
           type="email"
@@ -93,7 +93,7 @@ function LoginRegister({ isLogin }) {
         />
 
         <FormInput
-          label={PASSWORD}
+          labelText={PASSWORD}
           placeholder={PASSWORD_PLACEHOLDER}
           value={passwordValue}
           type="password"
@@ -102,14 +102,13 @@ function LoginRegister({ isLogin }) {
         />
 
         <div>
-          <Button
-            className="mt-5 action xs:full"
+          <button
+            className="primary xs:full"
             type="submit"
-            colorScheme="green"
-            isDisabled={!formIsValid}
+            disabled={!formIsValid}
           >
             {isLogin ? LOGIN : REGISTER}
-          </Button>
+          </button>
         </div>
       </form>
 

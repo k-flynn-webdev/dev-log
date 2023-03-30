@@ -2,7 +2,9 @@ $bg-color: hsl(228, 10, 88);
 $mid-color: hsl(222, 10, 34);
 $fore-color: hsl(228, 20, 97);
 $tag-color: hsl(91, 19, 54);
+$primary-color: hsl(91, 19, 54);
 
+$disabled-color: #6e6363;
 $border-color: #353434;
 $danger-color: #e53939;
 $progress-color: #86ec86;
@@ -34,6 +36,9 @@ body {
     padding: $log-spacing;
     border-radius: $border-radius;
     padding: 0.3rem 0.8rem;
+
+    color: $mid-color;
+    background-color: $bg-color;
   }
 
   .container {
@@ -69,11 +74,41 @@ body {
     }
   }
 
+  .form-input {
+    label {
+      display: inline-block;
+    }
+
+    input {
+      border-radius: $border-radius;
+      color: $mid-color;
+      background-color: $bg-color;
+    }
+  }
+
   .icon {
     display: inline-block;
     line-height: 1rem;
     color: currentColor;
     vertical-align: middle;
+  }
+
+  .link {
+    box-shadow: inset 0 -0.2rem 0 0 $primary-color;
+    transition: 100ms;
+
+    &:hover {
+      box-shadow: inset 0 -0.6rem 0 0 $primary-color;
+    }
+  }
+
+  // button.primary { // todo
+  //   background-color: $primary-color;
+  // }
+
+  button:disabled,
+  button[disabled] {
+    background-color: $disabled-color;
   }
 
   $sizes: (1, 2, 3, 4, 5, 6, 7, 8, 9);
@@ -262,14 +297,6 @@ body {
   //  background-color: white;
   //}
   //
-  //.link {
-  //  box-shadow: inset 0 -0.2rem 0 0 $link-color;
-  //  transition: 100ms;
-  //
-  //  &:hover {
-  //    box-shadow: inset 0 -0.6rem 0 0 $link-color;
-  //  }
-  //}
   //
   //
   //.log {

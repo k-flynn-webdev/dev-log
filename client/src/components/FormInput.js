@@ -1,8 +1,8 @@
 import * as React from "react"
-import { Box, Input, Text } from "@chakra-ui/react"
+import { Input } from "@chakra-ui/react"
 
 function FormInput({
-  label,
+  labelText,
   placeholder,
   value,
   type,
@@ -13,9 +13,12 @@ function FormInput({
   ...rest
 }) {
   return (
-    <Box className="mb-4" w="100%" {...rest}>
-      <Text mb="0.5rem">{label}</Text>
+    <div className="mb-4 form-input" {...rest}>
+      <label className="mb-1" htmlFor={labelText}>
+        {labelText}
+      </label>
       <Input
+        id={labelText}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
@@ -25,7 +28,7 @@ function FormInput({
         isRequired
         isInvalid={!isValid}
       />
-    </Box>
+    </div>
   )
 }
 

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Input, Card, Button } from "@chakra-ui/react"
+import FormInput from "./FormInput"
 
 import LogInputLength from "./LogInputLength"
 import Tags from "./Tags"
@@ -40,39 +40,36 @@ function LogInput() {
   }
 
   return (
-    <Card className="card log__input p-2 mb-3">
+    <div className="card log__input p-2 mb-3">
       <form
         id="logForm"
         onSubmit={handleSubmit}
         className="flex flex-row flex-wrap"
       >
         <div className="flex-grow">
-          <Input
-            id="logInput"
-            width="100%"
-            type="text"
+          <FormInput
             placeholder={randomPlaceholder()}
-            isRequired
-            minLength={LOG_INPUT_MIN_LENGTH}
-            maxLength={LOG_INPUT_MAX_LENGTH}
-            onChange={handleChange}
             value={propLogValue}
+            type="text"
+            min={LOG_INPUT_MIN_LENGTH}
+            max={LOG_INPUT_MAX_LENGTH}
+            isValid={isValid}
+            onChange={handleChange}
           />
           <LogInputLength />
         </div>
 
-        <Button
+        <button
+          className="primary xs:hide ml-1"
           type="submit"
-          colorScheme="green"
-          isDisabled={!isValid}
-          className="xs:hide ml-1"
+          disabled={!isValid}
         >
           {ADD}
-        </Button>
+        </button>
       </form>
 
       <Tags tags={propLogTags} />
-    </Card>
+    </div>
   )
 }
 

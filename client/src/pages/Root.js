@@ -1,21 +1,23 @@
-import * as React from 'react'
-import Header from "../components/Header";
-import Error from "../components/Error";
-import { Outlet } from "react-router-dom";
+import * as React from "react"
+import Header from "../components/Header"
+import Error from "../components/Error"
+import { Outlet } from "react-router-dom"
 import useMountUser from "../hooks/use-mount-user"
 import useAccessTokenURL from "../hooks/use-access-token-url"
 
 const Root = () => {
-	useMountUser();
-	useAccessTokenURL();
+  useMountUser()
+  useAccessTokenURL()
 
   return (
-		<>
-			<Header />
-			<Error />
-			<Outlet />
-		</>
-  );
-};
+    <>
+      <Header />
+      <Error />
+      <div className="container">
+        <Outlet />
+      </div>
+    </>
+  )
+}
 
-export default Root;
+export default Root

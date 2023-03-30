@@ -29,6 +29,17 @@ body {
     xs: "max-width: 20em",
   );
 
+  $breakpoints-medium-up: (
+    xl: "max-width: 80em",
+    lg: "max-width: 62em",
+    md: "max-width: 48em",
+  );
+
+  $breakpoints-medium-down: (
+    sm: "max-width: 30em",
+    xs: "max-width: 20em",
+  );
+
   @each $key, $val in $breakpoints {
     @media (#{$val}) {
       .#{$key}\:hide {
@@ -37,6 +48,19 @@ body {
 
       .#{$key}\:full {
         width: 100%;
+      }
+    }
+  }
+
+  .container {
+    padding: 0 1rem;
+    margin: 0 auto;
+  }
+
+  @each $key, $val in $breakpoints-medium-down {
+    @media (#{$val}) {
+      .container {
+        padding: 0;
       }
     }
   }

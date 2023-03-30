@@ -1,12 +1,12 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { parseTags } from '../../helpers/parse-tags'
-import { post } from '../../plugins/http';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { parseTags } from "../../helpers/parse-tags"
+import { post } from "../../plugins/http"
 
 const initLog = () => {
   return {
-    id: '',
+    id: "",
     value: "",
-    tags: []
+    tags: [],
   }
 }
 
@@ -14,32 +14,32 @@ export const logValue = state => state.logInput.value
 export const logTags = state => state.logInput.tags
 
 export const create = createAsyncThunk(
-  'logInput/create',
+  "logInput/create",
   async (arg, thunkAPI) => {
-    return post('logs', {
-      value: logValue(thunkAPI.getState())
+    return post("logs", {
+      value: logValue(thunkAPI.getState()),
     })
-    .then((res) => {
-      thunkAPI.dispatch({
-        type: 'logs/addLog',
-        payload: res.data,
+      .then(res => {
+        thunkAPI.dispatch({
+          type: "logs/addLog",
+          payload: res.data,
+        })
       })
-    })
-    .catch((err) => {
-      thunkAPI.dispatch({
-        type: 'error/setError',
-        payload: err.response.data,
-      })
+      .catch(err => {
+        thunkAPI.dispatch({
+          type: "error/setError",
+          payload: err.response.data,
+        })
 
-      throw thunkAPI.rejectWithValue(err.response.data)
-    })
+        throw thunkAPI.rejectWithValue(err.response.data)
+      })
   }
 )
 
 // todo: combine logs and log states for ease of future data
 
 export const logInput = createSlice({
-  name: 'logInput',
+  name: "logInput",
   initialState: initLog(),
   reducers: {
     /**
@@ -48,12 +48,12 @@ export const logInput = createSlice({
      * @param state
      * @param action
      */
-    reset: (state) => initLog(),
+    reset: state => initLog(),
     update: (state, { payload }) => {
       state.value = payload
       state.tags = parseTags(payload)
     },
-  }
+  },
 })
 
 // each case under reducers becomes an action

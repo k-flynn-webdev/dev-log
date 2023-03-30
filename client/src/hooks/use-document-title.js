@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect } from "react"
 
-export const useDocumentTitle = (title) => {
-	useEffect(() => {
-			document.title = title;
-	}, [title]);
-	return null;
+export const useDocumentTitle = title => {
+  useEffect(() => {
+    document.title = title
+  }, [title])
+  return null
 }
 
-export default useDocumentTitle;
+export default useDocumentTitle

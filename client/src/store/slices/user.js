@@ -1,23 +1,23 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { authSet, get, post, remove } from '../../plugins/http';
-import { setStorageAccessToken } from '../../helpers/authentication';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import { authSet, get, post, remove } from "../../plugins/http"
+import { setStorageAccessToken } from "../../helpers/authentication"
 
 export const fetchUser = createAsyncThunk(
-  'user/updateUser',
+  "user/updateUser",
   async (arg, thunkAPI) => {
-    return get('users')
-        .then(({ data }) => {
-          let user = null;
-          if (data && data.data && data.data.length) {
-            user = data.data[0]
-          }
-          if (!user) throw('no user found')
-          thunkAPI.dispatch({ type: 'user/updateUser', payload: user })
-          return user
+    return get("users")
+      .then(({ data }) => {
+        let user = null
+        if (data && data.data && data.data.length) {
+          user = data.data[0]
+        }
+        if (!user) throw "no user found"
+        thunkAPI.dispatch({ type: "user/updateUser", payload: user })
+        return user
       })
-      .catch((err) => {
+      .catch(err => {
         thunkAPI.dispatch({
-          type: 'error/setError',
+          type: "error/setError",
           payload: err.response.data,
         })
 
@@ -27,20 +27,20 @@ export const fetchUser = createAsyncThunk(
 )
 
 export const loginUser = createAsyncThunk(
-  'user/loginUser',
+  "user/loginUser",
   async (arg, thunkAPI) => {
-    return post('authentication', { strategy: 'local', ...arg })
-        .then(({ data }) => {
-          let user = data?.user ? data.user : null;
-          if (!user) throw('no user found')
-          thunkAPI.dispatch({ type: 'user/updateUser', payload: user })
-          authSet(data.accessToken);
-          setStorageAccessToken(data.accessToken);
-          return user
+    return post("authentication", { strategy: "local", ...arg })
+      .then(({ data }) => {
+        let user = data?.user ? data.user : null
+        if (!user) throw "no user found"
+        thunkAPI.dispatch({ type: "user/updateUser", payload: user })
+        authSet(data.accessToken)
+        setStorageAccessToken(data.accessToken)
+        return user
       })
-      .catch((err) => {
+      .catch(err => {
         thunkAPI.dispatch({
-          type: 'error/setError',
+          type: "error/setError",
           payload: err.response.data,
         })
 
@@ -50,17 +50,17 @@ export const loginUser = createAsyncThunk(
 )
 
 export const createUser = createAsyncThunk(
-  'user/createUser',
+  "user/createUser",
   async (arg, thunkAPI) => {
-    return post('users', { ...arg })
-        .then(({ data }) => {
-          let user = data ? data : null;
-          if (!user) throw('no user found')
-          return user
+    return post("users", { ...arg })
+      .then(({ data }) => {
+        let user = data ? data : null
+        if (!user) throw "no user found"
+        return user
       })
-      .catch((err) => {
+      .catch(err => {
         thunkAPI.dispatch({
-          type: 'error/setError',
+          type: "error/setError",
           payload: err.response.data,
         })
 
@@ -69,22 +69,22 @@ export const createUser = createAsyncThunk(
   }
 )
 
-
 export const isLoggedIn = state => state.user.id !== null
 export const getUserID = state => state.user.id || null
-export const getUserName = state => state.user.name.split(' ')[0] || state.user.email.split('@')[0].split(' ')[0]
+export const getUserName = state =>
+  state.user.name.split(" ")[0] || state.user.email.split("@")[0].split(" ")[0]
 
 const initUser = () => {
   return {
     id: null,
-    name: '',
-    email: '',
-    meta: ''
+    name: "",
+    email: "",
+    meta: "",
   }
 }
 
 export const user = createSlice({
-  name: 'user',
+  name: "user",
   initialState: initUser(),
   reducers: {
     /**
@@ -92,7 +92,7 @@ export const user = createSlice({
      *
      * @param _state
      */
-    resetUser: (_state) => initUser(),
+    resetUser: _state => initUser(),
     /**
      * Update User local data
      *
@@ -100,12 +100,12 @@ export const user = createSlice({
      * @param action
      */
     updateUser: (state, { payload }) => {
-      const keys = ['id','name','email','meta'];
+      const keys = ["id", "name", "email", "meta"]
       const payLoadKeys = Object.keys(payload)
 
-      keys.forEach((key) => {
-        if(payLoadKeys.includes(key) && payload[key]) {
-          state[key] = payload[key];
+      keys.forEach(key => {
+        if (payLoadKeys.includes(key) && payload[key]) {
+          state[key] = payload[key]
         }
       })
     },
@@ -115,4 +115,4 @@ export const user = createSlice({
 // each case under reducers becomes an action
 export const { resetUser, updateUser } = user.actions
 
-export default user.reducer;
+export default user.reducer

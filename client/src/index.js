@@ -13,11 +13,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ChakraProvider>
-        <Box className="md:px-4">
-          <Container className="dev-log">
-            <App />
-          </Container>
-        </Box>
+        <div className="dev-log">
+          <App />
+        </div>
       </ChakraProvider>
     </Provider>
   </React.StrictMode>

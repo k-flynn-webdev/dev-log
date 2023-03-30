@@ -9,9 +9,12 @@ $progress-color: #86ec86;
 $link-color: #86ec86;
 
 $log-spacing: 0.5rem;
+$card-spacing: 1rem;
 
 $text-size-small: 0.7rem;
 $text-size: 1.5rem;
+$text-size-medium: 2rem;
+$text-size-large: 2.5rem;
 
 $border-radius: 0.4rem;
 
@@ -21,27 +24,88 @@ body {
 }
 
 .dev-log {
+  .mx-auto {
+    margin: 0 auto;
+  }
+
+  button,
+  .button {
+    margin-bottom: 1rem;
+    padding: $log-spacing;
+    border-radius: $border-radius;
+    padding: 0.3rem 0.8rem;
+  }
+
+  .container {
+    padding: 0 1rem;
+    margin: 0 auto;
+  }
+
+  .card {
+    color: $fore-color;
+    background-color: $mid-color;
+    margin-bottom: $card-spacing;
+    padding: $card-spacing;
+    border-radius: $border-radius;
+
+    &__header,
+    &__body,
+    &__footer {
+      margin-bottom: $card-spacing;
+    }
+
+    &__header {
+      font-size: $text-size-large;
+    }
+
+    &__footer {
+      margin-top: $card-spacing;
+    }
+
+    button,
+    .button {
+      color: $mid-color;
+      background-color: $bg-color;
+    }
+  }
+
+  .icon {
+    display: inline-block;
+    line-height: 1rem;
+    color: currentColor;
+    vertical-align: middle;
+  }
+
+  $sizes: (1, 2, 3, 4, 5, 6, 7, 8, 9);
+  @each $val in $sizes {
+    .icon\:#{$val} {
+      @extend .icon;
+      width: #{$val}rem;
+      height: #{$val}rem;
+    }
+  }
+
   $breakpoints: (
-    xl: "max-width: 80em",
-    lg: "max-width: 62em",
-    md: "max-width: 48em",
-    sm: "max-width: 30em",
-    xs: "max-width: 20em",
+    xl: 80rem,
+    lg: 62rem,
+    md: 48rem,
+    sm: 30rem,
+    xs: 20rem,
   );
 
   $breakpoints-medium-up: (
-    xl: "max-width: 80em",
-    lg: "max-width: 62em",
-    md: "max-width: 48em",
+    xl: 80rem,
+    lg: 62rem,
+    md: 48rem,
   );
 
   $breakpoints-medium-down: (
-    sm: "max-width: 30em",
-    xs: "max-width: 20em",
+    sm: 30rem,
+    xs: 20rem,
   );
 
   @each $key, $val in $breakpoints {
-    @media (#{$val}) {
+    @media (max-width: $val) {
       .#{$key}\:hide {
         display: none;
       }
@@ -52,16 +116,33 @@ body {
     }
   }
 
-  .container {
-    padding: 0 1rem;
-    margin: 0 auto;
+  @each $key, $val in $breakpoints {
+    .card\:#{$key} {
+      @extend .card;
+      max-width: $val;
+    }
+
+    .container\:#{$key} {
+      @extend .container;
+      max-width: $val;
+    }
   }
 
   @each $key, $val in $breakpoints-medium-down {
-    @media (#{$val}) {
+    @media (max-width: $val) {
       .container {
         padding: 0;
       }
+    }
+  }
+
+  .socials-bar {
+    display: flex;
+    flex-wrap: wrap;
+
+    .social {
+      flex: 1 1 auto;
+      margin: 0.25rem 0.5rem;
     }
   }
 

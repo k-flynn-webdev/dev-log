@@ -8,11 +8,11 @@ function LoginGoogle() {
   return (
     <a
       href={socialLogin}
-      className="social"
+      className="social button"
       aria-label={socialLoginDescription}
       title={socialLoginDescription}
     >
-      <Icon className="icon mr-2" boxSize={8}>
+      <div className="icon:2 mr-2">
         <svg viewBox="0 0 48 48">
           <defs>
             <path
@@ -40,7 +40,7 @@ function LoginGoogle() {
             d="M48 48L17 24l-4-3 35-10z"
           />
         </svg>
-      </Icon>
+      </div>
       <span>Google</span>
     </a>
   )

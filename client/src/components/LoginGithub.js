@@ -1,5 +1,4 @@
 import * as React from "react"
-import { Icon } from "@chakra-ui/react"
 
 function LoginGithub() {
   const socialLogin = process.env.REACT_APP_GITHUB_LOGIN
@@ -8,11 +7,11 @@ function LoginGithub() {
   return (
     <a
       href={socialLogin}
-      className="social"
+      className="social button"
       aria-label={socialLoginDescription}
       title={socialLoginDescription}
     >
-      <Icon className="icon mr-2" boxSize={8}>
+      <div className="icon:2 mr-2">
         <svg viewBox="0 0 1024 1024" fill="none">
           <path
             fillRule="evenodd"
@@ -22,7 +21,7 @@ function LoginGithub() {
             fill="#1B1F23"
           />
         </svg>
-      </Icon>
+      </div>
       <span>Github</span>
     </a>
   )

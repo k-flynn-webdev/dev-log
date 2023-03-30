@@ -1,6 +1,5 @@
 import * as React from "react"
 import { useLocation } from "react-router-dom"
-import { Box, Card, CardHeader, CardBody } from "@chakra-ui/react"
 import { REGISTER, LOGIN } from "../lang/en-gb"
 import LoginRegister from "../components/LoginRegister"
 import LoginGoogle from "../components/LoginGoogle"
@@ -14,16 +13,16 @@ function LoginPage() {
   const form = isLogin || isRegister ? <LoginRegister isLogin={isLogin} /> : ""
 
   return (
-    <Box className="login">
-      <Card maxW="sm" className="login__card mb-2 mx-auto">
-        <CardHeader>
-          <h1 className="text-center text-3xl">
+    <div className="login">
+      <div className="mx-auto card:sm">
+        <div className="card__header">
+          <h1 className="text-center">
             {isLogin && LOGIN}
             {isRegister && REGISTER}
           </h1>
-        </CardHeader>
+        </div>
 
-        <CardBody className="p-4">
+        <div className="card__body">
           <div className="socials-bar mb-4">
             <LoginGoogle />
             <LoginGithub />
@@ -32,9 +31,9 @@ function LoginPage() {
           <hr className="solid my-8" />
 
           <div>{form}</div>
-        </CardBody>
-      </Card>
-    </Box>
+        </div>
+      </div>
+    </div>
   )
 }
 

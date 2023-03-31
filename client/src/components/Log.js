@@ -3,9 +3,16 @@ import Tags from "./Tags"
 import LogDate from "./LogDate"
 import LogMenu from "./LogMenu"
 
+export const getMarginSpace = log => {
+  const hasTags = log.tags.length ? 1 : 0
+  const rows = Math.ceil(log.tags.length / 3)
+  const result = (hasTags + rows) * 2
+  return `mb-${log.tags.length ? result + 1 : 2}`
+}
+
 function Log({ log }) {
   return (
-    <div className="log" title={log.value}>
+    <div className={`log ${getMarginSpace(log)}`} title={log.value}>
       <div>
         <div className="log-text">
           <p>{log.value}</p>

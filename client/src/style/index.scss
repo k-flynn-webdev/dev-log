@@ -118,13 +118,19 @@ body {
   }
 
   // todo margin and paddings here
-  $sizes: (1, 2, 3, 4, 5, 6, 7, 8, 9);
-  @each $val in $sizes {
+  $val: 1;
+  @while $val < 20 {
     .icon\:#{$val} {
       @extend .icon;
       width: #{$val}rem;
       height: #{$val}rem;
     }
+
+    .mb-#{$val} {
+      margin-bottom: #{($val * 0.25)}rem;
+    }
+
+    $val: $val + 1;
   }
 
   $media-xl: 80rem;
@@ -240,7 +246,6 @@ body {
   }
 
   .log {
-    margin: 1rem 0;
     padding: $log-spacing;
     padding-top: ($log-spacing * 0.25);
     padding-right: ($log-spacing * 3);
@@ -254,23 +259,23 @@ body {
     &-text {
       word-wrap: break-word;
       text-overflow: ellipsis;
-      margin-bottom: ($log-spacing * 2);
+      margin-bottom: ($log-spacing * 2.5);
     }
 
     &-tags {
-      position: absolute;
-      z-index: 1;
-      right: 0;
-      bottom: -0.66rem;
-
       .tags {
+        position: absolute;
+        z-index: 1;
+        right: 0;
+        bottom: -0.9rem;
+
         display: inline-block;
         margin-right: $log-spacing;
 
         .tag {
           display: inline-block;
-          margin: ($log-spacing * 0.3) ($log-spacing * 0.6);
-          padding: 0.1rem 0.5rem;
+          margin: ($log-spacing * 0.2) ($log-spacing * 0.45);
+          padding: 0 0.33rem;
           background-color: $tag-color;
           border-radius: $border-radius;
 
@@ -284,7 +289,7 @@ body {
     &-date {
       position: absolute;
       left: $log-spacing;
-      bottom: ($log-spacing * 0.5);
+      bottom: 0.4rem;
       font-size: $text-size-small;
       font-weight: bold;
       opacity: 0.7;
@@ -320,6 +325,17 @@ body {
       position: relative;
       overflow: hidden;
       background-color: $mid-color;
+
+      &__form {
+        align-items: center;
+        margin: 0;
+        padding: 0;
+
+        .form-input {
+          margin: 0;
+          padding: 0;
+        }
+      }
 
       button {
         margin-bottom: 0;

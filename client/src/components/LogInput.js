@@ -36,7 +36,7 @@ function LogInput() {
       <form
         id="logForm"
         onSubmit={handleSubmit}
-        className="flex flex-row flex-wrap"
+        className="flex flex-row flex-wrap log__input__form"
       >
         <div className="flex-grow">
           <FormInput

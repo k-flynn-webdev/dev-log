@@ -1,14 +1,14 @@
 $bg-color: hsl(228, 10, 88);
 $mid-color: hsl(222, 10, 34);
 $fore-color: hsl(228, 20, 97);
-$tag-color: hsl(91, 19, 54);
-$primary-color: hsl(91, 19, 54);
+$primary-color: hsl(192, 47, 46);
+$tag-color: $primary-color;
 
-$disabled-color: #6e6363;
+$disabled-color: hsl(192, 10%, 55%);
 $border-color: #353434;
 $danger-color: #e53939;
-$progress-color: #86ec86;
-$link-color: #86ec86;
+$progress-color: $primary-color;
+$link-color: $primary-color;
 
 $card-spacing: 1rem;
 
@@ -41,6 +41,7 @@ body {
 
     color: $mid-color;
     background-color: $bg-color;
+    transition: background-color 1s, color 1s;
   }
 
   .container {
@@ -144,13 +145,20 @@ body {
     }
   }
 
-  // button.primary { // todo
-  //   background-color: $primary-color;
-  // }
+  .button.primary,
+  button.primary {
+    color: $fore-color;
+    background-color: $primary-color;
+
+    // svg {
+    //   fill: $primary-color;
+    // }
+  }
 
   button:disabled,
   button[disabled] {
-    opacity: 0.75;
+    opacity: 0.66;
+    background-color: $disabled-color;
   }
 
   // todo margin and paddings for media sizes

@@ -110,7 +110,7 @@ body {
 
   button:disabled,
   button[disabled] {
-    background-color: $disabled-color;
+    opacity: 0.75;
   }
 
   // todo margin and paddings here

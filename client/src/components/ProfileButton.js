@@ -5,11 +5,13 @@ export const getShortUserName = name => {
 }
 
 function ProfileButton({ userName, onClick }) {
+  const profileName = userName ? userName : "??"
+
   return (
     <div className="profile">
-      <span className="hide:sm profile-name">{userName}</span>
+      <span className="hide:sm profile-name">{profileName}</span>
       <span className="hide show@sm profile-name">
-        {getShortUserName(userName)}
+        {getShortUserName(profileName)}
       </span>
 
       <button className="profile-button" onClick={onClick}>

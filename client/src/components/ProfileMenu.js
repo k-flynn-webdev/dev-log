@@ -10,7 +10,7 @@ import { clearStorageAccessToken } from "../helpers/authentication"
 import { LOGOUT } from "../lang/en-gb"
 import ProfileButton from "./ProfileButton"
 
-function Header() {
+function ProfileMenu() {
   const dispatch = useDispatch()
   const userName = useSelector(getUserName)
   const navigate = useNavigate()
@@ -35,4 +35,4 @@ function Header() {
   )
 }
 
-export default Header
+export default ProfileMenu

@@ -24,7 +24,7 @@ function Header() {
   }
 
   return (
-    <ProfileButton userName={userName} />
+    <ProfileButton userName={userName} onClick={logoutUser} />
     // <Menu style={{ position: "relative", zIndex: "100" }}>
     //   <MenuButton as={}></MenuButton>
 

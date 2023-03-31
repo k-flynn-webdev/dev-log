@@ -4,7 +4,7 @@ export const getShortUserName = name => {
   return name.substring(0, 4)
 }
 
-function ProfileButton({ userName }) {
+function ProfileButton({ userName, onClick }) {
   return (
     <div className="profile">
       <span className="hide:sm profile-name">{userName}</span>
@@ -12,7 +12,7 @@ function ProfileButton({ userName }) {
         {getShortUserName(userName)}
       </span>
 
-      <button className="profile-button">
+      <button className="profile-button" onClick={onClick}>
         <svg
           xmlSpace="preserve"
           fillRule="evenodd"

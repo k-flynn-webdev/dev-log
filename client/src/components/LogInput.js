@@ -2,16 +2,9 @@ import * as React from "react"
 import FormInput from "./FormInput"
 
 import LogInputLength from "./LogInputLength"
-import Tags from "./Tags"
 
 import { useSelector, useDispatch } from "react-redux"
-import {
-  reset,
-  update,
-  logValue,
-  logTags,
-  create,
-} from "../store/slices/log-input"
+import { reset, update, logValue, create } from "../store/slices/log-input"
 import { clearError } from "../store/slices/error"
 import {
   randomPlaceholder,
@@ -25,7 +18,6 @@ import { ADD } from "../lang/en-gb"
 function LogInput() {
   const dispatch = useDispatch()
   const propLogValue = useSelector(logValue)
-  const propLogTags = useSelector(logTags)
   const isValid = isValidLogLength(propLogValue.length)
 
   const handleChange = event => dispatch(update(event.target.value))
@@ -40,7 +32,7 @@ function LogInput() {
   }
 
   return (
-    <div className="card log__input p-2 mb-3">
+    <div className="card log__input mb-3">
       <form
         id="logForm"
         onSubmit={handleSubmit}
@@ -56,7 +48,7 @@ function LogInput() {
             isValid={isValid}
             onChange={handleChange}
           />
-          <LogInputLength />
+          <LogInputLength logValue={propLogValue} />
         </div>
 
         <button
@@ -67,8 +59,6 @@ function LogInput() {
           {ADD}
         </button>
       </form>
-
-      <Tags tags={propLogTags} />
     </div>
   )
 }

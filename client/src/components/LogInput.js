@@ -53,7 +53,7 @@ function LogInput() {
         </div>
 
         <button
-          className="primary sm:hide ml-1 mb-0"
+          className="primary sm:hide mb-0"
           type="submit"
           disabled={!isValid}
         >

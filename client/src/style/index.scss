@@ -272,6 +272,8 @@ body {
       button {
         margin-bottom: 0;
         background-color: unset;
+        padding: 0;
+        margin-left: $log-spacing;
 
         .icon {
           fill: $fore-color;

@@ -13,12 +13,12 @@ import {
   LOG_INPUT_MAX_LENGTH,
 } from "../helpers/log-input"
 
-import { ADD } from "../lang/en-gb"
-
 function LogInput() {
   const dispatch = useDispatch()
   const propLogValue = useSelector(logValue)
-  const isValid = isValidLogLength(propLogValue.length)
+  const isValid = propLogValue.length
+    ? isValidLogLength(propLogValue.length)
+    : true
 
   const handleChange = event => dispatch(update(event.target.value))
 

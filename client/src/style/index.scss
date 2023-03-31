@@ -113,6 +113,22 @@ body {
         fill: $fore-color;
       }
     }
+
+    &-menu {
+      height: 20rem;
+      width: 100%;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+
+      color: $fore-color;
+      background-color: $mid-color;
+
+      button {
+        color: $mid-color;
+        background-color: $fore-color;
+      }
+    }
   }
 
   .hide {

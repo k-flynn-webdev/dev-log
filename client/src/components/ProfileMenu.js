@@ -1,21 +1,19 @@
 import * as React from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-import { getUserName, resetUser } from "../store/slices/user"
+import { resetUser } from "../store/slices/user"
 import { resetLogs } from "../store/slices/logs"
-import { Button, Menu, MenuList, MenuButton, MenuItem } from "@chakra-ui/react"
 import { authRemove } from "../plugins/http"
 import { clearStorageAccessToken } from "../helpers/authentication"
 import { LOGOUT } from "../lang/en-gb"
-import ProfileButton from "./ProfileButton"
 
-function ProfileMenu() {
+function ProfileMenu({ userName, onClick }) {
   const dispatch = useDispatch()
-  const userName = useSelector(getUserName)
   const navigate = useNavigate()
 
   const logoutUser = () => {
+    onClick()
     authRemove()
     clearStorageAccessToken()
     dispatch(resetUser())
@@ -24,14 +22,12 @@ function ProfileMenu() {
   }
 
   return (
-    <ProfileButton userName={userName} onClick={logoutUser} />
-    // <Menu style={{ position: "relative", zIndex: "100" }}>
-    //   <MenuButton as={}></MenuButton>
-
-    //   <MenuList rootProps={{ position: "relative", zIndex: "100" }}>
-    //     <MenuItem onClick={logoutUser}>{LOGOUT}</MenuItem>
-    //   </MenuList>
-    // </Menu>
+    <div className="profile-menu">
+      <h1>{userName}</h1>
+      <button onClick={logoutUser}>{LOGOUT}</button>
+      <br />
+      <button onClick={onClick}>X</button>
+    </div>
   )
 }
 

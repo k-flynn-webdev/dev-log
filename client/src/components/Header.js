@@ -23,25 +23,31 @@ function Header({ title, className }) {
   }
 
   return (
-    <div className={`${className ? className : ""} header`}>
-      <>{profileOpen && <span>profile open</span>}</>
-      <div className="flex-grow">
-        <div className="text-center mb-4">
-          <Link className="title text-5xl link" to="/">
-            {title || TITLE}
-          </Link>
+    <div>
+      {profileOpen && <ProfileMenu userName={userName} onClick={handleClick} />}
+
+      {!profileOpen && (
+        <div className={`${className ? className : ""} header`}>
+          <div className="flex-grow">
+            <div className="text-center mb-4">
+              <Link className="title text-5xl link" to="/">
+                {title || TITLE}
+              </Link>
+            </div>
+          </div>
+
+          <div>
+            {userLoggedIn && (
+              <ProfileButton userName={userName} onClick={handleClick} />
+            )}
+            {!userLoggedIn && (
+              <Link to="/login" className="link">
+                User
+              </Link>
+            )}
+          </div>
         </div>
-      </div>
-      <div>
-        {userLoggedIn && (
-          <ProfileButton userName={userName} onClick={handleClick} />
-        )}
-        {!userLoggedIn && (
-          <Link to="/login" className="link">
-            User
-          </Link>
-        )}
-      </div>
+      )}
     </div>
   )
 }

@@ -26,7 +26,9 @@ function FormInput({
         onChange={onChange}
         placeholder={placeholder}
         type={type}
+        minLength={min || 5}
         min={min || 5}
+        maxLength={max || 30}
         max={max || 30}
         isRequired
         isInvalid={!isValid}

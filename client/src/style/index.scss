@@ -95,6 +95,26 @@ body {
     vertical-align: middle;
   }
 
+  .profile {
+    font-weight: bold;
+    color: $mid-color;
+
+    &-name {
+      margin-right: 0.2rem;
+    }
+
+    &-button {
+      padding: 0;
+      margin: 0;
+      color: $fore-color;
+      background-color: $mid-color;
+
+      .icon {
+        fill: $fore-color;
+      }
+    }
+  }
+
   .hide {
     display: none;
   }
@@ -117,7 +137,7 @@ body {
     opacity: 0.75;
   }
 
-  // todo margin and paddings here
+  // todo margin and paddings for media sizes
   $val: 1;
   @while $val < 20 {
     .icon\:#{$val} {
@@ -126,8 +146,51 @@ body {
       height: #{$val}rem;
     }
 
+    .ml-#{$val} {
+      margin-left: #{($val * 0.25)}rem;
+    }
+    .mr-#{$val} {
+      margin-right: #{($val * 0.25)}rem;
+    }
+    .mx-#{$val} {
+      margin-left: #{($val * 0.25)}rem;
+      margin-right: #{($val * 0.25)}rem;
+    }
+    .mt-#{$val} {
+      margin-top: #{($val * 0.25)}rem;
+    }
     .mb-#{$val} {
       margin-bottom: #{($val * 0.25)}rem;
+    }
+    .my-#{$val} {
+      margin-top: #{($val * 0.25)}rem;
+      margin-bottom: #{($val * 0.25)}rem;
+    }
+    .m-#{$val} {
+      margin: #{($val * 0.25)}rem;
+    }
+    .pl-#{$val} {
+      padding-left: #{($val * 0.25)}rem;
+    }
+    .pr-#{$val} {
+      padding-right: #{($val * 0.25)}rem;
+    }
+    .px-#{$val} {
+      padding-left: #{($val * 0.25)}rem;
+      padding-right: #{($val * 0.25)}rem;
+    }
+    .pt-#{$val} {
+      padding-top: #{($val * 0.25)}rem;
+    }
+    .pb-#{$val} {
+      padding-bottom: #{($val * 0.25)}rem;
+    }
+    .py-#{$val} {
+      padding-top: #{($val * 0.25)}rem;
+      padding-bottom: #{($val * 0.25)}rem;
+    }
+    .p-#{$val} {
+      padding: #{($val * 0.25)}rem;
     }
 
     $val: $val + 1;

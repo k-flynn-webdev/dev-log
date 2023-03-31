@@ -10,10 +10,11 @@ function FormInput({
   onChange,
   min,
   max,
+  className,
   ...rest
 }) {
   return (
-    <div className="mb-4 form-input" {...rest}>
+    <div className={`mb-4 form-input ${className}`} {...rest}>
       {labelText && (
         <label className="mb-1" htmlFor={labelText}>
           {labelText}

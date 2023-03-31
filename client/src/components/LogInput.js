@@ -47,16 +47,27 @@ function LogInput() {
             max={LOG_INPUT_MAX_LENGTH}
             isValid={isValid}
             onChange={handleChange}
+            className="mb-0"
           />
           <LogInputLength logValue={propLogValue} />
         </div>
 
         <button
-          className="primary xs:hide ml-1"
+          className="primary sm:hide ml-1 mb-0"
           type="submit"
           disabled={!isValid}
         >
-          {ADD}
+          <svg
+            xmlSpace="preserve"
+            fillRule="evenodd"
+            strokeLinejoin="round"
+            strokeMiterlimit="2"
+            clipRule="evenodd"
+            viewBox="0 0 16 16"
+            className="icon:2"
+          >
+            <path d="M5.9219 6.1694h-5.11c-.22 0-.39.176-.39.392v3.217c0 .216.17.391.39.391h5.11v5.109c0 .216.17.391.39.391h3.22c.21 0 .39-.175.39-.391v-5.109h5.11c.21 0 .39-.175.39-.391v-3.217c0-.216-.18-.392-.39-.392h-5.11v-5.108c0-.216-.18-.392-.39-.392h-3.22c-.22 0-.39.176-.39.392v5.108Z" />
+          </svg>
         </button>
       </form>
     </div>

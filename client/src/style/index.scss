@@ -263,9 +263,20 @@ body {
     }
 
     &__input {
+      padding: $log-spacing;
+      padding-bottom: ($log-spacing * 2);
       position: relative;
       overflow: hidden;
       background-color: $mid-color;
+
+      button {
+        margin-bottom: 0;
+        background-color: unset;
+
+        .icon {
+          fill: $fore-color;
+        }
+      }
 
       &-progress {
         pointer-events: none;

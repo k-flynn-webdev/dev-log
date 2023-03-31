@@ -261,6 +261,27 @@ body {
         vertical-align: top;
       }
     }
+
+    &__input {
+      position: relative;
+      overflow: hidden;
+      background-color: $mid-color;
+
+      &-progress {
+        pointer-events: none;
+        transition: width 0.3s ease-out, background-color 1.5s;
+        background-color: $progress-color;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 5px;
+
+        &.invalid {
+          opacity: 0.66;
+          background-color: $danger-color;
+        }
+      }
+    }
   }
 
   //
@@ -333,31 +354,7 @@ body {
   //  &__tags { z-index: 1; }
   //
   //
-  //  &__input {
-  //    background-color: $mid-color;
-  //    overflow: hidden;
-  //    position: relative;
-  //    border-radius: 0.5rem;
-  //
-  //    input, button { z-index: 1; }
-  //
-  //    &-progress {
-  //      opacity: 0.9;
-  //      pointer-events: none;
-  //      transition: width 0.3s ease-out, background-color 1.5s;
-  //      background-color: $progress-color;
-  //      position: absolute;
-  //      left: 0;
-  //      bottom: 0;
-  //      height: 100%;
-  //      z-index: 0;
-  //
-  //      &.invalid {
-  //        opacity: 0.66;
-  //        background-color: $danger-color;
-  //      }
-  //    }
-  //  }
+
   //}
 }
 //

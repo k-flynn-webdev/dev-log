@@ -1,6 +1,5 @@
 import * as React from "react"
 import { useEffect, useRef } from "react"
-import { Box } from "@chakra-ui/react"
 import Log from "./Log"
 
 import { getLogs, logList } from "../store/slices/logs"
@@ -26,7 +25,7 @@ function Logs() {
     }
   }, [userId])
 
-  return <Box>{LogListRender}</Box>
+  return <div>{LogListRender}</div>
 }
 
 export default Logs

@@ -10,8 +10,10 @@ $danger-color: #e53939;
 $progress-color: #86ec86;
 $link-color: #86ec86;
 
-$log-spacing: 0.5rem;
 $card-spacing: 1rem;
+
+$log-spacing: 0.5rem;
+$log-menu-button-size: 1rem;
 
 $text-size-small: 0.7rem;
 $text-size: 1.5rem;
@@ -111,6 +113,7 @@ body {
     background-color: $disabled-color;
   }
 
+  // todo margin and paddings here
   $sizes: (1, 2, 3, 4, 5, 6, 7, 8, 9);
   @each $val in $sizes {
     .icon\:#{$val} {
@@ -152,6 +155,10 @@ body {
   }
 
   @each $key, $val in $breakpoints {
+    .max-#{$key} {
+      max-width: $val;
+    }
+
     .card\:#{$key} {
       @extend .card;
       max-width: $val;
@@ -244,9 +251,13 @@ body {
       padding: 0;
       border-radius: unset;
 
+      overflow: hidden;
+      width: $log-menu-button-size;
+      height: $log-menu-button-size;
+
       .icon {
-        width: 0.75rem;
-        height: 0.75rem;
+        width: $log-menu-button-size;
+        height: $log-menu-button-size;
         vertical-align: top;
       }
     }

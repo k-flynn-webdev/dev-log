@@ -13,7 +13,7 @@ const Root = () => {
     <>
       <Header />
       <Error />
-      <div className="container">
+      <div className="container:md">
         <Outlet />
       </div>
     </>

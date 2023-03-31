@@ -101,7 +101,7 @@ function LoginRegister({ isLogin }) {
 
         <div>
           <button
-            className="primary xs:full"
+            className="primary full:xs"
             type="submit"
             disabled={!formIsValid}
           >

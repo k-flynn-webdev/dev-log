@@ -95,6 +95,10 @@ body {
     vertical-align: middle;
   }
 
+  .hide {
+    display: none;
+  }
+
   .link {
     box-shadow: inset 0 -0.2rem 0 0 $primary-color;
     transition: 100ms;
@@ -123,32 +127,79 @@ body {
     }
   }
 
+  $media-xl: 80rem;
+  $media-lg: 62rem;
+  $media-md: 48rem;
+  $media-sm: 30rem;
+  $media-xs: 20rem;
+
   $breakpoints: (
-    xl: 80rem,
-    lg: 62rem,
-    md: 48rem,
-    sm: 30rem,
-    xs: 20rem,
+    xl: $media-xl,
+    lg: $media-lg,
+    md: $media-md,
+    sm: $media-sm,
+    xs: $media-xs,
   );
 
   $breakpoints-medium-up: (
-    xl: 80rem,
-    lg: 62rem,
-    md: 48rem,
+    xl: $media-xl,
+    lg: $media-lg,
+    md: $media-md,
   );
 
   $breakpoints-medium-down: (
-    sm: 30rem,
-    xs: 20rem,
+    sm: $media-sm,
+    xs: $media-xs,
   );
 
+  // css from max size and down
   @each $key, $val in $breakpoints {
     @media (max-width: $val) {
-      .#{$key}\:hide {
+      .hide\:#{$key} {
         display: none;
       }
 
-      .#{$key}\:full {
+      .full\:#{$key} {
+        width: 100%;
+      }
+    }
+  }
+
+  // css between each case
+  $breakpoints-between: (
+    xl: (
+      $media-lg,
+      200rem,
+    ),
+    lg: (
+      $media-md,
+      $media-lg,
+    ),
+    md: (
+      $media-sm,
+      $media-md,
+    ),
+    sm: (
+      $media-xs,
+      $media-sm,
+    ),
+    xs: (
+      1rem,
+      $media-xs,
+    ),
+  );
+
+  @each $key, $val in $breakpoints-between {
+    @media screen and (min-width: nth($val, 1)) and (max-width: (nth($val, 2) - 0.01rem)) {
+      .hide\@#{$key} {
+        display: none;
+      }
+
+      .show\@#{$key} {
+        display: inline-block;
+      }
+
+      .full\@#{$key} {
         width: 100%;
       }
     }

@@ -13,7 +13,7 @@ function Tags({ tags }) {
       ))
     : ""
 
-  return <div className="tags">{tagsList}</div>
+  return <>{tags.length ? <div className="tags">{tagsList}</div> : ""}</>
 }
 
 export default Tags

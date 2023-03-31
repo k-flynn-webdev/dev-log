@@ -305,15 +305,13 @@ body {
   .header {
     display: flex;
     flex-direction: row;
-    margin-left: 2rem;
-    margin-right: 2rem;
     margin-top: 0.25rem;
   }
 
   @media screen and (min-width: 0) and (max-width: $media-sm) {
     .header {
-      margin-left: 0.25rem;
-      margin-right: 0.25rem;
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
     }
   }
 

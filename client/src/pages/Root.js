@@ -11,8 +11,11 @@ const Root = () => {
 
   return (
     <>
-      <Header />
-      <Error />
+      <div className="container:lg">
+        <Header />
+        <Error />
+      </div>
+
       <div className="container:md">
         <Outlet />
       </div>

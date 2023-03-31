@@ -1,7 +1,7 @@
 import * as React from "react"
 
 export const getShortUserName = name => {
-  return name.substring(0, 3)
+  return name.substring(0, 4)
 }
 
 function ProfileButton({ userName }) {

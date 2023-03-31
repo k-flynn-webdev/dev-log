@@ -29,14 +29,18 @@ function LoginRegister({ isLogin }) {
   const [passwordIsValid, setPasswordIsValid] = useState(true)
   const [formIsValid, setFormIsValid] = useState(false)
 
+  useEffect(() => {
+    setFormIsValid(
+      emailValue && emailIsValid && passwordValue && passwordIsValid
+    )
+  }, [emailValue, emailIsValid, passwordValue, passwordIsValid])
+
   const successToast = useToast({
     position: "top",
     title: isLogin ? LOGIN_SUCCESS : REGISTER_SUCCESS,
     isClosable: true,
     duration: 2500,
   })
-
-  useEffect(() => updateForm(), [emailValue, passwordValue])
 
   const handleEmail = event => {
     const email = event.target.value
@@ -50,12 +54,6 @@ function LoginRegister({ isLogin }) {
     setPassword(password)
     setPasswordIsValid(validPassword(password))
     if (!password) setPasswordIsValid(true)
-  }
-
-  const updateForm = () => {
-    setFormIsValid(
-      emailValue && emailIsValid && passwordValue && passwordIsValid
-    )
   }
 
   const handleSubmit = async event => {

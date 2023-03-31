@@ -14,7 +14,7 @@ function Header({ title, className }) {
   const userLoggedIn = useSelector(isLoggedIn)
 
   return (
-    <div className={`${className ? className : ""} flex flex-row`}>
+    <div className={`${className ? className : ""} header`}>
       <div className="flex-grow">
         <div className="text-center mb-4">
           <Link className="title text-5xl link" to="/">

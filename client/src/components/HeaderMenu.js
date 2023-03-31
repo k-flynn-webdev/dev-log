@@ -8,6 +8,7 @@ import { Button, Menu, MenuList, MenuButton, MenuItem } from "@chakra-ui/react"
 import { authRemove } from "../plugins/http"
 import { clearStorageAccessToken } from "../helpers/authentication"
 import { LOGOUT } from "../lang/en-gb"
+import ProfileButton from "./ProfileButton"
 
 function Header() {
   const dispatch = useDispatch()
@@ -23,13 +24,14 @@ function Header() {
   }
 
   return (
-    <Menu style={{ position: "relative", zIndex: "100" }}>
-      <MenuButton as={Button}>{userName}</MenuButton>
+    <ProfileButton userName={userName} />
+    // <Menu style={{ position: "relative", zIndex: "100" }}>
+    //   <MenuButton as={}></MenuButton>
 
-      <MenuList rootProps={{ position: "relative", zIndex: "100" }}>
-        <MenuItem onClick={logoutUser}>{LOGOUT}</MenuItem>
-      </MenuList>
-    </Menu>
+    //   <MenuList rootProps={{ position: "relative", zIndex: "100" }}>
+    //     <MenuItem onClick={logoutUser}>{LOGOUT}</MenuItem>
+    //   </MenuList>
+    // </Menu>
   )
 }
 

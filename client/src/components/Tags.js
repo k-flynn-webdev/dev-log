@@ -1,25 +1,19 @@
-import * as React from 'react'
-import { Tag } from '@chakra-ui/react';
+import * as React from "react"
 
-const getTagType = (tag) => (tag.type.toLowerCase())
-const getTagValue = (tag) => (tag.value.toLowerCase())
+const getTagType = tag => tag.type.toLowerCase()
+const getTagValue = tag => tag.value.toLowerCase()
+const getTagTitle = tag => `${getTagType(tag)} - ${getTagValue(tag)}`
 
 function Tags({ tags }) {
-	const tagsList = tags ? tags.map((item) => (
-			<Tag
-					key={getTagValue(item)}
-					variant="solid"
-					className="log__tag mr-2"
-					title={`tag: ${getTagType(item)} - ${getTagValue(item)}`}>
-				{getTagValue(item)}
-			</Tag>
-	)) : ""
+  const tagsList = tags
+    ? tags.map(tag => (
+        <div key={getTagValue(tag)} className="tag" title={getTagTitle(tag)}>
+          {getTagValue(tag)}
+        </div>
+      ))
+    : ""
 
-	return (
-		<div className={`log__tags ${tags.length ? 'mt-2' : ''}`}>
-			{tagsList}
-		</div>
-	)
+  return <div className="tags">{tagsList}</div>
 }
 
-export default Tags;
+export default Tags

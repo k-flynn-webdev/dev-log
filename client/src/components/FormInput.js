@@ -1,23 +1,41 @@
-import * as React from 'react'
-import { Box, Input, Text } from '@chakra-ui/react';
+import * as React from "react"
+import { Input } from "@chakra-ui/react"
 
-function FormInput({ label, placeholder, value, type, isValid, onChange, min, max, ...rest }) {
-
+function FormInput({
+  labelText,
+  placeholder,
+  value,
+  type,
+  isValid,
+  onChange,
+  min,
+  max,
+  className,
+  ...rest
+}) {
   return (
-    <Box className='mb-4' w='100%' {...rest} >
-      <Text mb='0.5rem'>{label}</Text>
+    <div className={`mb-4 form-input ${className}`} {...rest}>
+      {labelText && (
+        <label className="mb-1" htmlFor={labelText}>
+          {labelText}
+        </label>
+      )}
+
       <Input
+        id={labelText}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-				type={type}
-				min={min || 5}
-				max={max || 30}
-				isRequired
-				isInvalid={!isValid}
+        type={type}
+        minLength={min || 5}
+        min={min || 5}
+        maxLength={max || 30}
+        max={max || 30}
+        isRequired
+        isInvalid={!isValid}
       />
-    </Box>
-	)
+    </div>
+  )
 }
 
-export default FormInput;
+export default FormInput

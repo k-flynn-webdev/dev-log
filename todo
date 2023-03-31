@@ -1,8 +1,12 @@
+
+improve colour scheme: done
+improve ui design: done
+add user menu button click: done
+
 dev-log todo:
 
-improve colour scheme
-improve ui design
-add user menu button click
+bugfix: custom tags should not contain the #tag in the value
+
 add log button menu click
 add tag click to see user/global useage count
 
@@ -38,3 +42,5 @@ add admin view all activity
 
 add user search history
 add get tags as user types input feedback
+implement skins / theme
+icons for well known tags ?

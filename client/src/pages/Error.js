@@ -1,8 +1,8 @@
-import { useRouteError } from "react-router-dom";
-import Header from "../components/Header";
+import { useRouteError } from "react-router-dom"
+import Header from "../components/Header"
 
 function ErrorPage() {
-  const error = useRouteError();
+  const error = useRouteError()
 
   return (
     <>
@@ -15,7 +15,7 @@ function ErrorPage() {
         </p>
       </div>
     </>
-  );
+  )
 }
 
 export default ErrorPage

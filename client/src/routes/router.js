@@ -1,18 +1,16 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom"
 
-import Root from "../pages/Root";
-import Home from "../pages/Home";
-import LoginPage from "../pages/Login";
-import Error from "../pages/Error";
+import Root from "../pages/Root"
+import Home from "../pages/Home"
+import LoginPage from "../pages/Login"
+import Error from "../pages/Error"
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
     errorElement: <Error />,
-    children: [
-      { path: "", element: <Home /> },
-    ],
+    children: [{ path: "", element: <Home /> }],
   },
   {
     path: "login",
@@ -25,6 +23,6 @@ const router = createBrowserRouter([
       { path: "recover", element: <LoginPage /> },
     ],
   },
-]);
+])
 
-export default router;
+export default router

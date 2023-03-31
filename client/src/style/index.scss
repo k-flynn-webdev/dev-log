@@ -1,40 +1,338 @@
-$border-color: #353434;
-$mid-color: #eaebee;
-$danger-color: #e53939;
-$progress-color: #86ec86;
-$link-color: #86ec86;
+$bg-color: hsl(228, 10, 88);
+$mid-color: hsl(222, 10, 34);
+$fore-color: hsl(228, 20, 97);
+$primary-color: hsl(192, 47, 46);
+$tag-color: $primary-color;
 
-html, body {
-  //background-color: $bg-color !important;
+$disabled-color: hsl(192, 10%, 55%);
+$border-color: #353434;
+$danger-color: #e53939;
+$progress-color: $primary-color;
+$link-color: $primary-color;
+
+$card-spacing: 1rem;
+
+$log-spacing: 0.5rem;
+$log-menu-button-size: 1rem;
+
+$text-size-small: 0.7rem;
+$text-size: 1.5rem;
+$text-size-medium: 2rem;
+$text-size-large: 2.5rem;
+
+$border-radius: 0.4rem;
+
+html,
+body {
+  background-color: $bg-color !important;
 }
 
-
 .dev-log {
-    $breakpoints:(
-    xl: 'max-width: 80em',
-    lg: 'max-width: 62em',
-    md: 'max-width: 48em',
-    sm: 'max-width: 30em',
-    xs: 'max-width: 20em',
+  .mx-auto {
+    margin: 0 auto;
+  }
+
+  button,
+  .button {
+    margin-bottom: 1rem;
+    padding: $log-spacing;
+    border-radius: $border-radius;
+    padding: 0.3rem 0.8rem;
+
+    color: $mid-color;
+    background-color: $bg-color;
+    transition: background-color 1s, color 1s;
+  }
+
+  .container {
+    padding: 0 1rem;
+    margin: 0 auto;
+  }
+
+  .card {
+    color: $fore-color;
+    background-color: $mid-color;
+    margin-bottom: $card-spacing;
+    padding: $card-spacing;
+    border-radius: $border-radius;
+
+    &__header,
+    &__body,
+    &__footer {
+      margin-bottom: $card-spacing;
+    }
+
+    &__header {
+      font-size: $text-size-large;
+    }
+
+    &__footer {
+      margin-top: $card-spacing;
+    }
+
+    button,
+    .button {
+      color: $mid-color;
+      background-color: $bg-color;
+    }
+  }
+
+  .form-input {
+    label {
+      display: inline-block;
+    }
+
+    input {
+      border-radius: $border-radius;
+      color: $mid-color;
+      background-color: $bg-color;
+    }
+  }
+
+  .icon {
+    display: inline-block;
+    line-height: 1rem;
+    color: currentColor;
+    vertical-align: middle;
+  }
+
+  .profile {
+    font-weight: bold;
+    color: $mid-color;
+
+    &-name {
+      margin-right: 0.2rem;
+    }
+
+    &-button {
+      padding: 0;
+      margin: 0;
+      color: $fore-color;
+      background-color: $mid-color;
+
+      .icon {
+        fill: $fore-color;
+      }
+    }
+
+    &-menu {
+      height: 20rem;
+      width: 100%;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+
+      color: $fore-color;
+      background-color: $mid-color;
+
+      button {
+        color: $mid-color;
+        background-color: $fore-color;
+      }
+    }
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .link {
+    box-shadow: inset 0 -0.2rem 0 0 $primary-color;
+    transition: 100ms;
+
+    &:hover {
+      box-shadow: inset 0 -0.6rem 0 0 $primary-color;
+    }
+  }
+
+  .button.primary,
+  button.primary {
+    color: $fore-color;
+    background-color: $primary-color;
+  }
+
+  button:disabled,
+  button[disabled] {
+    opacity: 0.66;
+    background-color: $disabled-color;
+  }
+
+  // todo margin and paddings for media sizes
+  $val: 1;
+  @while $val < 20 {
+    .icon\:#{$val} {
+      @extend .icon;
+      width: #{$val}rem;
+      height: #{$val}rem;
+    }
+
+    .ml-#{$val} {
+      margin-left: #{($val * 0.25)}rem;
+    }
+    .mr-#{$val} {
+      margin-right: #{($val * 0.25)}rem;
+    }
+    .mx-#{$val} {
+      margin-left: #{($val * 0.25)}rem;
+      margin-right: #{($val * 0.25)}rem;
+    }
+    .mt-#{$val} {
+      margin-top: #{($val * 0.25)}rem;
+    }
+    .mb-#{$val} {
+      margin-bottom: #{($val * 0.25)}rem;
+    }
+    .my-#{$val} {
+      margin-top: #{($val * 0.25)}rem;
+      margin-bottom: #{($val * 0.25)}rem;
+    }
+    .m-#{$val} {
+      margin: #{($val * 0.25)}rem;
+    }
+    .pl-#{$val} {
+      padding-left: #{($val * 0.25)}rem;
+    }
+    .pr-#{$val} {
+      padding-right: #{($val * 0.25)}rem;
+    }
+    .px-#{$val} {
+      padding-left: #{($val * 0.25)}rem;
+      padding-right: #{($val * 0.25)}rem;
+    }
+    .pt-#{$val} {
+      padding-top: #{($val * 0.25)}rem;
+    }
+    .pb-#{$val} {
+      padding-bottom: #{($val * 0.25)}rem;
+    }
+    .py-#{$val} {
+      padding-top: #{($val * 0.25)}rem;
+      padding-bottom: #{($val * 0.25)}rem;
+    }
+    .p-#{$val} {
+      padding: #{($val * 0.25)}rem;
+    }
+
+    $val: $val + 1;
+  }
+
+  $media-xl: 80rem;
+  $media-lg: 62rem;
+  $media-md: 48rem;
+  $media-sm: 30rem;
+  $media-xs: 20rem;
+
+  $breakpoints: (
+    xl: $media-xl,
+    lg: $media-lg,
+    md: $media-md,
+    sm: $media-sm,
+    xs: $media-xs,
   );
-  @each $key,$val in $breakpoints{
-    @media (#{$val}) {
-      .#{$key}\:hide {
+
+  $breakpoints-medium-up: (
+    xl: $media-xl,
+    lg: $media-lg,
+    md: $media-md,
+  );
+
+  $breakpoints-medium-down: (
+    sm: $media-sm,
+    xs: $media-xs,
+  );
+
+  // css from max size and down
+  @each $key, $val in $breakpoints {
+    @media (max-width: $val) {
+      .hide\:#{$key} {
         display: none;
       }
 
-      .#{$key}\:full {
+      .show\:#{$key} {
+        display: inline-block;
+      }
+
+      .full\:#{$key} {
         width: 100%;
       }
     }
   }
 
-  .alert {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    right: 2rem;
-    z-index: 100;
+  // css between each case
+  $breakpoints-between: (
+    xl: (
+      $media-lg,
+      200rem,
+    ),
+    lg: (
+      $media-md,
+      $media-lg,
+    ),
+    md: (
+      $media-sm,
+      $media-md,
+    ),
+    sm: (
+      $media-xs,
+      $media-sm,
+    ),
+    xs: (
+      1rem,
+      $media-xs,
+    ),
+  );
+
+  @each $key, $val in $breakpoints-between {
+    @media screen and (min-width: nth($val, 1)) and (max-width: (nth($val, 2) - 0.01rem)) {
+      .hide\@#{$key} {
+        display: none;
+      }
+
+      .show\@#{$key} {
+        display: inline-block;
+      }
+
+      .full\@#{$key} {
+        width: 100%;
+      }
+    }
+  }
+
+  @each $key, $val in $breakpoints {
+    .max-#{$key} {
+      max-width: $val;
+    }
+
+    .card\:#{$key} {
+      @extend .card;
+      max-width: $val;
+    }
+
+    .container\:#{$key} {
+      @extend .container;
+      max-width: $val;
+    }
+  }
+
+  @each $key, $val in $breakpoints-medium-down {
+    @media (max-width: $val) {
+      .container {
+        padding: 0;
+      }
+    }
+  }
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.25rem;
+  }
+
+  @media screen and (min-width: 0) and (max-width: $media-sm) {
+    .header {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+    }
   }
 
   .socials-bar {
@@ -44,85 +342,120 @@ html, body {
     .social {
       flex: 1 1 auto;
       margin: 0.25rem 0.5rem;
-      padding: 0.3rem 0.8rem;
-      background-color: rgba(0,0,0,0.1);
-      border-radius: 0.2rem;
     }
   }
-
-  .hide {
-    display: none;
-  }
-
-  &.chakra-container {
-    margin-top: 0.75rem;
-    padding: 0;
-  }
-
-  .chakra-card {
-    box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(100,100,100,0.2);
-
-    .action {
-      display: block;
-      margin-left: auto;
-      padding: 0 1.5rem;
-    }
-  }
-
-  .block {
-    display: block;
-  }
-
-  .dev-log-border {
-    border: 0.66px solid $border-color;
-  }
-
-  input {
-    //@extend .dev-log-border;
-    background-color: white;
-  }
-
-  .link {
-    box-shadow: inset 0 -0.2rem 0 0 $link-color;
-    transition: 100ms;
-
-    &:hover {
-      box-shadow: inset 0 -0.6rem 0 0 $link-color;
-    }
-  }
-
 
   .log {
-    &__card {
-      //background-color: $mid-color;
+    padding: $log-spacing;
+    padding-top: ($log-spacing * 0.25);
+    padding-right: ($log-spacing * 3);
+    color: $fore-color;
+    background-color: $mid-color;
+    border-radius: $border-radius;
+    border-top-right-radius: 0;
 
-      &-text { cursor: default; }
+    position: relative;
+
+    &-text {
+      word-wrap: break-word;
+      text-overflow: ellipsis;
+      margin-bottom: ($log-spacing * 2.5);
     }
 
-    &__tag { cursor: default; }
+    &-tags {
+      .tags {
+        position: absolute;
+        z-index: 1;
+        right: 0;
+        bottom: -0.9rem;
 
-    &__tags { z-index: 1; }
+        display: inline-block;
+        margin-right: $log-spacing;
 
+        .tag {
+          display: inline-block;
+          margin: ($log-spacing * 0.2) ($log-spacing * 0.45);
+          padding: 0 0.33rem;
+          background-color: $tag-color;
+          border-radius: $border-radius;
+
+          &:last-of-type {
+            margin: 0;
+          }
+        }
+      }
+    }
+
+    &-date {
+      position: absolute;
+      left: $log-spacing;
+      bottom: 0.4rem;
+      font-size: $text-size-small;
+      font-weight: bold;
+      opacity: 0.7;
+    }
+
+    &-menu {
+      position: absolute;
+      right: ($log-spacing * 0.5);
+      top: ($log-spacing * 0.5);
+
+      color: $fore-color;
+      background-color: unset;
+      fill: $fore-color;
+
+      margin: 0;
+      padding: 0;
+      border-radius: unset;
+
+      overflow: hidden;
+      width: $log-menu-button-size;
+      height: $log-menu-button-size;
+
+      .icon {
+        width: $log-menu-button-size;
+        height: $log-menu-button-size;
+        vertical-align: top;
+      }
+    }
 
     &__input {
-      background-color: $mid-color;
-      overflow: hidden;
+      padding: $log-spacing;
+      padding-bottom: ($log-spacing * 2);
       position: relative;
-      border-radius: 0.5rem;
+      overflow: hidden;
+      background-color: $mid-color;
 
-      input, button { z-index: 1; }
+      &__form {
+        align-items: center;
+        margin: 0;
+        padding: 0;
+
+        .form-input {
+          margin: 0;
+          padding: 0;
+        }
+      }
+
+      button {
+        margin-bottom: 0;
+        background-color: unset;
+        padding: 0;
+        margin-left: $log-spacing;
+
+        .icon {
+          fill: $fore-color;
+        }
+      }
 
       &-progress {
-        opacity: 0.9;
         pointer-events: none;
         transition: width 0.3s ease-out, background-color 1.5s;
         background-color: $progress-color;
         position: absolute;
         left: 0;
         bottom: 0;
-        height: 100%;
-        z-index: 0;
+        height: 5px;
 
         &.invalid {
           opacity: 0.66;
@@ -131,13 +464,84 @@ html, body {
       }
     }
   }
-}
 
+  //
+  //
+  //.alert {
+  //  position: absolute;
+  //  top: 1rem;
+  //  left: 1rem;
+  //  right: 2rem;
+  //  z-index: 100;
+  //}
+  //
+  //.socials-bar {
+  //  display: flex;
+  //  flex-wrap: wrap;
+  //
+  //  .social {
+  //    flex: 1 1 auto;
+  //    margin: 0.25rem 0.5rem;
+  //    padding: 0.3rem 0.8rem;
+  //    background-color: rgba(0,0,0,0.1);
+  //    border-radius: 0.2rem;
+  //  }
+  //}
+  //
 
+  //
+  //&.chakra-container {
+  //  margin-top: 0.75rem;
+  //  padding: 0;
+  //}
+  //
+  //.chakra-card {
+  //  box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.1);
+  //  border: 1px solid rgba(100,100,100,0.2);
+  //
+  //  .action {
+  //    display: block;
+  //    margin-left: auto;
+  //    padding: 0 1.5rem;
+  //  }
+  //}
+  //
+  //.block {
+  //  display: block;
+  //}
+  //
+  //.dev-log-border {
+  //  border: 0.66px solid $border-color;
+  //}
+  //
+  //input {
+  //  //@extend .dev-log-border;
+  //  background-color: white;
+  //}
+  //
+  //
+  //
+  //.log {
+  //  &__card {
+  //    //background-color: $mid-color;
+  //
+  //    &-text { cursor: default; }
+  //  }
+  //
+  //  &__tag { cursor: default; }
+  //
+  //  &__tags { z-index: 1; }
+  //
+  //
 
-.warning {
-  background-color: darkorange !important;
+  //}
 }
-.danger {
-  background-color: $danger-color;
-}
+//
+//
+//
+//.warning {
+//  background-color: darkorange !important;
+//}
+//.danger {
+//  background-color: $danger-color;
+//}

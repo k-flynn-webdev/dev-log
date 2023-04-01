@@ -1,5 +1,5 @@
 /**
- * Split by hashtags from `context.params.logClean`
+ * Find custom hashtags from `context.params.logClean`
  *
  * @return {function(*): *}
  */
@@ -12,7 +12,7 @@ export const parseCustomLogTags = (context) => {
   const tagsByHash = context.data.value.match(/#[a-z0-9_]+/g)
 
   tagsByHash.forEach((tag) => {
-    context.params.logTagsCustom.push(tag.trim())
+    context.params.logTagsCustom.push(tag.trim().replace('#', ''))
   })
 
   return context

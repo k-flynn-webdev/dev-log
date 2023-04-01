@@ -2,8 +2,12 @@
 improve colour scheme: done
 improve ui design: done
 add user menu button click: done
+tags are now more responsive: done
+add ui footer with my website: done
 
 dev-log todo:
+
+
 
 bugfix: custom tags should not contain the #tag in the value
 
@@ -15,7 +19,6 @@ add BE testing in node
 add testing automation on git push
 add testing automation on git merge
 
-add ui footer with my website
 
 add user recover account by email
 add user edit password

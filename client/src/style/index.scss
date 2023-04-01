@@ -459,6 +459,7 @@ body {
       color: $fore-color;
       border-top: $fore-color 1px solid;
       border-left: $fore-color 1px solid;
+      border-bottom: $mid-color 1px solid;
 
       &:last-of-type {
         margin: 0;

@@ -9,10 +9,10 @@ export const parseCustomLogTags = (context) => {
   if (!context.data.value || !context.params.logClean) return context
   if (!context.data.value.includes('#')) return context
 
-  const tagsByHash = context.data.value.match(/#[a-z0-9_]+/g)
+  const tagsByHash = context.data.value.match(/#[A-Za-z0-9-_]+/g)
 
   tagsByHash.forEach((tag) => {
-    context.params.logTagsCustom.push(tag.trim().replace('#', ''))
+    context.params.logTagsCustom.push(tag.toLowerCase().trim().replace('#', ''))
   })
 
   return context

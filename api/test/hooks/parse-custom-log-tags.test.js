@@ -1,23 +1,57 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/service.test.html
-import assert from 'assert'
+import { afterEach, expect, test, describe, vi } from 'vitest'
 import { parseCustomLogTags } from '../../src/hooks/parse-custom-log-tags.js'
 
-const defaultContext = () => {
-  return { data: { value: '' }, params: {} }
+const defaultContext = (value) => {
+  const res = {
+    data: {
+      value: value || ''
+    },
+    params: {
+      logClean: value || ''
+    }
+  }
+
+  return res
 }
 
-describe('parseCustomLogTags hook', () => {
-  it('should add `logTagsCustom` to context params', () => {
-    const context = defaultContext()
-    const test = parseCustomLogTags(context)
+const hashExamples = ['#ALL-CAPS-123', '#tag', '#numbered-2-tag', '#otherTag']
 
-    assert.ok(test.params.hasOwnProperty('logTagsCustom'))
+describe('`parseCustomLogTags` hook', () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
   })
 
-  it('should return early if ', () => {
+  test('should add `logTagsCustom` to context params', () => {
     const context = defaultContext()
     const test = parseCustomLogTags(context)
 
-    assert.ok(test.params.hasOwnProperty('logTagsCustom'))
+    expect(test.params.hasOwnProperty('logTagsCustom')).toBe(true)
+  })
+
+  test('should return empty `logTagsCustom`', () => {
+    const context = defaultContext('no hash value')
+
+    const test = parseCustomLogTags(context)
+
+    expect(test.params.logTagsCustom).toEqual([])
+  })
+
+  test('should return value `logTagsCustom` array', () => {
+    const context = defaultContext('has #hash value')
+
+    const test = parseCustomLogTags(context)
+
+    expect(test.params.logTagsCustom).toEqual(['hash'])
+  })
+
+  test('should return lowercase tags without hash character', () => {
+    const context = defaultContext(hashExamples.join(', '))
+
+    const test = parseCustomLogTags(context)
+
+    expect(test.params.logTagsCustom).toEqual(
+      hashExamples.map((item) => item.toLowerCase().trim().replace('#', ''))
+    )
   })
 })

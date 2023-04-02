@@ -41,7 +41,7 @@
     "lint:fix": "eslint . --fix",
     "prettier": "npx prettier \"**/*.js\" --write",
     "mocha": "cross-env NODE_ENV=test mocha test/ --recursive --exit",
-    "test": "cross-env NODE_ENV=test npm run migrate && npm run mocha",
+    "test": "cross-env NODE_ENV=test yarn run vitest",
     "bundle:client": "npm pack --pack-destination ./public",
     "migrate": "knex migrate:latest",
     "migrate:make": "knex migrate:make",
@@ -81,9 +81,9 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-security": "^1.4.0",
     "husky": "^8.0.3",
-    "jest": "^29.3.1",
-    "mocha": "^10.2.0",
     "nodemon": "^2.0.20",
-    "prettier": "^2.8.1"
+    "prettier": "^2.8.1",
+    "vite": "^4.2.1",
+    "vitest": "^0.29.8"
   }
 }

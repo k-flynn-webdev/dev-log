@@ -2,9 +2,9 @@
 import assert from 'assert'
 import { app } from '../../../src/app.js'
 
-describe('users service', () => {
+describe('logs service', () => {
   it('registered the service', () => {
-    const service = app.service('api/users')
+    const service = app.service('api/logs')
 
     assert.ok(service, 'Registered the service')
   })

@@ -5,7 +5,7 @@ add user menu button click: done
 tags are now more responsive: done
 add ui footer with my website: done
 
-bugfix: custom tags should not contain the #tag in the value: progress
+bugfix: custom tags should not contain the #tag in the value: done
 
 dev-log todo:
 

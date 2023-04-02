@@ -37,7 +37,7 @@ describe('`parseCustomLogTags` hook', () => {
     expect(test.params.logTagsCustom).toEqual([])
   })
 
-  test('should return value `logTagsCustom` array', () => {
+  test('should return with `logTagsCustom` array', () => {
     const context = defaultContext('has #hash value')
 
     const test = parseCustomLogTags(context)
@@ -45,7 +45,15 @@ describe('`parseCustomLogTags` hook', () => {
     expect(test.params.logTagsCustom).toEqual(['hash'])
   })
 
-  test('should return lowercase tags without hash character', () => {
+  test('should always return lowercase tags', () => {
+    const context = defaultContext(hashExamples[0].toUpperCase())
+
+    const test = parseCustomLogTags(context)
+
+    expect(test.params.logTagsCustom).toEqual([hashExamples[0].toLowerCase().trim().replace('#', '')])
+  })
+
+  test('should always return tags without hash character', () => {
     const context = defaultContext(hashExamples.join(', '))
 
     const test = parseCustomLogTags(context)

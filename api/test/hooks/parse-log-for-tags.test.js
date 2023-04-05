@@ -2,7 +2,7 @@
 import { afterEach, expect, test, describe, vi } from 'vitest'
 import { parseLogForTags } from '../../src/hooks/parse-log-for-tags'
 
-const allTags = ['example', 'test', 'python', 'c#'].map((item, idx) => {
+const allTags = ['example', 'test', 'python', 'c\\#', 'c\\++'].map((item, idx) => {
   return { id: idx, value: item }
 })
 
@@ -32,6 +32,11 @@ const defaultContext = (value, tagService) => {
     }
   }
 
+  if (value) {
+    // cleanup due to test
+    res.params.logClean.replace('\\', '')
+  }
+
   return res
 }
 
@@ -56,11 +61,12 @@ describe('`parseLogForTags` hook', () => {
     const test = await parseLogForTags(context)
 
     expect(test.app.service('any').getAll).toBeCalledTimes(1)
+    expect(await test.app.service('any').getAll()).toEqual(allTags)
   })
 
   test('should match `getAll` tags with occurances in `cleanLog`', async () => {
     const tagService = tagsGetAllService(allTags)
-    const logValue = allTags.map((item) => item.value).join(' ')
+    const logValue = allTags.map((item) => item.value.replace('\\', '')).join(' ')
     const context = defaultContext(logValue, tagService)
 
     const test = await parseLogForTags(context)
@@ -92,10 +98,23 @@ describe('`parseLogForTags` hook', () => {
   })
 
   test('should check tags with special chars e.g. `c#`', async () => {
-    const testTag = { id: 0, value: 'c#' }
-    const tagService = tagsGetAllService([testTag])
+    const testTag = allTags.find((item) => item.value === 'c\\#')
+    const tagService = tagsGetAllService([...allTags])
 
     const logValue = 'testing c# tag'
+    const context = defaultContext(logValue, tagService)
+
+    const test = await parseLogForTags(context)
+
+    expect(test.params.logTagsFound.length).toEqual(1)
+    expect(test.params.logTagsFound[0]).toEqual(testTag)
+  })
+
+  test('should check tags with special chars e.g. `c++`', async () => {
+    const testTag = allTags.find((item) => item.value === 'c\\++')
+    const tagService = tagsGetAllService([...allTags])
+
+    const logValue = 'testing c++ tag'
     const context = defaultContext(logValue, tagService)
 
     const test = await parseLogForTags(context)

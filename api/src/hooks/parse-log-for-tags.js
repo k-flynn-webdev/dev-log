@@ -16,7 +16,7 @@ export const parseLogForTags = async (context) => {
 
     const tagValueCheck = tag.value.startsWith('#') ? prepareTag(tag.value) : prepareTag(tag.value, '  ')
 
-    if (context.params.logClean.toLowerCase().includes(tagValueCheck)) acc.push(tag)
+    if (new RegExp(`\\b${tagValueCheck}\\s`).test(`${context.params.logClean.toLowerCase()} `)) acc.push(tag)
 
     // remove duplicates from custom tags
     context.params.logTagsCustom = context.params.logTagsCustom.filter((item) => item !== tagValueCheck)

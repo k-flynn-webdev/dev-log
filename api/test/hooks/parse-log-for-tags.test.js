@@ -73,54 +73,34 @@ describe('`parseLogForTags` hook', () => {
     })
   })
 
-  test('should remove duplicate customTags', async () => {
+  test('should remove duplicate Tags where the occurance is very simialar', async () => {
     const genericTag = { id: 0, value: 'generic' }
-    const tagService = tagsGetAllService([genericTag])
+    const generic1Tag = { id: 1, value: 'generic1' }
+    const tagService = tagsGetAllService([genericTag, generic1Tag])
 
-    // const logValue = allTags.map((item) => item.value).join(' ')
-    // const context = defaultContext(logValue, tagService)
+    const testFunc = async (input) => {
+      const logValue = input.value
+      const context = defaultContext(logValue, tagService)
 
-    // const test = await parseLogForTags(context)
+      const test = await parseLogForTags(context)
+      expect(test.params.logTagsFound.length).toEqual(1)
+      expect(test.params.logTagsFound[0]).toEqual(input)
+    }
 
-    // expect(test.params.logTagsFound.length).toEqual(allTags.length)
-
-    // allTags.forEach((testTag) => {
-    //   const foundTag = test.params.logTagsFound.find((item) => item.value === testTag.value)
-    //   expect(foundTag).toBe(testTag)
-    // })
+    await testFunc(genericTag)
+    await testFunc(generic1Tag)
   })
 
-  // test('should return empty `logTagsCustom`', () => {
-  //   const context = defaultContext('no hash value')
+  test('should check tags with special chars e.g. `c#`', async () => {
+    const testTag = { id: 0, value: 'c#' }
+    const tagService = tagsGetAllService([testTag])
 
-  //   const test = parseCustomLogTags(context)
+    const logValue = 'testing c# tag'
+    const context = defaultContext(logValue, tagService)
 
-  //   expect(test.params.logTagsCustom).toEqual([])
-  // })
+    const test = await parseLogForTags(context)
 
-  // test('should return with `logTagsCustom` array', () => {
-  //   const context = defaultContext('has #hash value')
-
-  //   const test = parseCustomLogTags(context)
-
-  //   expect(test.params.logTagsCustom).toEqual(['hash'])
-  // })
-
-  // test('should always return lowercase tags', () => {
-  //   const context = defaultContext(hashExamples[0].toUpperCase())
-
-  //   const test = parseCustomLogTags(context)
-
-  //   expect(test.params.logTagsCustom).toEqual([hashExamples[0].toLowerCase().trim().replace('#', '')])
-  // })
-
-  // test('should always return tags without hash character', () => {
-  //   const context = defaultContext(hashExamples.join(', '))
-
-  //   const test = parseCustomLogTags(context)
-
-  //   expect(test.params.logTagsCustom).toEqual(
-  //     hashExamples.map((item) => item.toLowerCase().trim().replace('#', ''))
-  //   )
-  // })
+    expect(test.params.logTagsFound.length).toEqual(1)
+    expect(test.params.logTagsFound[0]).toEqual(testTag)
+  })
 })

@@ -35,7 +35,7 @@ describe('`cleanLogValue` hook', () => {
     expect(test.params.logClean).toEqual(` ${value} `)
   })
 
-  test('`logClean` should be a clean `data.value`', async () => {
+  test('`logClean` should be a cleaned log', async () => {
     const value = 'no tagtag with . and #other tag'
     const correct = 'no tagtag with and other tag'
     const context = defaultContext(value)

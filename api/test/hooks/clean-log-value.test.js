@@ -13,8 +13,6 @@ const defaultContext = (value) => {
   return res
 }
 
-const hashExamples = ['#ALL-CAPS-123', '#tag', '#numbered-2-tag', '#otherTag']
-
 describe('`cleanLogValue` hook', () => {
   afterEach(() => {
     vi.restoreAllMocks()

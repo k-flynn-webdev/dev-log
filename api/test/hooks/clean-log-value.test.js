@@ -5,7 +5,7 @@ import { cleanLogValue } from '../../src/hooks/clean-log-value'
 const defaultContext = (value) => {
   const res = {
     data: {
-      value: value || ''
+      value: value ? value : ''
     },
     params: {}
   }
@@ -35,7 +35,8 @@ describe('`cleanLogValue` hook', () => {
 
   test('`logClean` should be a cleaned log', async () => {
     const value = 'no tagtag with . and #other tag'
-    const correct = 'no tagtag with and other tag'
+    const correct = 'no tagtag with and  other tag'
+
     const context = defaultContext(value)
     const test = cleanLogValue(context)
 

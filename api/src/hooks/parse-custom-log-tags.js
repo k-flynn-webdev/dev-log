@@ -13,9 +13,11 @@ export const parseCustomLogTags = (context) => {
 
   const tagsByHash = context.data.value.match(/#[A-Za-z0-9-_]+/g)
 
-  tagsByHash.forEach((tag) => {
-    context.params.logTagsCustom.push(prepareTag(tag))
-  })
+  if (tagsByHash) {
+    tagsByHash.forEach((tag) => {
+      context.params.logTagsCustom.push(prepareTag(tag))
+    })
+  }
 
   return context
 }

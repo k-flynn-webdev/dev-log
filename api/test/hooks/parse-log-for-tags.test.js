@@ -2,7 +2,7 @@
 import { afterEach, expect, test, describe, vi } from 'vitest'
 import { parseLogForTags } from '../../src/hooks/parse-log-for-tags'
 
-const allTags = ['example', 'test', 'python', 'c\\#', 'c\\++'].map((item, idx) => {
+const allTags = ['example', 'test', 'python', 'c#', 'c++'].map((item, idx) => {
   return { id: idx, value: item }
 })
 
@@ -21,20 +21,15 @@ const tagsGetAllService = (value) => {
 const defaultContext = (value, tagService) => {
   const res = {
     data: {
-      value: value || ''
+      value: value ? value : ''
     },
     params: {
-      logClean: value || '',
+      logClean: value ? ` ${value} ` : '',
       logTagsCustom: []
     },
     app: {
       service: () => tagService
     }
-  }
-
-  if (value) {
-    // cleanup due to test
-    res.params.logClean.replace('\\', '')
   }
 
   return res
@@ -66,7 +61,7 @@ describe('`parseLogForTags` hook', () => {
 
   test('should match `getAll` tags with occurances in `cleanLog`', async () => {
     const tagService = tagsGetAllService(allTags)
-    const logValue = allTags.map((item) => item.value.replace('\\', '')).join(' ')
+    const logValue = allTags.map((item) => item.value).join(' ')
     const context = defaultContext(logValue, tagService)
 
     const test = await parseLogForTags(context)
@@ -89,6 +84,7 @@ describe('`parseLogForTags` hook', () => {
       const context = defaultContext(logValue, tagService)
 
       const test = await parseLogForTags(context)
+
       expect(test.params.logTagsFound.length).toEqual(1)
       expect(test.params.logTagsFound[0]).toEqual(input)
     }
@@ -98,10 +94,10 @@ describe('`parseLogForTags` hook', () => {
   })
 
   test('should check tags with special chars e.g. `c#`', async () => {
-    const testTag = allTags.find((item) => item.value === 'c\\#')
+    const testTag = allTags.find((item) => item.value === 'c#')
     const tagService = tagsGetAllService([...allTags])
 
-    const logValue = 'testing c# tag'
+    const logValue = 'testing c# code here'
     const context = defaultContext(logValue, tagService)
 
     const test = await parseLogForTags(context)
@@ -111,10 +107,10 @@ describe('`parseLogForTags` hook', () => {
   })
 
   test('should check tags with special chars e.g. `c++`', async () => {
-    const testTag = allTags.find((item) => item.value === 'c\\++')
+    const testTag = allTags.find((item) => item.value === 'c++')
     const tagService = tagsGetAllService([...allTags])
 
-    const logValue = 'testing c++ tag'
+    const logValue = 'testing c++ code here'
     const context = defaultContext(logValue, tagService)
 
     const test = await parseLogForTags(context)

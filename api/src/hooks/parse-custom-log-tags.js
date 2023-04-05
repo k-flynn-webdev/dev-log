@@ -1,3 +1,5 @@
+import { prepareTag } from '../helpers/prepare-tag.js'
+
 /**
  * Find custom hashtags from `context.params.logClean`
  *
@@ -11,9 +13,11 @@ export const parseCustomLogTags = (context) => {
 
   const tagsByHash = context.data.value.match(/#[A-Za-z0-9-_]+/g)
 
-  tagsByHash.forEach((tag) => {
-    context.params.logTagsCustom.push(tag.toLowerCase().trim().replace('#', ''))
-  })
+  if (tagsByHash) {
+    tagsByHash.forEach((tag) => {
+      context.params.logTagsCustom.push(prepareTag(tag))
+    })
+  }
 
   return context
 }

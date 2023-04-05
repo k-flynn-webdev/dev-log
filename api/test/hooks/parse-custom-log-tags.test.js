@@ -5,10 +5,11 @@ import { parseCustomLogTags } from '../../src/hooks/parse-custom-log-tags.js'
 const defaultContext = (value) => {
   const res = {
     data: {
-      value: value || ''
+      value: value ? value : ''
     },
     params: {
-      logClean: value || ''
+      logClean: value ? ` ${value} ` : '',
+      logTagsCustom: []
     }
   }
 

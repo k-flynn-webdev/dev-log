@@ -1,14 +1,14 @@
 const USER_ID = 1
-const ENUM_TOOL = "tool"
-const ENUM_LANGUAGE = "language"
-const ENUM_METHOD = "method"
-const ENUM_FRAMEWORK = "framework"
-const ENUM_LIBRARY = "library"
-const ENUM_PROCESSOR = "processor"
+const ENUM_TOOL = 'tool'
+const ENUM_LANGUAGE = 'language'
+const ENUM_METHOD = 'method'
+const ENUM_FRAMEWORK = 'framework'
+const ENUM_LIBRARY = 'library'
+const ENUM_PROCESSOR = 'processor'
 
 /**
  * @param { import("knex").Knex } knex
- * @returns { Promise<void> } 
+ * @returns { Promise<void> }
  */
 export async function seed(knex) {
   // Deletes ALL existing entries
@@ -37,6 +37,6 @@ export async function seed(knex) {
     { value: 'design', type: ENUM_METHOD, user_id: USER_ID },
     { value: 'time', type: ENUM_METHOD, user_id: USER_ID },
     { value: 'webpack', type: ENUM_PROCESSOR, user_id: USER_ID },
-    { value: 'vite', type: ENUM_TOOL, user_id: USER_ID },
-  ]);
-};
+    { value: 'vite', type: ENUM_TOOL, user_id: USER_ID }
+  ])
+}

@@ -9,9 +9,11 @@ function ProfileButton({ userName, onClick }) {
 
   return (
     <div className="profile">
-      <span className="hide:sm profile-name">{profileName}</span>
-      <span className="hide show@sm profile-name">
-        {getShortUserName(profileName)}
+      <span className="cursor" onClick={onClick}>
+        <span className="hide:sm profile-name">{profileName}</span>
+        <span className="hide show@sm profile-name">
+          {getShortUserName(profileName)}
+        </span>
       </span>
 
       <button className="profile-button" onClick={onClick}>

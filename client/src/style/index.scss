@@ -27,6 +27,10 @@ body {
   background-color: $bg-color !important;
 }
 
+.cursor {
+  cursor: pointer;
+}
+
 .dev-log {
   .mx-auto {
     margin: 0 auto;

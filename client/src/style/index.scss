@@ -31,6 +31,11 @@ body {
   cursor: pointer;
 }
 
+.border-style {
+  border-radius: $border-radius;
+  border-top-right-radius: 0;
+}
+
 .dev-log {
   a,
   p,
@@ -71,8 +76,8 @@ body {
   .card {
     color: $fore-color;
     background-color: $mid-color;
-    margin-bottom: $card-spacing;
     padding: $card-spacing;
+    margin-bottom: $card-spacing;
     border-radius: $border-radius;
 
     &__header,
@@ -145,7 +150,7 @@ body {
 
       color: $fore-color;
       background-color: $mid-color;
-      border-radius: $border-radius;
+      @extend .border-style;
 
       display: flex;
       flex-direction: column;
@@ -407,8 +412,7 @@ body {
     padding-right: ($log-spacing * 3);
     color: $fore-color;
     background-color: $mid-color;
-    border-radius: $border-radius;
-    border-top-right-radius: 0;
+    @extend .border-style;
 
     position: relative;
 

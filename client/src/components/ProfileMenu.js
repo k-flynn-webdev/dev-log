@@ -7,8 +7,9 @@ import { resetLogs } from "../store/slices/logs"
 import { authRemove } from "../plugins/http"
 import { clearStorageAccessToken } from "../helpers/authentication"
 import { LOGOUT } from "../lang/en-gb"
+import UserMenuDetails from "./UserMenuDetails"
 
-function ProfileMenu({ userName, onClick }) {
+function ProfileMenu({ userName, userDetails, onClick }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -40,8 +41,8 @@ function ProfileMenu({ userName, onClick }) {
         </button>
       </div>
 
-      <div className="profile-menu__content">
-        <div>11</div>
+      <div className="profile-menu__content mt-4">
+        <UserMenuDetails userDetails={userDetails} />
         <button className="quit-button" onClick={logoutUser}>
           {LOGOUT}
         </button>

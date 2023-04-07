@@ -73,15 +73,22 @@ export const isLoggedIn = state => state.user.id !== null
 export const getUserID = state => state.user.id || null
 export const getUserName = state =>
   state.user.name.split(" ")[0] || state.user.email.split("@")[0].split(" ")[0]
+export const getUserDetails = state => state.user || null
 
-const initUser = () => {
+export const initUser = () => {
   return {
     id: null,
     name: "",
     email: "",
     meta: "",
+    log_count: 0,
+    tag_count: 0,
+    created_at: null,
+    updated_at: null,
   }
 }
+
+export const userProperties = Object.keys(initUser())
 
 export const user = createSlice({
   name: "user",
@@ -100,10 +107,9 @@ export const user = createSlice({
      * @param action
      */
     updateUser: (state, { payload }) => {
-      const keys = ["id", "name", "email", "meta"]
       const payLoadKeys = Object.keys(payload)
 
-      keys.forEach(key => {
+      userProperties.forEach(key => {
         if (payLoadKeys.includes(key) && payload[key]) {
           state[key] = payload[key]
         }

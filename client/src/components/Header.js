@@ -2,7 +2,7 @@ import * as React from "react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { isLoggedIn, getUserName } from "../store/slices/user"
+import { isLoggedIn, getUserName, getUserDetails } from "../store/slices/user"
 
 import useDocumentTitle from "../hooks/use-document-title"
 import { TITLE } from "../lang/en-gb"
@@ -15,6 +15,7 @@ function Header({ title, className }) {
 
   const userLoggedIn = useSelector(isLoggedIn)
   const userName = useSelector(getUserName)
+  const userDetails = useSelector(getUserDetails)
 
   const [profileOpen, setProfileOpen] = useState(false)
 
@@ -24,13 +25,19 @@ function Header({ title, className }) {
 
   return (
     <div>
-      {profileOpen && <ProfileMenu userName={userName} onClick={handleClick} />}
+      {profileOpen && (
+        <ProfileMenu
+          userName={userName}
+          userDetails={userDetails}
+          onClick={handleClick}
+        />
+      )}
 
       {!profileOpen && (
         <div className={`${className ? className : ""} header`}>
           <div className="flex-grow">
             <div className="text-center mb-4">
-              <Link className="title text-5xl link" to="/">
+              <Link className="title link" to="/">
                 {title || TITLE}
               </Link>
             </div>

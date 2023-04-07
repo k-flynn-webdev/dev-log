@@ -1,29 +1,31 @@
 import * as React from "react"
 
+const userDetailsToShow = {
+  email: { label: "Email", render: user => user.email },
+  created_at: {
+    label: "Joined",
+    render: user => new Date(user.created_at).toLocaleDateString(),
+  },
+  log_count: { label: "Logs created", render: user => user.log_count },
+  tag_count: { label: "Tags created", render: user => user.tag_count },
+}
+
 function UserMenuDetails({ userDetails }) {
   return (
-    <>
-      <div>
-        <span>Email: </span>
-        <span>{userDetails.email}</span>
-      </div>
-      <div>
-        <span>Joined: </span>
-        <span>{new Date(userDetails.created_at).toLocaleDateString()}</span>
-      </div>
-      <div>
-        <span>Updated: </span>
-        <span>{new Date(userDetails.updated_at).toLocaleDateString()}</span>
-      </div>
-      <div>
-        <span>Logs created: </span>
-        <span>{userDetails.log_count}</span>
-      </div>
-      <div>
-        <span>Tags created: </span>
-        <span>{userDetails.tag_count}</span>
-      </div>
-    </>
+    <div className="profile-user-details">
+      {Object.keys(userDetailsToShow).map(key => {
+        return (
+          <div className="profile-user-details__line" key={key}>
+            <span className="profile-user-details__line-label">
+              {userDetailsToShow[key].label}:{" "}
+            </span>
+            <span className="profile-user-details__line-detail">
+              {userDetailsToShow[key].render(userDetails)}
+            </span>
+          </div>
+        )
+      })}
+    </div>
   )
 }
 

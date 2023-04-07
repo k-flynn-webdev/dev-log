@@ -9,7 +9,7 @@ bugfix: custom tags should not contain the #tag in the value: done
 
 dev-log todo:
 
-
+have a loading page when user might exists, main page flashes
 
 add log button menu click
 add tag click to see user/global useage count

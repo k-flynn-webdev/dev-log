@@ -2,18 +2,18 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { authSet, get, post, remove } from "../../plugins/http"
 import { setStorageAccessToken } from "../../helpers/authentication"
 
-export const fetchUser = createAsyncThunk(
-  "user/updateUser",
+export const fetchProfile = createAsyncThunk(
+  "profile/updateProfile",
   async (arg, thunkAPI) => {
     return get("users")
       .then(({ data }) => {
-        let user = null
+        let profile = null
         if (data && data.data && data.data.length) {
-          user = data.data[0]
+          profile = data.data[0]
         }
-        if (!user) throw "no user found"
-        thunkAPI.dispatch({ type: "user/updateUser", payload: user })
-        return user
+        if (!profile) throw "no profile found"
+        thunkAPI.dispatch({ type: "profile/updateProfile", payload: profile })
+        return profile
       })
       .catch(err => {
         thunkAPI.dispatch({
@@ -26,17 +26,17 @@ export const fetchUser = createAsyncThunk(
   }
 )
 
-export const loginUser = createAsyncThunk(
-  "user/loginUser",
+export const loginProfile = createAsyncThunk(
+  "profile/loginProfile",
   async (arg, thunkAPI) => {
     return post("authentication", { strategy: "local", ...arg })
       .then(({ data }) => {
-        let user = data?.user ? data.user : null
-        if (!user) throw "no user found"
-        thunkAPI.dispatch({ type: "user/updateUser", payload: user })
+        let profile = data?.profile ? data.profile : null
+        if (!profile) throw "no profile found"
+        thunkAPI.dispatch({ type: "profile/updateProfile", payload: profile })
         authSet(data.accessToken)
         setStorageAccessToken(data.accessToken)
-        return user
+        return profile
       })
       .catch(err => {
         thunkAPI.dispatch({
@@ -49,14 +49,14 @@ export const loginUser = createAsyncThunk(
   }
 )
 
-export const createUser = createAsyncThunk(
-  "user/createUser",
+export const createProfile = createAsyncThunk(
+  "profile/createProfile",
   async (arg, thunkAPI) => {
     return post("users", { ...arg })
       .then(({ data }) => {
-        let user = data ? data : null
-        if (!user) throw "no user found"
-        return user
+        let profile = data ? data : null
+        if (!profile) throw "no profile found"
+        return profile
       })
       .catch(err => {
         thunkAPI.dispatch({
@@ -69,13 +69,14 @@ export const createUser = createAsyncThunk(
   }
 )
 
-export const isLoggedIn = state => state.user.id !== null
-export const getUserID = state => state.user.id || null
-export const getUserName = state =>
-  state.user.name.split(" ")[0] || state.user.email.split("@")[0].split(" ")[0]
-export const getUserDetails = state => state.user || null
+export const isLoggedIn = state => state.profile.id !== null
+export const getProfileID = state => state.profile.id || null
+export const getProfileName = state =>
+  state.profile.name.split(" ")[0] ||
+  state.profile.email.split("@")[0].split(" ")[0]
+export const getProfileDetails = state => state.profile || null
 
-export const initUser = () => {
+export const initProfile = () => {
   return {
     id: null,
     name: "",
@@ -88,28 +89,28 @@ export const initUser = () => {
   }
 }
 
-export const userProperties = Object.keys(initUser())
+export const profileProperties = Object.keys(initProfile())
 
-export const user = createSlice({
-  name: "user",
-  initialState: initUser(),
+export const profile = createSlice({
+  name: "profile",
+  initialState: initProfile(),
   reducers: {
     /**
-     * Reset User local data
+     * Reset Profile local data
      *
      * @param _state
      */
-    resetUser: _state => initUser(),
+    resetProfile: _state => initProfile(),
     /**
-     * Update User local data
+     * Update Profile local data
      *
      * @param state
      * @param action
      */
-    updateUser: (state, { payload }) => {
+    updateProfile: (state, { payload }) => {
       const payLoadKeys = Object.keys(payload)
 
-      userProperties.forEach(key => {
+      profileProperties.forEach(key => {
         if (payLoadKeys.includes(key) && payload[key]) {
           state[key] = payload[key]
         }
@@ -119,6 +120,6 @@ export const user = createSlice({
 })
 
 // each case under reducers becomes an action
-export const { resetUser, updateUser } = user.actions
+export const { resetProfile, updateProfile } = profile.actions
 
-export default user.reducer
+export default profile.reducer

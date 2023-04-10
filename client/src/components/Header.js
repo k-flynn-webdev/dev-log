@@ -2,20 +2,24 @@ import * as React from "react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { isLoggedIn, getUserName, getUserDetails } from "../store/slices/user"
+import {
+  isLoggedIn,
+  getProfileName,
+  getProfileDetails,
+} from "../store/slices/profile"
 
 import useDocumentTitle from "../hooks/use-document-title"
 import { TITLE } from "../lang/en-gb"
 
 import HeaderMenu from "./HeaderMenu"
-import HeaderUser from "./HeaderUser"
+import HeaderProfile from "./HeaderProfile"
 
 function Header({ title, className }) {
   useDocumentTitle(title || TITLE)
 
-  const userLoggedIn = useSelector(isLoggedIn)
-  const userName = useSelector(getUserName)
-  const userDetails = useSelector(getUserDetails)
+  const profileLoggedIn = useSelector(isLoggedIn)
+  const profileName = useSelector(getProfileName)
+  const profileDetails = useSelector(getProfileDetails)
 
   const [profileOpen, setProfileOpen] = useState(false)
 
@@ -27,8 +31,8 @@ function Header({ title, className }) {
     <div className="header">
       {profileOpen && (
         <HeaderMenu
-          userName={userName}
-          userDetails={userDetails}
+          profileName={profileName}
+          profileDetails={profileDetails}
           onClick={handleClick}
         />
       )}
@@ -45,16 +49,16 @@ function Header({ title, className }) {
             </Link>
           </div>
 
-          <>
-            {userLoggedIn && (
-              <HeaderUser userName={userName} onClick={handleClick} />
+          <div>
+            {profileLoggedIn && (
+              <HeaderProfile profileName={profileName} onClick={handleClick} />
             )}
-            {!userLoggedIn && (
+            {!profileLoggedIn && (
               <Link to="/login" className="link">
-                User
+                Profile
               </Link>
             )}
-          </>
+          </div>
         </div>
       }
     </div>

@@ -1,20 +1,18 @@
 import * as React from "react"
 
-export const getShortUserName = name => {
+export const getShortProfileName = name => {
   return name.substring(0, 4)
 }
 
-function HeaderUser({ userName, onClick }) {
-  const profileName = userName ? userName : "??"
+function HeaderProfile({ profileName, onClick }) {
+  const name = profileName ? profileName : "??"
 
   return (
     <div className="header__content__profile mt-3">
       <span className="cursor" onClick={onClick}>
-        <span className="hide:sm header__content__profile-name">
-          {profileName}
-        </span>
+        <span className="hide:sm header__content__profile-name">{name}</span>
         <span className="hide show@sm header__content__profile-name">
-          {getShortUserName(profileName)}
+          {getShortProfileName(name)}
         </span>
       </span>
 
@@ -36,4 +34,4 @@ function HeaderUser({ userName, onClick }) {
   )
 }
 
-export default HeaderUser
+export default HeaderProfile

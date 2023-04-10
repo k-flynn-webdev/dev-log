@@ -4,19 +4,21 @@ export const getShortUserName = name => {
   return name.substring(0, 4)
 }
 
-function ProfileButton({ userName, onClick }) {
+function HeaderUser({ userName, onClick }) {
   const profileName = userName ? userName : "??"
 
   return (
-    <div className="profile mt-3">
+    <div className="header__content__user mt-3">
       <span className="cursor" onClick={onClick}>
-        <span className="hide:sm profile-name">{profileName}</span>
-        <span className="hide show@sm profile-name">
+        <span className="hide:sm header__content__user-name">
+          {profileName}
+        </span>
+        <span className="hide show@sm header__content__user-name">
           {getShortUserName(profileName)}
         </span>
       </span>
 
-      <button className="profile-button" onClick={onClick}>
+      <button className="header__content__user-button" onClick={onClick}>
         <svg
           xmlSpace="preserve"
           fillRule="evenodd"
@@ -34,4 +36,4 @@ function ProfileButton({ userName, onClick }) {
   )
 }
 
-export default ProfileButton
+export default HeaderUser

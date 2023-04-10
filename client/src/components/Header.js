@@ -8,7 +8,7 @@ import useDocumentTitle from "../hooks/use-document-title"
 import { TITLE } from "../lang/en-gb"
 
 import ProfileMenu from "./ProfileMenu"
-import ProfileButton from "./ProfileButton"
+import HeaderUser from "./HeaderUser"
 
 function Header({ title, className }) {
   useDocumentTitle(title || TITLE)
@@ -47,7 +47,7 @@ function Header({ title, className }) {
 
           <>
             {userLoggedIn && (
-              <ProfileButton userName={userName} onClick={handleClick} />
+              <HeaderUser userName={userName} onClick={handleClick} />
             )}
             {!userLoggedIn && (
               <Link to="/login" className="link">

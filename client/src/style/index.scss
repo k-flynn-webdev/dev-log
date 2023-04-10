@@ -145,96 +145,6 @@ body {
     vertical-align: middle;
   }
 
-  .profile {
-    font-weight: bold;
-    color: $mid-color;
-
-    &-name {
-      margin-right: 0.2rem;
-    }
-
-    &-user {
-      &-details {
-        &__line {
-          &-label {
-            font-weight: 400;
-            margin-right: 1rem;
-          }
-          &-detail {
-          }
-        }
-      }
-    }
-
-    &-button {
-      padding: 0;
-      margin: 0;
-      color: $fore-color;
-      background-color: $mid-color;
-
-      .icon {
-        fill: $fore-color;
-      }
-    }
-
-    &-menu {
-      // todo make responsive for desktop / phone
-
-      height: 20rem;
-      width: 100%;
-      margin-top: 0.5rem;
-      margin-bottom: 1rem;
-      padding: 0.5rem;
-
-      color: $fore-color;
-      background-color: $mid-color;
-      @extend .border-style;
-
-      display: flex;
-      flex-direction: column;
-      flex-wrap: nowrap;
-
-      &__header {
-        max-width: 100%;
-        flex-grow: 0;
-
-        .title {
-          display: inline-block;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          max-width: 75%;
-        }
-
-        button.close-button {
-          float: right;
-          margin: 0;
-          padding: 0;
-          background-color: $fore-color;
-
-          .icon-close {
-            transform: rotateZ(45deg);
-            fill: $mid-color;
-          }
-        }
-      }
-
-      &__content {
-        flex-grow: 1;
-
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-
-        button.quit-button {
-          width: 7rem;
-          margin-bottom: 0;
-        }
-      }
-    }
-  }
-
   .hide {
     display: none;
   }
@@ -407,6 +317,93 @@ body {
     &__content {
       display: flex;
       flex-direction: row;
+
+      &__user {
+        font-weight: bold;
+        color: $mid-color;
+
+        &-name {
+          margin-right: 0.2rem;
+        }
+
+        // &-user {
+        //   &-details {
+        //     &__line {
+        //       &-label {
+        //         font-weight: 400;
+        //         margin-right: 1rem;
+        //       }
+        //       &-detail {
+        //       }
+        //     }
+        //   }
+        &-button {
+          padding: 0;
+          margin: 0;
+          color: $fore-color;
+          background-color: $mid-color;
+
+          .icon {
+            fill: $fore-color;
+          }
+        }
+      }
+
+      // &-menu {
+      //   height: 20rem;
+      //   width: 100%;
+      //   margin-top: 0.5rem;
+      //   margin-bottom: 1rem;
+      //   padding: 0.5rem;
+
+      //   color: $fore-color;
+      //   background-color: $mid-color;
+      //   @extend .border-style;
+
+      //   display: flex;
+      //   flex-direction: column;
+      //   flex-wrap: nowrap;
+
+      //   &__header {
+      //     max-width: 100%;
+      //     flex-grow: 0;
+
+      //     .title {
+      //       display: inline-block;
+      //       overflow: hidden;
+      //       white-space: nowrap;
+      //       text-overflow: ellipsis;
+      //       max-width: 75%;
+      //     }
+
+      //     button.close-button {
+      //       float: right;
+      //       margin: 0;
+      //       padding: 0;
+      //       background-color: $fore-color;
+
+      //       .icon-close {
+      //         transform: rotateZ(45deg);
+      //         fill: $mid-color;
+      //       }
+      //     }
+      //   }
+
+      //   &__content {
+      //     flex-grow: 1;
+
+      //     flex-grow: 1;
+      //     display: flex;
+      //     flex-direction: column;
+      //     justify-content: space-between;
+
+      //     button.quit-button {
+      //       width: 7rem;
+      //       margin-bottom: 0;
+      //     }
+      //   }
+      // }
+      // }
     }
   }
 
@@ -422,14 +419,14 @@ body {
 
   @media screen and (min-width: $media-md) {
     .header {
-      .profile-menu {
-        max-width: 20rem;
-        position: absolute;
-        top: 0;
-        right: 0;
-        z-index: 100;
-        border: 1px solid $bg-color;
-      }
+      // .profile-menu {
+      //   max-width: 20rem;
+      //   position: absolute;
+      //   top: 0;
+      //   right: 0;
+      //   z-index: 100;
+      //   border: 1px solid $bg-color;
+      // }
     }
   }
 

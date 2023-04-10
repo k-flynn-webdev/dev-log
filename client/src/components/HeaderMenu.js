@@ -2,22 +2,22 @@ import * as React from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-import { resetUser } from "../store/slices/user"
+import { resetProfile } from "../store/slices/profile"
 import { resetLogs } from "../store/slices/logs"
 import { authRemove } from "../plugins/http"
 import { clearStorageAccessToken } from "../helpers/authentication"
 import { LOGOUT } from "../lang/en-gb"
 import ProfileDetails from "./ProfileDetails"
 
-function HeaderMenu({ userName, userDetails, onClick }) {
+function HeaderMenu({ profileName, profileDetails, onClick }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const logoutUser = () => {
+  const logoutProfile = () => {
     onClick()
     authRemove()
     clearStorageAccessToken()
-    dispatch(resetUser())
+    dispatch(resetProfile())
     dispatch(resetLogs())
     navigate("/")
   }
@@ -25,7 +25,7 @@ function HeaderMenu({ userName, userDetails, onClick }) {
   return (
     <div className="header__content__menu">
       <div className="header__content__menu-title">
-        <h1 className="title">{userName}</h1>
+        <h1 className="title">{profileName}</h1>
         <button className="close-button" onClick={onClick}>
           <svg
             xmlSpace="preserve"
@@ -42,8 +42,8 @@ function HeaderMenu({ userName, userDetails, onClick }) {
       </div>
 
       <div className="header__content__menu-body mt-4">
-        <ProfileDetails userDetails={userDetails} />
-        <button className="quit-button" onClick={logoutUser}>
+        <ProfileDetails profileDetails={profileDetails} />
+        <button className="quit-button" onClick={logoutProfile}>
           {LOGOUT}
         </button>
       </div>

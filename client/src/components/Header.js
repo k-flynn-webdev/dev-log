@@ -4,8 +4,8 @@ import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import {
   isLoggedIn,
-  getUserName,
-  getUserDetails,
+  getProfileName,
+  getProfileDetails,
 } from "../store/slices/profile"
 
 import useDocumentTitle from "../hooks/use-document-title"
@@ -17,9 +17,9 @@ import HeaderProfile from "./HeaderProfile"
 function Header({ title, className }) {
   useDocumentTitle(title || TITLE)
 
-  const userLoggedIn = useSelector(isLoggedIn)
-  const userName = useSelector(getUserName)
-  const userDetails = useSelector(getUserDetails)
+  const profileLoggedIn = useSelector(isLoggedIn)
+  const profileName = useSelector(getProfileName)
+  const profileDetails = useSelector(getProfileDetails)
 
   const [profileOpen, setProfileOpen] = useState(false)
 
@@ -31,8 +31,8 @@ function Header({ title, className }) {
     <div className="header">
       {profileOpen && (
         <HeaderMenu
-          userName={userName}
-          userDetails={userDetails}
+          profileName={profileName}
+          profileDetails={profileDetails}
           onClick={handleClick}
         />
       )}
@@ -50,12 +50,12 @@ function Header({ title, className }) {
           </div>
 
           <>
-            {userLoggedIn && (
-              <HeaderProfile userName={userName} onClick={handleClick} />
+            {profileLoggedIn && (
+              <HeaderProfile profileName={profileName} onClick={handleClick} />
             )}
-            {!userLoggedIn && (
+            {!profileLoggedIn && (
               <Link to="/login" className="link">
-                User
+                Profile
               </Link>
             )}
           </>

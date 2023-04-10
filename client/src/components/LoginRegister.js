@@ -5,7 +5,7 @@ import { useToast } from "@chakra-ui/react"
 import { useDispatch } from "react-redux"
 import { validEmail, validPassword } from "../helpers/authentication"
 import FormInput from "./FormInput"
-import { createUser, loginUser } from "../store/slices/user"
+import { createProfile, loginProfile } from "../store/slices/profile"
 
 import {
   REGISTER,
@@ -60,17 +60,17 @@ function LoginRegister({ isLogin }) {
     event.preventDefault()
     if (!formIsValid) return
 
-    const userDetails = { email: emailValue, password: passwordValue }
+    const profileDetails = { email: emailValue, password: passwordValue }
 
     if (!isLogin) {
-      await dispatch(createUser(userDetails))
+      await dispatch(createProfile(profileDetails))
         .unwrap()
         .catch(e => {
           throw e
         })
     }
 
-    await dispatch(loginUser(userDetails))
+    await dispatch(loginProfile(profileDetails))
       .unwrap()
       .then(() => {
         successToast()

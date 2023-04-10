@@ -1,11 +1,11 @@
 import * as React from "react"
 import { useDispatch } from "react-redux"
-import { fetchUser } from "../store/slices/user"
+import { fetchProfile } from "../store/slices/profile"
 import { getStorageAccessToken } from "../helpers/authentication"
 import { useEffect, useRef } from "react"
 import { authSet } from "../plugins/http"
 
-function useMountUser() {
+function useMountProfile() {
   const dispatch = useDispatch()
   const effectRan = useRef(false)
   const accessTokenKey = getStorageAccessToken()
@@ -14,7 +14,7 @@ function useMountUser() {
     if (!effectRan.current) {
       if (accessTokenKey && accessTokenKey.length) {
         authSet(accessTokenKey)
-        dispatch(fetchUser())
+        dispatch(fetchProfile())
 
         return () => {
           effectRan.current = true
@@ -26,4 +26,4 @@ function useMountUser() {
   return null
 }
 
-export default useMountUser
+export default useMountProfile

@@ -3,11 +3,11 @@ import Header from "../components/Header"
 import Error from "../components/Error"
 import Footer from "../components/Footer"
 import { Outlet } from "react-router-dom"
-import useMountUser from "../hooks/use-mount-user"
+import useMountProfile from "../hooks/use-mount-profile"
 import useAccessTokenURL from "../hooks/use-access-token-url"
 
 const Root = () => {
-  useMountUser()
+  useMountProfile()
   useAccessTokenURL()
 
   return (

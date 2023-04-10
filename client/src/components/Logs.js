@@ -3,19 +3,19 @@ import { useEffect, useRef } from "react"
 import Log from "./Log"
 
 import { getLogs, logList } from "../store/slices/logs"
-import { getUserID } from "../store/slices/user"
+import { getProfileID } from "../store/slices/profile"
 
 import { useSelector, useDispatch } from "react-redux"
 
 function Logs() {
   const dispatch = useDispatch()
   const effectRan = useRef(false)
-  const userId = useSelector(getUserID)
+  const profileId = useSelector(getProfileID)
   const logs = useSelector(logList)
   const LogListRender = logs.map(item => <Log key={item.id} log={item} />)
 
   useEffect(() => {
-    if (!userId) return
+    if (!profileId) return
     if (!effectRan.current) {
       dispatch(getLogs()).unwrap()
 
@@ -23,7 +23,7 @@ function Logs() {
         effectRan.current = true
       }
     }
-  }, [userId])
+  }, [profileId])
 
   return <div>{LogListRender}</div>
 }

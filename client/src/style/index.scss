@@ -419,9 +419,10 @@ body {
       .profile-menu {
         max-width: 20rem;
         position: absolute;
-        top: 1rem;
-        right: 1rem;
+        top: 0;
+        right: 0;
         z-index: 100;
+        border: 1px solid $bg-color;
       }
     }
   }

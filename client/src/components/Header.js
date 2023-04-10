@@ -49,7 +49,7 @@ function Header({ title, className }) {
             </Link>
           </div>
 
-          <>
+          <div>
             {profileLoggedIn && (
               <HeaderProfile profileName={profileName} onClick={handleClick} />
             )}
@@ -58,7 +58,7 @@ function Header({ title, className }) {
                 Profile
               </Link>
             )}
-          </>
+          </div>
         </div>
       }
     </div>

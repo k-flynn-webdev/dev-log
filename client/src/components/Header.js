@@ -7,7 +7,7 @@ import { isLoggedIn, getUserName, getUserDetails } from "../store/slices/user"
 import useDocumentTitle from "../hooks/use-document-title"
 import { TITLE } from "../lang/en-gb"
 
-import ProfileMenu from "./ProfileMenu"
+import HeaderMenu from "./HeaderMenu"
 import HeaderUser from "./HeaderUser"
 
 function Header({ title, className }) {
@@ -26,7 +26,7 @@ function Header({ title, className }) {
   return (
     <div className="header">
       {profileOpen && (
-        <ProfileMenu
+        <HeaderMenu
           userName={userName}
           userDetails={userDetails}
           onClick={handleClick}

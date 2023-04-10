@@ -24,7 +24,7 @@ function Header({ title, className }) {
   }
 
   return (
-    <div>
+    <div className="header">
       {profileOpen && (
         <ProfileMenu
           userName={userName}
@@ -33,17 +33,19 @@ function Header({ title, className }) {
         />
       )}
 
-      {!profileOpen && (
-        <div className={`${className ? className : ""} header`}>
-          <div className="flex-grow">
-            <div className="text-center mb-4">
-              <Link className="title link" to="/">
-                {title || TITLE}
-              </Link>
-            </div>
+      {
+        <div
+          className={`${profileOpen ? "open" : ""}${
+            className ? className : ""
+          } header__content `}
+        >
+          <div className="flex-grow text-center mb-4">
+            <Link className="title link" to="/">
+              {title || TITLE}
+            </Link>
           </div>
 
-          <div>
+          <>
             {userLoggedIn && (
               <ProfileButton userName={userName} onClick={handleClick} />
             )}
@@ -52,9 +54,9 @@ function Header({ title, className }) {
                 User
               </Link>
             )}
-          </div>
+          </>
         </div>
-      )}
+      }
     </div>
   )
 }

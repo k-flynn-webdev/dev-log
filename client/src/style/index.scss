@@ -22,6 +22,31 @@ $text-size-large: 2.5rem;
 
 $border-radius: 0.4rem;
 
+$media-xl: 80rem;
+$media-lg: 62rem;
+$media-md: 48rem;
+$media-sm: 30rem;
+$media-xs: 20rem;
+
+$breakpoints: (
+  xl: $media-xl,
+  lg: $media-lg,
+  md: $media-md,
+  sm: $media-sm,
+  xs: $media-xs,
+);
+
+$breakpoints-medium-up: (
+  xl: $media-xl,
+  lg: $media-lg,
+  md: $media-md,
+);
+
+$breakpoints-medium-down: (
+  sm: $media-sm,
+  xs: $media-xs,
+);
+
 html,
 body {
   background-color: $bg-color !important;
@@ -288,31 +313,6 @@ body {
     $val: $val + 1;
   }
 
-  $media-xl: 80rem;
-  $media-lg: 62rem;
-  $media-md: 48rem;
-  $media-sm: 30rem;
-  $media-xs: 20rem;
-
-  $breakpoints: (
-    xl: $media-xl,
-    lg: $media-lg,
-    md: $media-md,
-    sm: $media-sm,
-    xs: $media-xs,
-  );
-
-  $breakpoints-medium-up: (
-    xl: $media-xl,
-    lg: $media-lg,
-    md: $media-md,
-  );
-
-  $breakpoints-medium-down: (
-    sm: $media-sm,
-    xs: $media-xs,
-  );
-
   // css from max size and down
   @each $key, $val in $breakpoints {
     @media (max-width: $val) {
@@ -395,15 +395,34 @@ body {
   }
 
   .header {
-    display: flex;
-    flex-direction: row;
+    position: relative;
     margin-top: 0.25rem;
+
+    &__content {
+      display: flex;
+      flex-direction: row;
+    }
   }
 
-  @media screen and (min-width: 0) and (max-width: $media-sm) {
+  @media screen and (min-width: 0) and (max-width: $media-md) {
     .header {
-      margin-left: 0.5rem;
-      margin-right: 0.5rem;
+      &__content {
+        &.open {
+          display: none;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: $media-md) {
+    .header {
+      .profile-menu {
+        max-width: 20rem;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 100;
+      }
     }
   }
 

@@ -195,9 +195,15 @@ body {
       flex-wrap: nowrap;
 
       &__header {
+        max-width: 100%;
         flex-grow: 0;
+
         .title {
           display: inline-block;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          max-width: 75%;
         }
 
         button.close-button {

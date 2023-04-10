@@ -22,6 +22,31 @@ $text-size-large: 2.5rem;
 
 $border-radius: 0.4rem;
 
+$media-xl: 80rem;
+$media-lg: 62rem;
+$media-md: 48rem;
+$media-sm: 30rem;
+$media-xs: 20rem;
+
+$breakpoints: (
+  xl: $media-xl,
+  lg: $media-lg,
+  md: $media-md,
+  sm: $media-sm,
+  xs: $media-xs,
+);
+
+$breakpoints-medium-up: (
+  xl: $media-xl,
+  lg: $media-lg,
+  md: $media-md,
+);
+
+$breakpoints-medium-down: (
+  sm: $media-sm,
+  xs: $media-xs,
+);
+
 html,
 body {
   background-color: $bg-color !important;
@@ -31,7 +56,31 @@ body {
   cursor: pointer;
 }
 
+.border-style {
+  border-radius: $border-radius;
+  border-top-right-radius: 0;
+}
+
+.min-content-height {
+  min-height: 35rem;
+}
+
 .dev-log {
+  a,
+  p,
+  span,
+  .text,
+  .link {
+    font-size: 1.2rem;
+    font-weight: 300;
+  }
+
+  h1,
+  .title {
+    font-size: 3rem;
+    font-weight: 400;
+  }
+
   .mx-auto {
     margin: 0 auto;
   }
@@ -56,8 +105,8 @@ body {
   .card {
     color: $fore-color;
     background-color: $mid-color;
-    margin-bottom: $card-spacing;
     padding: $card-spacing;
+    margin-bottom: $card-spacing;
     border-radius: $border-radius;
 
     &__header,
@@ -98,42 +147,6 @@ body {
     line-height: 1rem;
     color: currentColor;
     vertical-align: middle;
-  }
-
-  .profile {
-    font-weight: bold;
-    color: $mid-color;
-
-    &-name {
-      margin-right: 0.2rem;
-    }
-
-    &-button {
-      padding: 0;
-      margin: 0;
-      color: $fore-color;
-      background-color: $mid-color;
-
-      .icon {
-        fill: $fore-color;
-      }
-    }
-
-    &-menu {
-      height: 20rem;
-      width: 100%;
-      margin-top: 0.5rem;
-      margin-bottom: 1rem;
-      padding: 0.5rem;
-
-      color: $fore-color;
-      background-color: $mid-color;
-
-      button {
-        color: $mid-color;
-        background-color: $fore-color;
-      }
-    }
   }
 
   .hide {
@@ -220,31 +233,6 @@ body {
     $val: $val + 1;
   }
 
-  $media-xl: 80rem;
-  $media-lg: 62rem;
-  $media-md: 48rem;
-  $media-sm: 30rem;
-  $media-xs: 20rem;
-
-  $breakpoints: (
-    xl: $media-xl,
-    lg: $media-lg,
-    md: $media-md,
-    sm: $media-sm,
-    xs: $media-xs,
-  );
-
-  $breakpoints-medium-up: (
-    xl: $media-xl,
-    lg: $media-lg,
-    md: $media-md,
-  );
-
-  $breakpoints-medium-down: (
-    sm: $media-sm,
-    xs: $media-xs,
-  );
-
   // css from max size and down
   @each $key, $val in $breakpoints {
     @media (max-width: $val) {
@@ -327,15 +315,113 @@ body {
   }
 
   .header {
-    display: flex;
-    flex-direction: row;
+    position: relative;
     margin-top: 0.25rem;
+
+    &__content {
+      display: flex;
+      flex-direction: row;
+
+      &__profile {
+        font-weight: bold;
+        color: $mid-color;
+
+        &-name {
+          margin-right: 0.2rem;
+        }
+
+        &-details {
+          &__line {
+            &-label {
+              font-weight: 400;
+              margin-right: 1rem;
+            }
+          }
+        }
+
+        &-button {
+          padding: 0;
+          margin: 0;
+          color: $fore-color;
+          background-color: $mid-color;
+
+          .icon {
+            fill: $fore-color;
+          }
+        }
+      }
+
+      &__menu {
+        height: 20rem;
+        width: 100%;
+        padding: 0.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+
+        color: $fore-color;
+        background-color: $mid-color;
+        @extend .border-style;
+
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+
+        &-title {
+          max-width: 100%;
+          flex-grow: 0;
+
+          .title {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            max-width: 75%;
+          }
+
+          button.close-button {
+            float: right;
+            margin: 0;
+            padding: 0;
+            background-color: $fore-color;
+
+            .icon-close {
+              transform: rotateZ(45deg);
+              fill: $mid-color;
+            }
+          }
+        }
+
+        &-body {
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          button.quit-button {
+            width: 7rem;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
   }
 
-  @media screen and (min-width: 0) and (max-width: $media-sm) {
-    .header {
-      margin-left: 0.5rem;
-      margin-right: 0.5rem;
+  @media screen and (min-width: 0) and (max-width: $media-md) {
+    .header__content {
+      &.open {
+        display: none;
+      }
+    }
+  }
+
+  @media screen and (min-width: $media-md) {
+    .header__content__menu {
+      max-width: 20rem;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 100;
+      border: 1px solid $bg-color;
     }
   }
 
@@ -355,8 +441,7 @@ body {
     padding-right: ($log-spacing * 3);
     color: $fore-color;
     background-color: $mid-color;
-    border-radius: $border-radius;
-    border-top-right-radius: 0;
+    @extend .border-style;
 
     position: relative;
 
@@ -469,10 +554,6 @@ body {
         margin: 0;
       }
     }
-  }
-
-  .min-content-height {
-    min-height: 35rem;
   }
 
   .footer {

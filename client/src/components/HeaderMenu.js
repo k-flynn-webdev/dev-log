@@ -7,9 +7,9 @@ import { resetLogs } from "../store/slices/logs"
 import { authRemove } from "../plugins/http"
 import { clearStorageAccessToken } from "../helpers/authentication"
 import { LOGOUT } from "../lang/en-gb"
-import UserMenuDetails from "./UserMenuDetails"
+import ProfileDetails from "./ProfileDetails"
 
-function ProfileMenu({ userName, userDetails, onClick }) {
+function HeaderMenu({ userName, userDetails, onClick }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -23,8 +23,8 @@ function ProfileMenu({ userName, userDetails, onClick }) {
   }
 
   return (
-    <div className="profile-menu">
-      <div className="profile-menu__header">
+    <div className="header__content__menu">
+      <div className="header__content__menu-title">
         <h1 className="title">{userName}</h1>
         <button className="close-button" onClick={onClick}>
           <svg
@@ -41,8 +41,8 @@ function ProfileMenu({ userName, userDetails, onClick }) {
         </button>
       </div>
 
-      <div className="profile-menu__content mt-4">
-        <UserMenuDetails userDetails={userDetails} />
+      <div className="header__content__menu-body mt-4">
+        <ProfileDetails userDetails={userDetails} />
         <button className="quit-button" onClick={logoutUser}>
           {LOGOUT}
         </button>
@@ -51,4 +51,4 @@ function ProfileMenu({ userName, userDetails, onClick }) {
   )
 }
 
-export default ProfileMenu
+export default HeaderMenu

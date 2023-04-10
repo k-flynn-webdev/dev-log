@@ -8,17 +8,17 @@ function HeaderUser({ userName, onClick }) {
   const profileName = userName ? userName : "??"
 
   return (
-    <div className="header__content__user mt-3">
+    <div className="header__content__profile mt-3">
       <span className="cursor" onClick={onClick}>
-        <span className="hide:sm header__content__user-name">
+        <span className="hide:sm header__content__profile-name">
           {profileName}
         </span>
-        <span className="hide show@sm header__content__user-name">
+        <span className="hide show@sm header__content__profile-name">
           {getShortUserName(profileName)}
         </span>
       </span>
 
-      <button className="header__content__user-button" onClick={onClick}>
+      <button className="header__content__profile-button" onClick={onClick}>
         <svg
           xmlSpace="preserve"
           fillRule="evenodd"

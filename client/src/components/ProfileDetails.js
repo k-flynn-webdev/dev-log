@@ -10,16 +10,16 @@ const userDetailsToShow = {
   tag_count: { label: "Tags created", render: user => user.tag_count },
 }
 
-function UserMenuDetails({ userDetails }) {
+function ProfileDetails({ userDetails }) {
   return (
-    <div className="profile-user-details">
+    <div className="profile-details">
       {Object.keys(userDetailsToShow).map(key => {
         return (
-          <div className="profile-user-details__line" key={key}>
-            <span className="profile-user-details__line-label">
+          <div className="profile-details__line" key={key}>
+            <span className="profile-details__line-label">
               {userDetailsToShow[key].label}:{" "}
             </span>
-            <span className="profile-user-details__line-detail">
+            <span className="profile-details__line-detail">
               {userDetailsToShow[key].render(userDetails)}
             </span>
           </div>
@@ -29,4 +29,4 @@ function UserMenuDetails({ userDetails }) {
   )
 }
 
-export default UserMenuDetails
+export default ProfileDetails

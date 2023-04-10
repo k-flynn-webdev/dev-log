@@ -4,7 +4,7 @@ export const getShortUserName = name => {
   return name.substring(0, 4)
 }
 
-function HeaderUser({ userName, onClick }) {
+function HeaderProfile({ userName, onClick }) {
   const profileName = userName ? userName : "??"
 
   return (
@@ -36,4 +36,4 @@ function HeaderUser({ userName, onClick }) {
   )
 }
 
-export default HeaderUser
+export default HeaderProfile

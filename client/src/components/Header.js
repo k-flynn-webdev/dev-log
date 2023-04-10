@@ -2,13 +2,17 @@ import * as React from "react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { isLoggedIn, getUserName, getUserDetails } from "../store/slices/user"
+import {
+  isLoggedIn,
+  getUserName,
+  getUserDetails,
+} from "../store/slices/profile"
 
 import useDocumentTitle from "../hooks/use-document-title"
 import { TITLE } from "../lang/en-gb"
 
 import HeaderMenu from "./HeaderMenu"
-import HeaderUser from "./HeaderUser"
+import HeaderProfile from "./HeaderProfile"
 
 function Header({ title, className }) {
   useDocumentTitle(title || TITLE)
@@ -47,7 +51,7 @@ function Header({ title, className }) {
 
           <>
             {userLoggedIn && (
-              <HeaderUser userName={userName} onClick={handleClick} />
+              <HeaderProfile userName={userName} onClick={handleClick} />
             )}
             {!userLoggedIn && (
               <Link to="/login" className="link">

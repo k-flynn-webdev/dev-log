@@ -543,8 +543,14 @@ body {
     top: $log-spacing * -1.75;
     right: $log-spacing * 1;
     text-align: right;
-    padding-left: 3rem;
     margin-bottom: -0.25rem;
+
+    &::before {
+      content: "";
+      min-width: 4rem;
+      min-height: 1rem;
+      display: inline-block;
+    }
 
     .tag {
       display: inline-block;

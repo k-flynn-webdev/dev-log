@@ -2,6 +2,12 @@ $bg-color: hsl(228, 10, 88);
 $mid-color: hsl(222, 10, 34);
 $fore-color: hsl(228, 20, 97);
 $primary-color: hsl(192, 47, 46);
+
+$bg-opaque-color: hsla(228, 10, 88, 30%);
+$mid-opaque-color: hsla(222, 10, 34, 30%);
+$fore-opaque-color: hsla(228, 20, 97, 30%);
+$primary-opaque-color: hsla(192, 47, 46, 30%);
+
 $tag-color: $primary-color;
 
 $disabled-color: hsl(192, 10%, 55%);
@@ -323,11 +329,12 @@ body {
       flex-direction: row;
 
       &__profile {
-        font-weight: bold;
         color: $mid-color;
 
         &-name {
-          margin-right: 0.2rem;
+          font-weight: 500;
+          margin-right: 0.33rem;
+          vertical-align: middle;
         }
 
         &-details {
@@ -340,7 +347,7 @@ body {
         }
 
         &-button {
-          padding: 0;
+          padding: 0.2rem;
           margin: 0;
           color: $fore-color;
           background-color: $mid-color;
@@ -541,17 +548,24 @@ body {
 
     .tag {
       display: inline-block;
-      margin: ($log-spacing * 0.2) ($log-spacing * 0.45);
       padding: 0 0.33rem;
+      margin: ($log-spacing * 0.2) ($log-spacing * 0.45);
+      color: $fore-color;
       background-color: $tag-color;
       border-radius: $border-radius;
-      color: $fore-color;
-      border-top: $fore-color 1px solid;
-      border-left: $fore-color 1px solid;
+      border-top: $fore-opaque-color 1px solid;
+      border-left: $fore-opaque-color 1px solid;
       border-bottom: $mid-color 1px solid;
+      cursor: pointer;
 
       &:last-of-type {
         margin: 0;
+      }
+
+      &::before {
+        content: "#";
+        opacity: 0.5;
+        margin-right: 0.1rem;
       }
     }
   }

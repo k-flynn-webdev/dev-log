@@ -4,12 +4,14 @@ improve ui design: done
 add user menu button click: done
 tags are now more responsive: done
 add ui footer with my website: done
+improve BEM class naming for header -> profile: done
 
 bugfix: custom tags should not contain the #tag in the value: done
 
 dev-log todo:
 
-improve BEM class naming for header -> profile
+add user recover account by email: progress
+add user email verify: progress
 
 have a loading page when user might exists, main page flashes
 
@@ -22,9 +24,8 @@ add testing automation on git push
 add testing automation on git merge
 
 
-add user recover account by email
+
 add user edit password
-add user email verify
 add user delete account option
 add user request all data option
 

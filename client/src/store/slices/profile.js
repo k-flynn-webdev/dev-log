@@ -31,7 +31,6 @@ export const loginProfile = createAsyncThunk(
   async (arg, thunkAPI) => {
     return post("authentication", { strategy: "local", ...arg })
       .then(({ data }) => {
-        console.log("ionside111", data)
         let profile = data?.user ? data.user : null
         if (!profile) throw "no profile found"
         thunkAPI.dispatch({ type: "profile/updateProfile", payload: profile })

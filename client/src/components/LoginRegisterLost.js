@@ -104,14 +104,13 @@ function LoginRegisterLost({ state }) {
         })
     }
 
-    // if (isLost) {
-    //   console.log("islost")
-    //   await dispatch(lostProfile({ email: emailValue }))
-    //     .unwrap()
-    //     .catch(e => {
-    //       throw e
-    //     })
-    // }
+    if (isLost) {
+      await dispatch(lostProfile({ email: emailValue }))
+        .unwrap()
+        .catch(e => {
+          throw e
+        })
+    }
   }
 
   return (

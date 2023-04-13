@@ -545,13 +545,6 @@ body {
     text-align: right;
     margin-bottom: -0.25rem;
 
-    &::before {
-      content: "";
-      min-width: 4rem;
-      min-height: 1rem;
-      display: inline-block;
-    }
-
     .tag {
       display: inline-block;
       padding: 0 0.33rem;
@@ -568,10 +561,8 @@ body {
         margin: 0;
       }
 
-      &::before {
-        content: "#";
-        opacity: 0.5;
-        margin-right: 0.1rem;
+      &:first-of-type {
+        margin-left: 4rem;
       }
     }
   }

@@ -17,10 +17,10 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <Error />,
     children: [
-      { path: "", element: <LoginPage /> },
-      { path: "register", element: <LoginPage /> },
-      { path: "verify/:token", element: <LoginPage /> },
-      { path: "recover", element: <LoginPage /> },
+      { path: "", element: <LoginPage state="login" /> },
+      { path: "register", element: <LoginPage state="register" /> },
+      { path: "verify/:token", element: <LoginPage state="verify" /> },
+      { path: "lost", element: <LoginPage state="lost" /> },
     ],
   },
 ])

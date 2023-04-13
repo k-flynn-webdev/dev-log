@@ -31,7 +31,8 @@ export const loginProfile = createAsyncThunk(
   async (arg, thunkAPI) => {
     return post("authentication", { strategy: "local", ...arg })
       .then(({ data }) => {
-        let profile = data?.profile ? data.profile : null
+        console.log("ionside111", data)
+        let profile = data?.user ? data.user : null
         if (!profile) throw "no profile found"
         thunkAPI.dispatch({ type: "profile/updateProfile", payload: profile })
         authSet(data.accessToken)
@@ -51,6 +52,26 @@ export const loginProfile = createAsyncThunk(
 
 export const createProfile = createAsyncThunk(
   "profile/createProfile",
+  async (arg, thunkAPI) => {
+    return post("users", { ...arg })
+      .then(({ data }) => {
+        let profile = data ? data : null
+        if (!profile) throw "no profile found"
+        return profile
+      })
+      .catch(err => {
+        thunkAPI.dispatch({
+          type: "error/setError",
+          payload: err.response.data,
+        })
+
+        throw thunkAPI.rejectWithValue(err.response.data)
+      })
+  }
+)
+
+export const lostProfile = createAsyncThunk(
+  "profile/lostProfile",
   async (arg, thunkAPI) => {
     return post("users", { ...arg })
       .then(({ data }) => {

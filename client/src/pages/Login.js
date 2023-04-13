@@ -1,16 +1,16 @@
 import * as React from "react"
-import { useLocation } from "react-router-dom"
-import { REGISTER, LOGIN } from "../lang/en-gb"
-import LoginRegister from "../components/LoginRegister"
+import { REGISTER, LOGIN, LOST } from "../lang/en-gb"
+import LoginRegisterLost from "../components/LoginRegisterLost"
 import LoginGoogle from "../components/LoginGoogle"
 import LoginGithub from "../components/LoginGithub"
 
-function LoginPage() {
-  const location = useLocation().pathname
-  const isLogin = location === "/login"
-  const isRegister = location === "/login/register"
+function LoginPage({ state }) {
+  const form = <LoginRegisterLost state={state} />
 
-  const form = isLogin || isRegister ? <LoginRegister isLogin={isLogin} /> : ""
+  const isLogin = state === "login"
+  const isRegister = state === "register"
+  const isVerify = state === "verify"
+  const isLost = state === "lost"
 
   return (
     <div className="login">
@@ -23,12 +23,16 @@ function LoginPage() {
         </div>
 
         <div className="card__body">
-          <div className="socials-bar mb-4">
-            <LoginGoogle />
-            <LoginGithub />
-          </div>
+          <>
+            {(isLogin || isRegister) && (
+              <div className="socials-bar mb-4">
+                <LoginGoogle />
+                <LoginGithub />
+              </div>
+            )}
+          </>
 
-          <hr className="solid my-8" />
+          {(isLogin || isRegister) && <hr className="solid my-8" />}
 
           <div>{form}</div>
         </div>

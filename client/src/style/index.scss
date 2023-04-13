@@ -543,7 +543,6 @@ body {
     top: $log-spacing * -1.75;
     right: $log-spacing * 1;
     text-align: right;
-    padding-left: 3rem;
     margin-bottom: -0.25rem;
 
     .tag {
@@ -562,10 +561,8 @@ body {
         margin: 0;
       }
 
-      &::before {
-        content: "#";
-        opacity: 0.5;
-        margin-right: 0.1rem;
+      &:first-of-type {
+        margin-left: 4rem;
       }
     }
   }

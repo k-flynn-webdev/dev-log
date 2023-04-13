@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { parseTags } from "../../helpers/parse-tags"
 import { post } from "../../plugins/http"
 
 const initLog = () => {
@@ -51,7 +50,7 @@ export const logInput = createSlice({
     reset: state => initLog(),
     update: (state, { payload }) => {
       state.value = payload
-      state.tags = parseTags(payload)
+      state.tags = []
     },
   },
 })

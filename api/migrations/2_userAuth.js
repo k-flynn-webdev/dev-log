@@ -7,6 +7,12 @@ export async function up(knex) {
     table.boolean('isVerified').defaultTo(false).notNullable()
     table.string('verifyToken').defaultTo(null).nullable()
     table.timestamp('verifyExpires').defaultTo(null).nullable()
+    table.string('verifyShortToken').defaultTo(null).nullable()
+    table.string('verifyChanges').defaultTo(null).nullable()
+    table.string('resetToken').defaultTo(null).nullable()
+    table.string('resetShortToken').defaultTo(null).nullable()
+    table.timestamp('resetExpires').defaultTo(null).nullable()
+    table.integer('resetAttempts').defaultTo(null).nullable()
   })
 }
 
@@ -19,5 +25,11 @@ export async function down(knex) {
     table.dropColumn('isVerified')
     table.dropColumn('verifyToken')
     table.dropColumn('verifyExpires')
+    table.dropColumn('verifyShortToken')
+    table.dropColumn('verifyChanges')
+    table.dropColumn('resetToken')
+    table.dropColumn('resetShortToken')
+    table.dropColumn('resetExpires')
+    table.dropColumn('resetAttempts')
   })
 }

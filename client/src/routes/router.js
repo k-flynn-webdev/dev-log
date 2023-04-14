@@ -19,7 +19,7 @@ const router = createBrowserRouter([
     children: [
       { path: "", element: <LoginPage state="login" /> },
       { path: "register", element: <LoginPage state="register" /> },
-      { path: "verify/:token", element: <LoginPage state="verify" /> },
+      { path: "verify", element: <LoginPage state="verify" /> },
       { path: "lost", element: <LoginPage state="lost" /> },
     ],
   },

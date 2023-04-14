@@ -15,6 +15,7 @@ export const HAVE_ACCOUNT = "Already have an account?"
 export const LOST_PASSWORD = "Lost password?"
 export const LOGIN_SUCCESS = "Login was successful."
 export const LOST_SUCCESS = "Please check your email."
+export const VERIFY_SUCCESS = "Account verify successful."
 export const REGISTER_SUCCESS = "Register was successful."
 
 export const SPLASH_CONTENT_LOG =

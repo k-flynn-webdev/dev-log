@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useState, useEffect } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useSearchParams } from "react-router-dom"
 import { useToast } from "@chakra-ui/react"
 import { useDispatch } from "react-redux"
 import { validEmail, validPassword } from "../helpers/authentication"
@@ -8,6 +8,7 @@ import FormInput from "./FormInput"
 import {
   createProfile,
   loginProfile,
+  verifyProfile,
   lostProfile,
 } from "../store/slices/profile"
 
@@ -25,9 +26,10 @@ import {
   LOGIN_SUCCESS,
   REGISTER_SUCCESS,
   LOST_SUCCESS,
+  VERIFY_SUCCESS,
 } from "../lang/en-gb"
 
-function LoginRegisterLost({ state }) {
+function LoginRegisterLost({ state, token }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [emailValue, setEmail] = useState("")
@@ -35,6 +37,7 @@ function LoginRegisterLost({ state }) {
   const [passwordValue, setPassword] = useState("")
   const [passwordIsValid, setPasswordIsValid] = useState(true)
   const [formIsValid, setFormIsValid] = useState(false)
+  const [searchParams] = useSearchParams()
 
   const isLogin = state === "login"
   const isRegister = state === "register"
@@ -50,12 +53,15 @@ function LoginRegisterLost({ state }) {
     if (isLost) {
       setFormIsValid(emailValue && emailIsValid)
     }
+
+    if (isVerify) handleVerify()
   }, [emailValue, emailIsValid, passwordValue, passwordIsValid])
 
   const getToastTitle = () => {
     if (isLogin) return LOGIN_SUCCESS
     if (isRegister) return REGISTER_SUCCESS
     if (isLost) return LOST_SUCCESS
+    if (isVerify) return VERIFY_SUCCESS
   }
 
   const successToast = useToast({
@@ -77,6 +83,25 @@ function LoginRegisterLost({ state }) {
     setPassword(password)
     setPasswordIsValid(validPassword(password))
     if (!password) setPasswordIsValid(true)
+  }
+
+  const handleVerify = async () => {
+    if (isVerify) {
+      const token = searchParams.get("token")
+      console.log(token)
+
+      if (!token) return
+
+      await dispatch(verifyProfile(token))
+        .unwrap()
+        .then(() => {
+          successToast()
+          navigate("/")
+        })
+        .catch(e => {
+          throw e
+        })
+    }
   }
 
   const handleSubmit = async event => {
@@ -111,6 +136,10 @@ function LoginRegisterLost({ state }) {
           throw e
         })
     }
+  }
+
+  if (isVerify) {
+    return <></>
   }
 
   return (

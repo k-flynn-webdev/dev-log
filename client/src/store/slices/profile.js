@@ -72,7 +72,26 @@ export const createProfile = createAsyncThunk(
 export const lostProfile = createAsyncThunk(
   "profile/lostProfile",
   async (arg, thunkAPI) => {
-    return post("authentication/lost", { strategy: "local", ...arg })
+    return post("auth-management", { strategy: "local", ...arg })
+      .then(({ data }) => {
+        let profile = data ? data : null
+        if (!profile) throw "no profile found"
+        return profile
+      })
+      .catch(err => {
+        thunkAPI.dispatch({
+          type: "error/setError",
+          payload: err.response.data,
+        })
+
+        throw thunkAPI.rejectWithValue(err.response.data)
+      })
+  }
+)
+export const verifyProfile = createAsyncThunk(
+  "profile/verifyProfile",
+  async (arg, thunkAPI) => {
+    return post("auth-management", { action: "verifySignupLong", value: arg })
       .then(({ data }) => {
         let profile = data ? data : null
         if (!profile) throw "no profile found"

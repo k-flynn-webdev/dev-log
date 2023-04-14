@@ -12,6 +12,8 @@ import { authentication } from './authentication.js'
 import { services } from './services/index.js'
 import { channels } from './channels.js'
 
+import { authManagement } from './services/auth-management/auth-management.service.js'
+
 const app = koa(feathers())
 
 // Load our app configuration (see config/ folder)
@@ -39,6 +41,8 @@ app.configure(authentication)
 
 app.configure(services)
 app.configure(channels)
+
+app.configure(authManagement)
 
 // Register hooks that run on all service methods
 app.hooks({

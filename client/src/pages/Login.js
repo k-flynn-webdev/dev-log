@@ -1,5 +1,5 @@
 import * as React from "react"
-import { REGISTER, LOGIN, LOST } from "../lang/en-gb"
+import { REGISTER, LOGIN } from "../lang/en-gb"
 import LoginRegisterLost from "../components/LoginRegisterLost"
 import LoginGoogle from "../components/LoginGoogle"
 import LoginGithub from "../components/LoginGithub"
@@ -9,8 +9,6 @@ function LoginPage({ state }) {
 
   const isLogin = state === "login"
   const isRegister = state === "register"
-  const isVerify = state === "verify"
-  const isLost = state === "lost"
 
   return (
     <div className="login">

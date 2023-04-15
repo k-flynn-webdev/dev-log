@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Link, useNavigate, useSearchParams } from "react-router-dom"
 import { useToast } from "@chakra-ui/react"
 import { useDispatch } from "react-redux"
@@ -38,6 +38,8 @@ function LoginRegisterLost({ state, token }) {
   const [passwordIsValid, setPasswordIsValid] = useState(true)
   const [formIsValid, setFormIsValid] = useState(false)
   const [searchParams] = useSearchParams()
+
+  const effectRan = useRef(false)
 
   const isLogin = state === "login"
   const isRegister = state === "register"
@@ -86,9 +88,9 @@ function LoginRegisterLost({ state, token }) {
   }
 
   const handleVerify = async () => {
-    if (isVerify) {
+    // todo this is still running twice!!! maybe move to own `useEffect` ??? could be proper use
+    if (isVerify && !effectRan.current) {
       const token = searchParams.get("token")
-      console.log(token)
 
       if (!token) return
 
@@ -101,6 +103,10 @@ function LoginRegisterLost({ state, token }) {
         .catch(e => {
           throw e
         })
+
+      return () => {
+        effectRan.current = true
+      }
     }
   }
 

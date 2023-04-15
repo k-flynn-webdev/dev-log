@@ -3,6 +3,7 @@ import { addApiPrefix } from '../../helpers/add-api-prefix.js'
 
 import { addVerification, removeVerification } from 'feathers-authentication-management'
 import { sequelizeConvert, getItems, replaceItems } from 'feathers-hooks-common'
+import { logger } from '../../logger.js'
 
 // todo
 // const sendVerify = () => {
@@ -32,16 +33,27 @@ export const sequelizeConvertAlm = (context) => {
 
   // return sequelizeConvert(converts, ignores, conversions)
 
-  if (context?.data?.verifyChanges) {
-    // if (context.type === 'before') {
-    //   context.data.verifyChanges = JSON.parse(context.data.verifyChanges)
-    //   return context
-    // } else {
-    context.data.verifyChanges = JSON.stringify(context.data.verifyChanges)
-    // console.log(context.data.verifyChanges)
-    // return context
-    // }
+  if (context.data) {
+    // bugfix for random properties added???
+    const keys = Object.keys(context.data)
+    if (keys.includes('0')) delete context.data['0']
+    if (keys.includes('1')) delete context.data['1']
   }
+
+  if (context?.data?.verifyChanges) {
+    if (context.type === 'before') {
+      context.data.verifyChanges = JSON.stringify(context.data.verifyChanges)
+    }
+    if (context.type === 'after') {
+      try {
+        context.data.verifyChanges = JSON.parse(context.data.verifyChanges)
+      } catch (e) {
+        logger.error('error converting', context.data.verifyChanges)
+      }
+    }
+  }
+
+  return context
 }
 
 export const userAuthModelFields = {
@@ -56,7 +68,7 @@ export const userAuthModelFields = {
   resetAttempts: { type: 'number', nullable: true }
 }
 
-export const notifier = () => {}
+export const notifier = (app) => () => {}
 
 export const authManagement = (app) => {
   const servicePath = addApiPrefix(app, 'auth-management')
@@ -82,5 +94,3 @@ export const authManagement = (app) => {
     }
   })
 }
-
-// 1232342re243edf1232342re243edf

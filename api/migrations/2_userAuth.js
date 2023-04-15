@@ -6,13 +6,13 @@ export async function up(knex) {
   await knex.schema.alterTable('user', function (table) {
     table.boolean('isVerified').defaultTo(false).notNullable()
     table.string('verifyToken').defaultTo(null).nullable()
-    table.timestamp('verifyExpires').defaultTo(null).nullable()
+    table.bigInteger('verifyExpires').defaultTo(null).nullable()
     table.string('verifyShortToken').defaultTo(null).nullable()
     table.string('verifyChanges').defaultTo(null).nullable()
     table.string('resetToken').defaultTo(null).nullable()
     table.string('resetShortToken').defaultTo(null).nullable()
-    table.timestamp('resetExpires').defaultTo(null).nullable()
-    table.integer('resetAttempts').defaultTo(null).nullable()
+    table.bigInteger('resetExpires').defaultTo(null).nullable()
+    table.integer('resetAttempts').defaultTo(0).notNullable()
   })
 }
 

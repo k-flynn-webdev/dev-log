@@ -72,7 +72,10 @@ export const createProfile = createAsyncThunk(
 export const lostProfile = createAsyncThunk(
   "profile/lostProfile",
   async (arg, thunkAPI) => {
-    return post("auth-management", { strategy: "local", ...arg })
+    return post("auth-management", {
+      action: "sendResetPwd",
+      value: { email: arg },
+    })
       .then(({ data }) => {
         let profile = data ? data : null
         if (!profile) throw "no profile found"

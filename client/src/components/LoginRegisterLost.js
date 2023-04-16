@@ -140,7 +140,7 @@ function LoginRegisterLost({ state, token }) {
     }
 
     if (isLost) {
-      await dispatch(lostProfile({ email: emailValue }))
+      await dispatch(lostProfile(emailValue))
         .unwrap()
         .catch(e => {
           throw e

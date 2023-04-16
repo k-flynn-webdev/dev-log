@@ -47,6 +47,7 @@ export const sequelizeConvertAlm = (context) => {
     if (context.type === 'after') {
       try {
         context.data.verifyChanges = JSON.parse(context.data.verifyChanges)
+        context.data.resetExpires = new Date(context.data.resetExpires).valueOf() || null
       } catch (e) {
         logger.error('error converting', context.data.verifyChanges)
       }
@@ -64,7 +65,7 @@ export const userAuthModelFields = {
   verifyChanges: { type: 'string', nullable: true },
   resetToken: { type: 'string', nullable: true },
   resetShortToken: { type: 'string', nullable: true },
-  resetExpires: { type: 'string', format: 'date-time', nullable: true },
+  resetExpires: { type: 'number', nullable: true },
   resetAttempts: { type: 'number', nullable: true }
 }
 

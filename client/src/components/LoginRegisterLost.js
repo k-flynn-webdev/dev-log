@@ -52,12 +52,23 @@ function LoginRegisterLost({ state, token }) {
         emailValue && emailIsValid && passwordValue && passwordIsValid
       )
     }
+  }, [emailValue, emailIsValid, passwordValue, passwordIsValid])
+
+  useEffect(() => {
     if (isLost) {
       setFormIsValid(emailValue && emailIsValid)
     }
-
-    if (isVerify) handleVerify()
   }, [emailValue, emailIsValid, passwordValue, passwordIsValid])
+
+  useEffect(() => {
+    if (isVerify && !effectRan.current) {
+      handleVerify()
+
+      return () => {
+        effectRan.current = true
+      }
+    }
+  }, [])
 
   const getToastTitle = () => {
     if (isLogin) return LOGIN_SUCCESS
@@ -88,26 +99,19 @@ function LoginRegisterLost({ state, token }) {
   }
 
   const handleVerify = async () => {
-    // todo this is still running twice!!! maybe move to own `useEffect` ??? could be proper use
-    if (isVerify && !effectRan.current) {
-      const token = searchParams.get("token")
+    const token = searchParams.get("token")
 
-      if (!token) return
+    if (!token) return
 
-      await dispatch(verifyProfile(token))
-        .unwrap()
-        .then(() => {
-          successToast()
-          navigate("/")
-        })
-        .catch(e => {
-          throw e
-        })
-
-      return () => {
-        effectRan.current = true
-      }
-    }
+    await dispatch(verifyProfile(token))
+      .unwrap()
+      .then(() => {
+        successToast()
+        navigate("/")
+      })
+      .catch(e => {
+        throw e
+      })
   }
 
   const handleSubmit = async event => {

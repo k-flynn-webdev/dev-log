@@ -1,10 +1,16 @@
 import { AuthenticationManagementService } from 'feathers-authentication-management'
+import { authenticate } from '@feathersjs/authentication'
 import { addApiPrefix } from '../../helpers/add-api-prefix.js'
 
 import { addVerification, removeVerification } from 'feathers-authentication-management'
-// import { sequelizeConvert, getItems, replaceItems } from 'feathers-hooks-common'
+import { iff } from 'feathers-hooks-common'
 import { logger } from '../../logger.js'
 import { notifier } from './notifier.js'
+
+const isAction =
+  (...args) =>
+  (hook) =>
+    args.includes(hook.data.action)
 
 // todo
 export const sendVerify = () => {
@@ -78,15 +84,29 @@ export const authManagement = (app) => {
     })
   )
 
+  app.service(servicePath).hooks({
+    before: {
+      create: [
+        // The user must be signed in before being allowed to change their password or communication values.
+        iff(isAction('passwordChange', 'identityChange'), authenticate('jwt'))
+      ]
+    }
+  })
+
   // Initialize hooks
   app.service(userServicePath).hooks({
     before: {
       all: [sequelizeConvertAlm],
-      create: [addVerification(servicePath)]
+      create: [
+        addVerification(servicePath) // adds .isVerified, .verifyExpires, .verifyToken, .verifyChanges
+      ]
     },
     after: {
       all: [sequelizeConvertAlm],
-      create: [sendVerify(), removeVerification()]
+      create: [
+        sendVerify(),
+        removeVerification() // removes verification/reset fields other than .isVerified from the response
+      ]
     }
   })
 }

@@ -7,7 +7,7 @@ export const notifier = (app) => {
   function createTokenLink(type, hash) {
     const url = app.get('app_url') || app.get('host')
 
-    return `${url}/${type}?token=${hash}`
+    return `${url}/login/${type}?token=${hash}`
   }
 
   async function sendEmail(emailContent) {
@@ -19,19 +19,40 @@ export const notifier = (app) => {
     }
   }
 
-  return (type, user, notifierOptions = {}) => {
-    if (type === 'resendVerifySignup') {
-      return sendEmail({
-        to: user.email,
-        subject: 'Please confirm your e-mail address',
-        text: 'Click here: ' + createTokenLink('login/verify', user.verifyToken)
-      })
-    } else if (type === 'verifySignup') {
-      return sendEmail({
-        to: user.email,
-        subject: 'E-Mail address verified',
-        text: 'Registration process complete. Thanks for joining us!'
-      })
+  return async function (type, user, notifierOptions) {
+    switch (type) {
+      case 'resendVerifySignup':
+        return await sendEmail({
+          to: user.email,
+          subject: 'Verify Signup',
+          html: createTokenLink('verify-email', user.verifyToken)
+        })
+      case 'verifySignup':
+        return await sendEmail({
+          to: user.email,
+          subject: 'Confirm Signup',
+          html: 'Thanks for joining'
+        })
+      case 'sendResetPwd':
+        return await sendEmail({
+          to: user.email,
+          subject: 'Send Reset Password',
+          html: createTokenLink('reset-password', user.resetToken)
+        })
+      case 'resetPwd':
+        return await sendEmail({
+          to: user.email,
+          subject: 'Reset Password',
+          html: 'Password has now been changed'
+        })
+      case 'passwordChange':
+        break
+      case 'identityChange':
+        return await sendEmail({
+          to: user.email,
+          subject: 'Change your identity',
+          html: createTokenLink('verifyChanges', user.verifyToken)
+        })
     }
   }
 }

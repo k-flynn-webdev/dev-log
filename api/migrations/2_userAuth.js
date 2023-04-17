@@ -12,7 +12,7 @@ export async function up(knex) {
     table.string('resetToken').defaultTo(null).nullable()
     table.string('resetShortToken').defaultTo(null).nullable()
     table.bigInteger('resetExpires').defaultTo(null).nullable()
-    table.integer('resetAttempts').defaultTo(0).notNullable()
+    table.integer('resetAttempts').defaultTo(0).nullable()
   })
 }
 

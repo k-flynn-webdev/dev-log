@@ -26,6 +26,7 @@ export class Email {
   async create(data, params) {
     return new Promise((resolve, reject) => {
       if (!this.active) return resolve('Email not active.')
+
       data.from = this.from
 
       this.email.messages().send(data, (err, result) => {

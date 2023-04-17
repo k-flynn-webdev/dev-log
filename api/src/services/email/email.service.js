@@ -5,13 +5,15 @@ import { addApiPrefix } from '../../helpers/add-api-prefix.js'
 export const email = (app) => {
   const servicePath = addApiPrefix(app, 'email')
 
+  const mailConfig = app.get('mail')
+
   const options = {
     paginate: app.get('paginate'),
-    active: app.get('mail').active,
-    api: app.get('mail').api,
-    domain: app.get('mail').domain,
-    host: app.get('mail').host,
-    from: app.get('mail').from
+    active: mailConfig.active,
+    api: mailConfig.api,
+    domain: mailConfig.domain,
+    host: mailConfig.host,
+    from: mailConfig.from
   }
 
   app.use(servicePath, new Email(options))

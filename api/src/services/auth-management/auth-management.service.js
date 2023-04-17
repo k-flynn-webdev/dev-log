@@ -2,23 +2,20 @@ import { AuthenticationManagementService } from 'feathers-authentication-managem
 import { addApiPrefix } from '../../helpers/add-api-prefix.js'
 
 import { addVerification, removeVerification } from 'feathers-authentication-management'
-import { sequelizeConvert, getItems, replaceItems } from 'feathers-hooks-common'
+// import { sequelizeConvert, getItems, replaceItems } from 'feathers-hooks-common'
 import { logger } from '../../logger.js'
+import { notifier } from './notifier.js'
 
 // todo
-// const sendVerify = () => {
-//   return (context) => {
-//     const notifier = authNotifier(context.app);
+export const sendVerify = () => {
+  return async (context) => {
+    const authNotifier = notifier(context.app)
 
-//     const users = Array.isArray(context.result)
-//       ? context.result
-//       : [context.result];
+    const users = Array.isArray(context.result) ? context.result : [context.result]
 
-//     await Promise.all(
-//       users.map(async user => notifier("resendVerifySignup", user))
-//     )
-//   };
-// }
+    await Promise.all(users.map(async (user) => authNotifier('resendVerifySignup', user)))
+  }
+}
 
 export const sequelizeConvertAlm = (context) => {
   // converts = converts || {
@@ -49,7 +46,7 @@ export const sequelizeConvertAlm = (context) => {
         context.data.verifyChanges = JSON.parse(context.data.verifyChanges)
         context.data.resetExpires = new Date(context.data.resetExpires).valueOf() || null
       } catch (e) {
-        logger.error('error converting', context.data.verifyChanges)
+        logger.error('error converting', context.data)
       }
     }
   }
@@ -68,8 +65,6 @@ export const userAuthModelFields = {
   resetExpires: { type: 'number', nullable: true },
   resetAttempts: { type: 'number', nullable: true }
 }
-
-export const notifier = (app) => () => {}
 
 export const authManagement = (app) => {
   const servicePath = addApiPrefix(app, 'auth-management')
@@ -91,7 +86,7 @@ export const authManagement = (app) => {
     },
     after: {
       all: [sequelizeConvertAlm],
-      create: [removeVerification()]
+      create: [sendVerify(), removeVerification()]
     }
   })
 }

@@ -58,7 +58,7 @@ function LoginRegisterLost({ state, token }) {
     if (isLost) {
       setFormIsValid(emailValue && emailIsValid)
     }
-  }, [emailValue, emailIsValid, passwordValue, passwordIsValid])
+  }, [emailValue, emailIsValid])
 
   useEffect(() => {
     if (isVerify && !effectRan.current) {
@@ -142,6 +142,10 @@ function LoginRegisterLost({ state, token }) {
     if (isLost) {
       await dispatch(lostProfile(emailValue))
         .unwrap()
+        .then(() => {
+          successToast()
+          navigate("/")
+        })
         .catch(e => {
           throw e
         })

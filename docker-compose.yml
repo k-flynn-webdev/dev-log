@@ -22,7 +22,7 @@ services:
     ports:
       - "${API_PORT}:3002"
     environment:
-      - NODE_CONFIG={"host":"${HOST}", "port":3002, "mail":{"active":${MAIL_ACTIVE},"from":"${MAIL_FROM}","host":"${MAIL_HOST}","domain":"${MAIL_DOMAIN}","api":"${MAIL_API}"}, "authentication":{ "jwtOptions":{ "audience":"${APP_URL}" }, "oauth":{ "redirect":"http://${HOST}:${NGINX_PORT}/login?", "github":{"redirect_uri":"http://${HOST}:${NGINX_PORT}/api/oauth/github/callback","key":"${GITHUB_KEY}","secret":"${GITHUB_SECRET}"}, "google":{"redirect_uri":"http://${HOST}:${NGINX_PORT}/api/oauth/google/callback","key":"${GOOGLE_KEY}","secret":"${GOOGLE_SECRET}"}}},"postgresql":{"client":"pg","connection":"postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}"}}
+      - NODE_CONFIG={"host":"${HOST}", "port":3002,"app_url":"${APP_URL}", "mail":{"active":${MAIL_ACTIVE},"from":"${MAIL_FROM}","host":"${MAIL_HOST}","domain":"${MAIL_DOMAIN}","api":"${MAIL_API}"}, "authentication":{ "jwtOptions":{ "audience":"${APP_URL}" }, "oauth":{ "redirect":"http://${HOST}:${NGINX_PORT}/login?", "github":{"redirect_uri":"http://${HOST}:${NGINX_PORT}/api/oauth/github/callback","key":"${GITHUB_KEY}","secret":"${GITHUB_SECRET}"}, "google":{"redirect_uri":"http://${HOST}:${NGINX_PORT}/api/oauth/google/callback","key":"${GOOGLE_KEY}","secret":"${GOOGLE_SECRET}"}}},"postgresql":{"client":"pg","connection":"postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}"}}
     volumes:
       - api-volume:/api/node_modules
     networks:

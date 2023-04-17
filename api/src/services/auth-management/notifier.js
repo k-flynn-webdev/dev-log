@@ -5,7 +5,9 @@ export const notifier = (app) => {
   const servicePath = addApiPrefix(app, 'email')
 
   function getLink(type, hash) {
-    return `${app.get('APP_URL')}${type}?token=${hash}`
+    const url = app.get('app_url') || app.get('host')
+
+    return `${url}${type}?token=${hash}`
   }
 
   async function sendEmail(emailContent) {

@@ -4,7 +4,7 @@ import { addApiPrefix } from '../../helpers/add-api-prefix.js'
 export const notifier = (app) => {
   const servicePath = addApiPrefix(app, 'email')
 
-  function getLink(type, hash) {
+  function createTokenLink(type, hash) {
     const url = app.get('app_url') || app.get('host')
 
     return `${url}/${type}?token=${hash}`
@@ -24,7 +24,7 @@ export const notifier = (app) => {
       return sendEmail({
         to: user.email,
         subject: 'Please confirm your e-mail address',
-        text: 'Click here: ' + getLink('login/verify', user.verifyToken)
+        text: 'Click here: ' + createTokenLink('login/verify', user.verifyToken)
       })
     } else if (type === 'verifySignup') {
       return sendEmail({

@@ -7,7 +7,7 @@ export const notifier = (app) => {
   function getLink(type, hash) {
     const url = app.get('app_url') || app.get('host')
 
-    return `${url}${type}?token=${hash}`
+    return `${url}/${type}?token=${hash}`
   }
 
   async function sendEmail(emailContent) {
@@ -24,7 +24,7 @@ export const notifier = (app) => {
       return sendEmail({
         to: user.email,
         subject: 'Please confirm your e-mail address',
-        text: 'Click here: ' + getLink('verify', user.verifyToken)
+        text: 'Click here: ' + getLink('login/verify', user.verifyToken)
       })
     } else if (type === 'verifySignup') {
       return sendEmail({

@@ -11,6 +11,7 @@ export const configurationSchema = {
     host: { type: 'string' },
     port: { type: 'number' },
     public: { type: 'string' },
+    app_url: { type: 'string' },
     mail: { type: 'object' }
   }
 }

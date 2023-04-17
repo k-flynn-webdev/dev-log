@@ -23,7 +23,7 @@ add BE testing in node
 add testing automation on git push
 add testing automation on git merge
 
-
+add favicon for app
 
 add user edit password
 add user delete account option

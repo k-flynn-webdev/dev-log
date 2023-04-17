@@ -13,7 +13,7 @@ import {
 } from "../store/slices/profile"
 
 import {
-  REGISTER,
+  SIGNUP,
   LOGIN,
   EMAIL,
   EMAIL_PLACEHOLDER,
@@ -21,15 +21,15 @@ import {
   PASSWORD_PLACEHOLDER,
   NO_ACCOUNT,
   HAVE_ACCOUNT,
-  LOST,
-  LOST_PASSWORD,
+  FORGOT_PASSWORD,
+  CHANGE_PASSWORD,
   LOGIN_SUCCESS,
-  REGISTER_SUCCESS,
+  SIGNUP_SUCCESS,
   LOST_SUCCESS,
   VERIFY_SUCCESS,
 } from "../lang/en-gb"
 
-function LoginRegisterLost({ state, token }) {
+function LoginForm({ state, token }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [emailValue, setEmail] = useState("")
@@ -42,12 +42,13 @@ function LoginRegisterLost({ state, token }) {
   const effectRan = useRef(false)
 
   const isLogin = state === "login"
-  const isRegister = state === "register"
-  const isLost = state === "lost"
-  const isVerify = state === "verify"
+  const isSignUp = state === "signup"
+  const isVerify = state === "verify-email"
+  const isForgotPassword = state === "forgot-password"
+  const isChangePassword = state === "change-password"
 
   useEffect(() => {
-    if (isLogin || isRegister) {
+    if (isLogin || isSignUp) {
       setFormIsValid(
         emailValue && emailIsValid && passwordValue && passwordIsValid
       )
@@ -55,7 +56,7 @@ function LoginRegisterLost({ state, token }) {
   }, [emailValue, emailIsValid, passwordValue, passwordIsValid])
 
   useEffect(() => {
-    if (isLost) {
+    if (isForgotPassword) {
       setFormIsValid(emailValue && emailIsValid)
     }
   }, [emailValue, emailIsValid])
@@ -72,8 +73,8 @@ function LoginRegisterLost({ state, token }) {
 
   const getToastTitle = () => {
     if (isLogin) return LOGIN_SUCCESS
-    if (isRegister) return REGISTER_SUCCESS
-    if (isLost) return LOST_SUCCESS
+    if (isSignUp) return SIGNUP_SUCCESS
+    if (isForgotPassword) return LOST_SUCCESS
     if (isVerify) return VERIFY_SUCCESS
   }
 
@@ -118,7 +119,7 @@ function LoginRegisterLost({ state, token }) {
     event.preventDefault()
     if (!formIsValid) return
 
-    if (isRegister) {
+    if (isSignUp) {
       await dispatch(
         createProfile({ email: emailValue, password: passwordValue })
       )
@@ -128,7 +129,7 @@ function LoginRegisterLost({ state, token }) {
         })
     }
 
-    if (isRegister || isLogin) {
+    if (isSignUp || isLogin) {
       await dispatch(
         loginProfile({ email: emailValue, password: passwordValue })
       )
@@ -139,7 +140,7 @@ function LoginRegisterLost({ state, token }) {
         })
     }
 
-    if (isLost) {
+    if (isForgotPassword) {
       await dispatch(lostProfile(emailValue))
         .unwrap()
         .then(() => {
@@ -159,17 +160,21 @@ function LoginRegisterLost({ state, token }) {
   return (
     <div className="login__input">
       <form id="loginForm" onSubmit={handleSubmit}>
-        <FormInput
-          labelText={EMAIL}
-          placeholder={EMAIL_PLACEHOLDER}
-          value={emailValue}
-          type="email"
-          isValid={emailIsValid}
-          onChange={handleEmail}
-        />
+        <>
+          {(isLogin || isSignUp || isForgotPassword) && (
+            <FormInput
+              labelText={EMAIL}
+              placeholder={EMAIL_PLACEHOLDER}
+              value={emailValue}
+              type="email"
+              isValid={emailIsValid}
+              onChange={handleEmail}
+            />
+          )}
+        </>
 
         <>
-          {(isLogin || isRegister) && (
+          {(isLogin || isSignUp || isChangePassword) && (
             <FormInput
               labelText={PASSWORD}
               placeholder={PASSWORD_PLACEHOLDER}
@@ -188,31 +193,29 @@ function LoginRegisterLost({ state, token }) {
             disabled={!formIsValid}
           >
             {isLogin && LOGIN}
-            {isRegister && REGISTER}
-            {isLost && LOST}
+            {isSignUp && SIGNUP}
+            {isForgotPassword && FORGOT_PASSWORD}
+            {isChangePassword && CHANGE_PASSWORD}
           </button>
         </div>
       </form>
 
       <>
-        {!isLost && (
+        {(isLogin || isSignUp) && (
           <>
             <br />
             <div className="mt-4">
               <span className="mr-1">
                 {!isLogin ? HAVE_ACCOUNT : NO_ACCOUNT}
               </span>
-              <Link
-                className="link"
-                to={!isLogin ? "/login" : "/login/register"}
-              >
-                {!isLogin ? LOGIN : REGISTER}
+              <Link className="link" to={!isLogin ? "/login" : "/login/signup"}>
+                {!isLogin ? LOGIN : SIGNUP}
               </Link>
             </div>
 
             <div className="mt-4">
-              <Link className="link" to="/login/lost">
-                {LOST_PASSWORD}
+              <Link className="link" to="/login/forgot-password">
+                {FORGOT_PASSWORD}
               </Link>
             </div>
           </>
@@ -222,4 +225,4 @@ function LoginRegisterLost({ state, token }) {
   )
 }
 
-export default LoginRegisterLost
+export default LoginForm

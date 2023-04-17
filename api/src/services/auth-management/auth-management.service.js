@@ -1,4 +1,5 @@
 import { AuthenticationManagementService } from 'feathers-authentication-management'
+import { authenticate } from '@feathersjs/authentication'
 import { addApiPrefix } from '../../helpers/add-api-prefix.js'
 
 import { addVerification, removeVerification } from 'feathers-authentication-management'

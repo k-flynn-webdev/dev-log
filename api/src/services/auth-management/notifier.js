@@ -25,13 +25,13 @@ export const notifier = (app) => {
         return await sendEmail({
           to: user.email,
           subject: 'Verify Signup',
-          html: createTokenLink('verify', user.verifyToken)
+          html: createTokenLink('verify-email', user.verifyToken)
         })
       case 'verifySignup':
         return await sendEmail({
           to: user.email,
           subject: 'Confirm Signup',
-          html: createTokenLink('verify', user.verifyToken)
+          html: 'Thanks for joining'
         })
       case 'sendResetPwd':
         return await sendEmail({

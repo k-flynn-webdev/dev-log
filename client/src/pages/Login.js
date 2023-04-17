@@ -1,14 +1,17 @@
 import * as React from "react"
-import { REGISTER, LOGIN } from "../lang/en-gb"
-import LoginRegisterLost from "../components/LoginRegisterLost"
+import { SIGNUP, LOGIN } from "../lang/en-gb"
+import LoginForm from "../components/LoginForm"
 import LoginGoogle from "../components/LoginGoogle"
 import LoginGithub from "../components/LoginGithub"
 
 function LoginPage({ state }) {
-  const form = <LoginRegisterLost state={state} />
+  const form = <LoginForm state={state} />
 
   const isLogin = state === "login"
-  const isRegister = state === "register"
+  const isSignUp = state === "signup"
+  const isVerify = state === "verify-email"
+  const isForgotPassword = state === "forgot-password"
+  const isChangePassword = state === "change-password"
 
   return (
     <div className="login">
@@ -16,13 +19,13 @@ function LoginPage({ state }) {
         <div className="card__header">
           <h1 className="text-center">
             {isLogin && LOGIN}
-            {isRegister && REGISTER}
+            {isSignUp && SIGNUP}
           </h1>
         </div>
 
         <div className="card__body">
           <>
-            {(isLogin || isRegister) && (
+            {(isLogin || isSignUp) && (
               <div className="socials-bar mb-4">
                 <LoginGoogle />
                 <LoginGithub />
@@ -30,7 +33,7 @@ function LoginPage({ state }) {
             )}
           </>
 
-          {(isLogin || isRegister) && <hr className="solid my-8" />}
+          {(isLogin || isSignUp) && <hr className="solid my-8" />}
 
           <div>{form}</div>
         </div>

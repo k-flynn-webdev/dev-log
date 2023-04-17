@@ -13,7 +13,8 @@ export const email = (app) => {
     api: mailConfig.api,
     domain: mailConfig.domain,
     host: mailConfig.host,
-    from: mailConfig.from
+    from: mailConfig.from,
+    app_url: app.get('APP_URL')
   }
 
   app.use(servicePath, new Email(options))

@@ -9,7 +9,8 @@ import {
   createProfile,
   loginProfile,
   verifyProfile,
-  lostProfile,
+  forgotPassword,
+  resetPassword,
 } from "../store/slices/profile"
 
 import {
@@ -22,10 +23,12 @@ import {
   NO_ACCOUNT,
   HAVE_ACCOUNT,
   FORGOT_PASSWORD,
+  RESET_PASSWORD,
   CHANGE_PASSWORD,
   LOGIN_SUCCESS,
   SIGNUP_SUCCESS,
-  LOST_SUCCESS,
+  FORGOT_PASSWORD_SUCCESS,
+  RESET_PASSWORD_SUCCESS,
   VERIFY_SUCCESS,
 } from "../lang/en-gb"
 
@@ -45,6 +48,7 @@ function LoginForm({ state, token }) {
   const isSignUp = state === "signup"
   const isVerify = state === "verify-email"
   const isForgotPassword = state === "forgot-password"
+  const isResetPassword = state === "reset-password"
   const isChangePassword = state === "change-password"
 
   useEffect(() => {
@@ -62,6 +66,12 @@ function LoginForm({ state, token }) {
   }, [emailValue, emailIsValid])
 
   useEffect(() => {
+    if (isResetPassword) {
+      setFormIsValid(passwordValue && passwordIsValid)
+    }
+  }, [passwordValue, passwordIsValid])
+
+  useEffect(() => {
     if (isVerify && !effectRan.current) {
       handleVerify()
 
@@ -74,7 +84,8 @@ function LoginForm({ state, token }) {
   const getToastTitle = () => {
     if (isLogin) return LOGIN_SUCCESS
     if (isSignUp) return SIGNUP_SUCCESS
-    if (isForgotPassword) return LOST_SUCCESS
+    if (isForgotPassword) return FORGOT_PASSWORD_SUCCESS
+    if (isResetPassword) return RESET_PASSWORD_SUCCESS
     if (isVerify) return VERIFY_SUCCESS
   }
 
@@ -141,7 +152,7 @@ function LoginForm({ state, token }) {
     }
 
     if (isForgotPassword) {
-      await dispatch(lostProfile(emailValue))
+      await dispatch(forgotPassword(emailValue))
         .unwrap()
         .then(() => {
           successToast()
@@ -150,6 +161,34 @@ function LoginForm({ state, token }) {
         .catch(e => {
           throw e
         })
+    }
+
+    if (isResetPassword) {
+      const token = searchParams.get("token")
+
+      if (!token) return
+
+      await dispatch(resetPassword({ password: passwordValue, token }))
+        .unwrap()
+        .then(() => {
+          successToast()
+          navigate("/")
+        })
+        .catch(e => {
+          throw e
+        })
+    }
+
+    if (isChangePassword) {
+      // await dispatch(lostProfile(emailValue))
+      //   .unwrap()
+      //   .then(() => {
+      //     successToast()
+      //     navigate("/")
+      //   })
+      //   .catch(e => {
+      //     throw e
+      //   })
     }
   }
 
@@ -174,7 +213,7 @@ function LoginForm({ state, token }) {
         </>
 
         <>
-          {(isLogin || isSignUp || isChangePassword) && (
+          {(isLogin || isSignUp || isResetPassword || isChangePassword) && (
             <FormInput
               labelText={PASSWORD}
               placeholder={PASSWORD_PLACEHOLDER}
@@ -195,6 +234,7 @@ function LoginForm({ state, token }) {
             {isLogin && LOGIN}
             {isSignUp && SIGNUP}
             {isForgotPassword && FORGOT_PASSWORD}
+            {isResetPassword && RESET_PASSWORD}
             {isChangePassword && CHANGE_PASSWORD}
           </button>
         </div>

@@ -37,13 +37,13 @@ export const notifier = (app) => {
         return await sendEmail({
           to: user.email,
           subject: 'Send Reset Password',
-          html: createTokenLink('reset', user.verifyToken)
+          html: createTokenLink('reset-password', user.resetToken)
         })
       case 'resetPwd':
         return await sendEmail({
           to: user.email,
           subject: 'Reset Password',
-          html: createTokenLink('reset', user.verifyToken)
+          html: 'Password has now been changed'
         })
       case 'passwordChange':
         break

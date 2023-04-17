@@ -28,6 +28,10 @@ const router = createBrowserRouter([
         element: <LoginPage state="forgot-password" />,
       },
       {
+        path: "reset-password",
+        element: <LoginPage state="reset-password" />,
+      },
+      {
         path: "change-password",
         element: <LoginPage state="change-password" />,
       },

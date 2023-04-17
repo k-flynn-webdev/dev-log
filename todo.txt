@@ -7,7 +7,7 @@ add ui footer with my website: done
 improve BEM class naming for header -> profile: done
 bugfix: custom tags should not contain the #tag in the value: done
 add user email verify: done
-add user recover account by email: done
+add user recover account by email: progress
 
 
 dev-log todo:

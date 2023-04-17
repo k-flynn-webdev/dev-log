@@ -5,7 +5,7 @@ const port = app.get('port')
 const host = app.get('host')
 
 // debug for services
-console.log(Object.keys(app.services))
+logger.info(Object.keys(app.services))
 
 app.listen(port).then(() => {
   logger.info(`Feathers app listening on http://${host}:${port}`)

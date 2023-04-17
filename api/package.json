@@ -64,7 +64,10 @@
     "@feathersjs/socketio": "^5.0.0-pre.34",
     "@feathersjs/transport-commons": "^5.0.0-pre.34",
     "dotenv": "^16.0.3",
+    "feathers-authentication-management": "^4.0.2",
+    "feathers-hooks-common": "^7.0.3",
     "knex": "^2.3.0",
+    "mailgun-js": "^0.22.0",
     "pg": "^8.8.0",
     "winston": "^3.8.2"
   },

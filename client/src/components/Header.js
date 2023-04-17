@@ -9,7 +9,7 @@ import {
 } from "../store/slices/profile"
 
 import useDocumentTitle from "../hooks/use-document-title"
-import { TITLE } from "../lang/en-gb"
+import { LOGIN, TITLE } from "../lang/en-gb"
 
 import HeaderMenu from "./HeaderMenu"
 import HeaderProfile from "./HeaderProfile"
@@ -55,7 +55,7 @@ function Header({ title, className }) {
             )}
             {!profileLoggedIn && (
               <Link to="/login" className="link">
-                Profile
+                {LOGIN}
               </Link>
             )}
           </div>

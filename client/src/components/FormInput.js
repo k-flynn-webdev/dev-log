@@ -14,7 +14,7 @@ function FormInput({
   ...rest
 }) {
   return (
-    <div className={`mb-4 form-input ${className}`} {...rest}>
+    <div className={`mb-4 form-input ${className ? className : ""}`} {...rest}>
       {labelText && (
         <label className="mb-1" htmlFor={labelText}>
           {labelText}

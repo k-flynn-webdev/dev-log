@@ -2,6 +2,7 @@
 import { resolve, querySyntax, getValidator } from '@feathersjs/schema'
 import { passwordHash } from '@feathersjs/authentication-local'
 import { dataValidator, queryValidator } from '../../validators.js'
+import { userAuthModelFields } from '../auth-management/auth-management.service.js'
 
 // Main data model schema
 export const userSchema = {
@@ -21,7 +22,8 @@ export const userSchema = {
     created_at: { type: 'string', format: 'date-time', nullable: true },
     updated_at: { type: 'string', format: 'date-time', nullable: true },
     deleted_at: { type: 'string', format: 'date-time', nullable: true },
-    last_login: { type: 'string', format: 'date-time', nullable: true }
+    last_login: { type: 'string', format: 'date-time', nullable: true },
+    ...userAuthModelFields
   }
 }
 export const userResolver = resolve({})

@@ -6,6 +6,13 @@
     "default": 10,
     "max": 50
   },
+  "mail": {
+    "active": false,
+    "from": "hi@your.email",
+    "host": "api.mail.service",
+    "domain": "mail.yourwebsite.co.uk",
+    "api": "key-for-your-mail-service-here"
+  },
   "postgresql": {
     "client": "pg",
     "connection": "postgres://user:password@host:port/app-api"
@@ -52,4 +59,3 @@
     }
   }
 }
-

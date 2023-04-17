@@ -1,6 +1,7 @@
 // Initializes the `email` service on path `/email`
 import { Email } from './email.class.js'
 import { addApiPrefix } from '../../helpers/add-api-prefix.js'
+import { disallow } from 'feathers-hooks-common'
 
 export const email = (app) => {
   const servicePath = addApiPrefix(app, 'email')
@@ -18,4 +19,10 @@ export const email = (app) => {
   }
 
   app.use(servicePath, new Email(options))
+
+  app.service(servicePath).hooks({
+    before: {
+      all: [disallow('external')]
+    }
+  })
 }

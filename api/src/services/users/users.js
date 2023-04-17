@@ -3,6 +3,7 @@ import { authenticate } from '@feathersjs/authentication'
 import { hooks as schemaHooks } from '@feathersjs/schema'
 import { addApiPrefix } from '../../helpers/add-api-prefix.js'
 import { timeStamp } from '../../hooks/time-stamp.js'
+import { disallow, iff, isProvider, preventChanges } from 'feathers-hooks-common'
 
 import {
   userDataValidator,
@@ -49,10 +50,26 @@ export const user = (app) => {
         schemaHooks.resolveData(userDataResolver),
         timeStamp('created_at')
       ],
+      update: [disallow('external')],
       patch: [
         schemaHooks.validateData(userPatchValidator),
         schemaHooks.resolveData(userPatchResolver),
-        timeStamp('updated_at')
+        timeStamp('updated_at'),
+        iff(
+          isProvider('external'),
+          preventChanges(
+            true,
+            'email',
+            'isVerified',
+            'verifyToken',
+            'verifyShortToken',
+            'verifyExpires',
+            'verifyChanges',
+            'resetToken',
+            'resetShortToken',
+            'resetExpires'
+          )
+        )
       ],
       remove: []
     },

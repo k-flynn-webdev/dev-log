@@ -557,6 +557,12 @@ body {
       border-bottom: $mid-color 1px solid;
       cursor: pointer;
 
+      &::before {
+        content: "#";
+        opacity: 0.5;
+        margin-right: 0.1rem;
+      }
+
       &:last-of-type {
         margin: 0;
       }

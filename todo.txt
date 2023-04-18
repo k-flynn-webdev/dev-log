@@ -11,6 +11,9 @@ add user reset password: done
 fix first google sign in not working after installing app fresh: done
 custom tag values not being trimmed: done
 fe hashtag on tags missing: done
+add log button menu click: done
+add user patch log flow: done
+add user delete log flow: done
 
 dev-log todo:
 
@@ -18,7 +21,6 @@ log max input warning at full is'mt looking good
 
 have a loading page when user might exists, main page flashes
 
-add log button menu click
 add tag click to see user/global useage count
 
 add FE testing in react
@@ -32,8 +34,6 @@ add user edit password
 add user delete account option
 add user request all data option
 
-add user delete log option
-add user edit log option
 add user remove tags attached to log option
 
 investigate CI/CD to docker setup

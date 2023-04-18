@@ -1,5 +1,7 @@
 export const TITLE = "Dev Log"
 export const ADD = "Add"
+export const UPDATE = "Update"
+export const DELETE = "Delete"
 export const LOGIN = "Login"
 export const LOGOUT = "Logout"
 export const SIGNUP = "Signup"

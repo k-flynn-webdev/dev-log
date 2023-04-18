@@ -1,6 +1,6 @@
 import { KnexService } from '@feathersjs/knex'
 import { NotFound } from '@feathersjs/errors'
-import { REDUCED_TAGS_ALIAS } from '../../constants/global.js';
+import { REDUCED_TAGS_ALIAS } from '../../constants/global.js'
 
 // By default calls the standard Knex adapter service methods but can be customized with your own functionality.
 export class LogService extends KnexService {
@@ -25,9 +25,7 @@ export class LogService extends KnexService {
         }
       })
 
-      await this.db()
-        .from('log_tag')
-        .insert(logTagRows)
+      await this.db().from('log_tag').insert(logTagRows)
     }
 
     return {
@@ -44,25 +42,28 @@ export class LogService extends KnexService {
   }
 
   async getLogToTagRows(logIds) {
-    return this.db()
-      .select('*')
-      .from('log_tag')
-      .whereIn('log_tag.log_id', logIds)
+    return this.db().select('*').from('log_tag').whereIn('log_tag.log_id', logIds)
   }
 
   getLogToTagIdsObject(logTagRows) {
-    return logTagRows.reduce((acc, row) => {
-      if (!acc.tagIds.includes(row.tag_id)) acc.tagIds.push(row.tag_id)
-      if (!acc.logIds[row.log_id]) acc.logIds[row.log_id] = []
+    return logTagRows.reduce(
+      (acc, row) => {
+        if (!acc.tagIds.includes(row.tag_id)) acc.tagIds.push(row.tag_id)
+        if (!acc.logIds[row.log_id]) acc.logIds[row.log_id] = []
 
-      acc.logIds[row.log_id].push(row.tag_id)
+        acc.logIds[row.log_id].push(row.tag_id)
 
-      return acc
-    }, { tagIds: [], logIds: {}})
+        return acc
+      },
+      { tagIds: [], logIds: {} }
+    )
   }
 
   async find(params) {
-    const res = await super.find(params);
+    // return only none deleted items
+    params.query = { ...params.query, deleted_at: null }
+
+    const res = await super.find(params)
     const logIds = res.data.map((log) => log.id)
 
     const logToTagRows = await this.getLogToTagRows(logIds)
@@ -76,8 +77,7 @@ export class LogService extends KnexService {
       const currentDataTagIds = logTagIdData.logIds[currentDataLogId]
 
       if (currentDataTagIds) {
-        res.data[idx].tags = currentDataTagIds
-        .map((tagId) => tagsRelated.find((tag) => tag.id === tagId))
+        res.data[idx].tags = currentDataTagIds.map((tagId) => tagsRelated.find((tag) => tag.id === tagId))
       }
     })
 

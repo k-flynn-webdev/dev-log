@@ -1,22 +1,20 @@
 import * as React from "react"
 import Tags from "./Tags"
+import LogText from "./LogText"
+import LogEdit from "./LogEdit"
 import LogDate from "./LogDate"
 import LogMenu from "./LogMenu"
 
 function Log({ log }) {
   return (
     <div>
-      <div className={`log ${log.tags.length ? "" : "mb-3"}`} title={log.value}>
-        <div className="log-text">
-          <p>{log.value}</p>
+            <LogText log={log} />
+          )}
+        <LogDate log={log} />
+        <LogMenu isOpen={isOpen} handleIsOpen={handleMenuClick} />
         </div>
 
-        <LogDate created_at={log.created_at} />
-
-        <LogMenu />
-      </div>
-
-      <Tags tags={log.tags} />
+      <Tags log={log} />
     </div>
   )
 }

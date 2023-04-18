@@ -18,8 +18,8 @@ export const getDateLong = input => {
   return input.toLocaleString()
 }
 
-function LogDate({ created_at }) {
-  const [dateShort, dateLong] = getDate(created_at)
+function LogDate({ log }) {
+  const [dateShort, dateLong] = getDate(log.created_at)
 
   return (
     <div className="log-date" title={dateLong}>

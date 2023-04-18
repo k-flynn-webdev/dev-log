@@ -443,19 +443,41 @@ body {
   }
 
   .log {
+    color: $fore-color;
+    background-color: $mid-color;
     padding: $log-spacing;
     padding-top: ($log-spacing * 0.25);
     padding-right: ($log-spacing * 3);
-    color: $fore-color;
-    background-color: $mid-color;
     @extend .border-style;
 
     position: relative;
 
+    &-edit,
     &-text {
       word-wrap: break-word;
       text-overflow: ellipsis;
       margin-bottom: ($log-spacing * 2.5);
+    }
+
+    &-edit {
+      margin-top: $log-spacing * 2;
+
+      &__form {
+        &-input {
+          flex-grow: 1;
+        }
+        &__controls {
+          padding: 0;
+
+          button {
+            margin-right: $log-spacing;
+
+            &:last-of-type {
+              margin-right: 0;
+            }
+          }
+        }
+      }
     }
 
     &-date {
@@ -657,12 +679,10 @@ body {
 
   //}
 }
-//
-//
-//
-//.warning {
-//  background-color: darkorange !important;
-//}
-//.danger {
-//  background-color: $danger-color;
-//}
+
+.warning {
+  background-color: darkorange !important;
+}
+.danger {
+  background-color: $danger-color;
+}

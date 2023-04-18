@@ -2,7 +2,12 @@ import * as React from "react"
 import { useState } from "react"
 import FormInput from "./FormInput"
 import { useDispatch } from "react-redux"
-import { patchLogAPI, patchLog } from "../store/slices/logs"
+import {
+  patchLogAPI,
+  patchLog,
+  removeLog,
+  removeLogAPI,
+} from "../store/slices/logs"
 
 import { clearError } from "../store/slices/error"
 
@@ -34,6 +39,14 @@ function LogEdit({ log, handleIsOpen }) {
       .then(() => handleIsOpen(false))
   }
 
+  const handleRemove = () => {
+    dispatch(clearError())
+    dispatch(removeLog({ id: log.id }))
+    dispatch(removeLogAPI({ id: log.id }))
+      .unwrap()
+      .then(() => handleIsOpen(false))
+  }
+
   return (
     <div className="log-edit">
       <form onSubmit={handleSubmit} className="log-edit__form">
@@ -57,8 +70,8 @@ function LogEdit({ log, handleIsOpen }) {
           </button>
           <button
             className="log-edit__form__controls-button warning"
-            type="submit"
-            disabled={!isValid}
+            type="button"
+            onClick={handleRemove}
           >
             {DELETE}
           </button>

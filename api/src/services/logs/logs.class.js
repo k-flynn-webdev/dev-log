@@ -14,14 +14,6 @@ export class LogService extends KnexService {
     return result
   }
 
-  async find(params) {
-    console.log(params)
-    // todo
-    const result = await super.find({ ...params })
-
-    return result
-  }
-
   async create(data, params) {
     const log = await super.create(data, params)
 
@@ -68,6 +60,9 @@ export class LogService extends KnexService {
   }
 
   async find(params) {
+    // return only none deleted items
+    params.query = { ...params.query, deleted_at: null }
+
     const res = await super.find(params)
     const logIds = res.data.map((log) => log.id)
 

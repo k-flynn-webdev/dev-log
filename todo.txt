@@ -34,7 +34,6 @@ add user edit password
 add user delete account option
 add user request all data option
 
-add user delete log option
 add user remove tags attached to log option
 
 investigate CI/CD to docker setup

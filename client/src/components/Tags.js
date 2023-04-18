@@ -2,19 +2,17 @@ import * as React from "react"
 
 import Tag from "./Tag"
 
-function Tags({ tags }) {
+function Tags({ log }) {
+  const tags = log.tags
+
+  if (!tags.length) return ""
+
   return (
-    <>
-      {tags.length ? (
-        <div className="tags">
-          {tags.map(tag => (
-            <Tag key={tag.id} tag={tag} />
-          ))}
-        </div>
-      ) : (
-        ""
-      )}
-    </>
+    <div className="tags">
+      {tags.map(tag => (
+        <Tag key={tag.id} tag={tag} />
+      ))}
+    </div>
   )
 }
 

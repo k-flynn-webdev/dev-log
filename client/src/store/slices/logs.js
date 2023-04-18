@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { get } from "../../plugins/http"
+import { get, patch } from "../../plugins/http"
 
 const ITEM_LIMIT = 50
 
@@ -28,7 +28,29 @@ export const getLogs = createAsyncThunk("logs/get", async (arg, thunkAPI) => {
     })
 })
 
+export const patchLogAPI = createAsyncThunk(
+  "logs/patchAPI",
+  async (arg, thunkAPI) => {
+    return patch(`logs/${arg.id}`, { value: arg.value })
+      .then(res => {
+        thunkAPI.dispatch({
+          type: "logs/patchLog",
+          payload: res.data,
+        })
+      })
+      .catch(err => {
+        thunkAPI.dispatch({
+          type: "error/setError",
+          payload: err.response.data,
+        })
+
+        throw thunkAPI.rejectWithValue(err.response.data)
+      })
+  }
+)
+
 export const logList = state => state.logs
+export const getByLogId = id => state => state.logs.find(item => item.id === id)
 
 export const logs = createSlice({
   name: "logs",
@@ -66,11 +88,9 @@ export const logs = createSlice({
      * @param action
      */
     patchLog: (state, action) => {
-      const log = state.find(log => log.id !== action.payload.id)
+      const log = state.find(log => log.id === action.payload.id)
       if (log) {
-        log.id = action.payload.id
         log.value = action.payload.value.trim()
-        log.tags = action.payload.tags
       }
     },
     /**

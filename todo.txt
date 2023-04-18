@@ -13,6 +13,7 @@ custom tag values not being trimmed: done
 fe hashtag on tags missing: done
 add log button menu click: done
 add user patch log flow: done
+add user delete log flow: done
 
 dev-log todo:
 

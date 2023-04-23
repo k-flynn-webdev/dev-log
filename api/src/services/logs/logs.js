@@ -53,7 +53,7 @@ export const log = (app) => {
         schemaHooks.resolveQuery(logQueryResolver),
         limitToUser
       ],
-      find: [getRelatedTagType],
+      find: [],
       get: [],
       create: [
         schemaHooks.validateData(logDataValidator),
@@ -76,8 +76,8 @@ export const log = (app) => {
       remove: []
     },
     after: {
-      all: [],
-      find: [getRelatedTagType]
+      all: [getRelatedTagType],
+      find: []
     },
     error: {
       all: []

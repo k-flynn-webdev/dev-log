@@ -20,6 +20,12 @@ export const addTagTypeToTags = (log, allTagObject) => {
  * Add related tag type from tag used in `data.log.tag[]` in `After Context`
  */
 export const getRelatedTagType = async (context) => {
+  console.log(context.data, context.params)
+
+  // todo : do this approach better, need a better way to mark tags to
+  //        be dealt with in the params object for logs tags and tag_types!
+
+  // for find
   if (context.result && context.result.data && context.result.data.length) {
     const getAllTagTypes = await context.app.service(addApiPrefix(context.app, 'tag-type')).getAllReduced()
 
@@ -27,6 +33,17 @@ export const getRelatedTagType = async (context) => {
 
     context.result.data.forEach((log) => {
       addTagTypeToTags(log, allTagObject)
+    })
+  }
+
+  // for create / patch
+  if (context.params && context.params.logTagFound && context.params.logTagFound.length) {
+    const getAllTagTypes = await context.app.service(addApiPrefix(context.app, 'tag-type')).getAllReduced()
+
+    const allTagObject = createAllTagTypeObject(getAllTagTypes)
+
+    context.params.logTagFound.forEach((tag) => {
+      tag.type = allTagObject[tag.type_id]
     })
   }
 

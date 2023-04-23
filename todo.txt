@@ -20,6 +20,7 @@ dev-log todo
 
 Landing page:
 
+Services being too mixed in BE, mixing of data should happen in stages in hooks!! (log class is already mising tag and tagtype in its methods)
 
 Have working on VPS box
 investigate CI/CD to docker setup

@@ -14,7 +14,7 @@ export class TagTypeService extends KnexService {
     return result
   }
 
-  async getAll() {
+  async getAllReduced() {
     return this.db()
       .select(...REDUCED_TAG_TYPE_ALIAS)
       .whereNull('tag_type.deleted_at')

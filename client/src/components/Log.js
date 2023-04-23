@@ -8,7 +8,7 @@ import { useState } from "react"
 
 function Log({ log }) {
   const [isOpen, setOpen] = useState(false)
-  const classNames = `log ${log.tags.length ? "" : "mb-3"} ${
+  const classNames = `log ${log.tag.length ? "" : "mb-3"} ${
     isOpen ? "open" : ""
   }`
 

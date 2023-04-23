@@ -9,6 +9,7 @@ import { cleanLogValue } from '../../hooks/clean-log-value.js'
 import { parseCustomLogTag } from '../../hooks/parse-custom-log-tag.js'
 import { parseLogForTag } from '../../hooks/parse-log-for-tag.js'
 import { createCustomTag } from '../../hooks/create-custom-tag.js'
+import { getRelatedTagType } from '../../hooks/get-related-tag-type.js'
 
 import {
   logDataValidator,
@@ -52,7 +53,7 @@ export const log = (app) => {
         schemaHooks.resolveQuery(logQueryResolver),
         limitToUser
       ],
-      find: [],
+      find: [getRelatedTagType],
       get: [],
       create: [
         schemaHooks.validateData(logDataValidator),
@@ -75,7 +76,8 @@ export const log = (app) => {
       remove: []
     },
     after: {
-      all: []
+      all: [],
+      find: [getRelatedTagType]
     },
     error: {
       all: []

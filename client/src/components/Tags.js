@@ -3,7 +3,7 @@ import * as React from "react"
 import Tag from "./Tag"
 
 function Tags({ log }) {
-  const tags = log.tags
+  const tags = log.tag
 
   if (!tags.length) return ""
 

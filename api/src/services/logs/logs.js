@@ -5,10 +5,10 @@ import { addApiPrefix } from '../../helpers/add-api-prefix.js'
 import { timeStamp } from '../../hooks/time-stamp.js'
 import { setUserIDFromUser } from '../../hooks/set-user-id-from-user.js'
 import { limitToUser } from '../../hooks/limit-to-user.js'
-import { cleanLogValue } from '../../hooks/clean-log-value.js';
-import { parseCustomLogTags } from '../../hooks/parse-custom-log-tags.js';
-import { parseLogForTags } from '../../hooks/parse-log-for-tags.js';
-import { createCustomTags } from '../../hooks/create-custom-tags.js';
+import { cleanLogValue } from '../../hooks/clean-log-value.js'
+import { parseCustomLogTag } from '../../hooks/parse-custom-log-tag.js'
+import { parseLogForTag } from '../../hooks/parse-log-for-tag.js'
+import { createCustomTag } from '../../hooks/create-custom-tag.js'
 
 import {
   logDataValidator,
@@ -50,7 +50,7 @@ export const log = (app) => {
       all: [
         schemaHooks.validateQuery(logQueryValidator),
         schemaHooks.resolveQuery(logQueryResolver),
-        limitToUser,
+        limitToUser
       ],
       find: [],
       get: [],
@@ -59,17 +59,17 @@ export const log = (app) => {
         schemaHooks.resolveData(logDataResolver),
         setUserIDFromUser,
         cleanLogValue,
-        parseCustomLogTags,
-        parseLogForTags,
-        createCustomTags,
+        parseCustomLogTag,
+        parseLogForTag,
+        createCustomTag
       ],
       patch: [
         schemaHooks.validateData(logPatchValidator),
         schemaHooks.resolveData(logPatchResolver),
         cleanLogValue,
-        parseCustomLogTags,
-        parseLogForTags,
-        createCustomTags,
+        parseCustomLogTag,
+        parseLogForTag,
+        createCustomTag,
         timeStamp('updated_at')
       ],
       remove: []

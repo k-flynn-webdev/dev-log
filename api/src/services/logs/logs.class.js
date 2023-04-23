@@ -1,6 +1,6 @@
 import { KnexService } from '@feathersjs/knex'
 import { NotFound } from '@feathersjs/errors'
-import { REDUCED_TAGS_ALIAS } from '../../constants/global.js'
+import { REDUCED_TAG_ALIAS } from '../../constants/global.js'
 
 // By default calls the standard Knex adapter service methods but can be customized with your own functionality.
 export class LogService extends KnexService {
@@ -17,8 +17,8 @@ export class LogService extends KnexService {
   async create(data, params) {
     const log = await super.create(data, params)
 
-    if (params.logTagsFound.length > 0) {
-      const logTagRows = params.logTagsFound.map((tag) => {
+    if (params.logTagFound.length > 0) {
+      const logTagRows = params.logTagFound.map((tag) => {
         return {
           log_id: log.id,
           tag_id: tag.id
@@ -30,13 +30,13 @@ export class LogService extends KnexService {
 
     return {
       ...log,
-      tags: params.logTagsFound ? params.logTagsFound : []
+      tag: params.logTagFound ? params.logTagFound : []
     }
   }
 
-  async getReducedTags(tagIds) {
+  async getReducedTag(tagIds) {
     return this.db()
-      .select(...REDUCED_TAGS_ALIAS)
+      .select(...REDUCED_TAG_ALIAS)
       .from('tag')
       .whereIn('tag.id', tagIds)
   }
@@ -68,16 +68,16 @@ export class LogService extends KnexService {
 
     const logToTagRows = await this.getLogToTagRows(logIds)
     const logTagIdData = this.getLogToTagIdsObject(logToTagRows)
-    const tagsRelated = await this.getReducedTags(logTagIdData.tagIds)
+    const tagRelated = await this.getReducedTag(logTagIdData.tagIds)
 
     res.data.forEach((_item, idx) => {
-      res.data[idx].tags = []
+      res.data[idx].tag = []
 
       const currentDataLogId = res.data[idx].id
       const currentDataTagIds = logTagIdData.logIds[currentDataLogId]
 
       if (currentDataTagIds) {
-        res.data[idx].tags = currentDataTagIds.map((tagId) => tagsRelated.find((tag) => tag.id === tagId))
+        res.data[idx].tag = currentDataTagIds.map((tagId) => tagRelated.find((tag) => tag.id === tagId))
       }
     })
 

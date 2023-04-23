@@ -13,18 +13,19 @@ export const tagSchema = {
       type: 'number'
     },
     value: { type: 'string' },
-    type: { type: 'string' },
+    type_id: { type: 'number' },
     user_id: { type: 'number' },
+
     created_at: { type: 'string', format: 'date-time', nullable: true },
     updated_at: { type: 'string', format: 'date-time', nullable: true },
-    deleted_at: { type: 'string', format: 'date-time', nullable: true },
+    deleted_at: { type: 'string', format: 'date-time', nullable: true }
   }
 }
 export const tagResolver = resolve({})
 
 export const tagExternalResolver = resolve({})
 
-// Schema for creating new tags
+// Schema for creating new tag
 export const tagDataSchema = {
   $id: 'TagData',
   type: 'object',
@@ -37,7 +38,7 @@ export const tagDataSchema = {
 export const tagDataValidator = getValidator(tagDataSchema, dataValidator)
 export const tagDataResolver = resolve({})
 
-// Schema for updating existing tags
+// Schema for updating existing tag
 export const tagPatchSchema = {
   $id: 'TagPatch',
   type: 'object',

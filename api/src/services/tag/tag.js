@@ -15,15 +15,15 @@ import {
   tagDataResolver,
   tagPatchResolver,
   tagQueryResolver
-} from './tags.schema.js'
-import { TagService, getOptions } from './tags.class.js'
+} from './tag.schema.js'
+import { TagService, getOptions } from './tag.class.js'
 
-export * from './tags.class.js'
-export * from './tags.schema.js'
+export * from './tag.class.js'
+export * from './tag.schema.js'
 
 // A configure function that registers the service and its hooks via `app.configure`
 export const tag = (app) => {
-  const servicePath = addApiPrefix(app, 'tags')
+  const servicePath = addApiPrefix(app, 'tag')
   // Register our service on the Feathers application
   app.use(servicePath, new TagService(getOptions(app)), {
     // A list of all methods this service exposes externally
@@ -43,25 +43,20 @@ export const tag = (app) => {
       remove: [authenticate('jwt')]
     },
     before: {
-      all: [
-        schemaHooks.validateQuery(tagQueryValidator),
-        schemaHooks.resolveQuery(tagQueryResolver),
-      ],
+      all: [schemaHooks.validateQuery(tagQueryValidator), schemaHooks.resolveQuery(tagQueryResolver)],
       find: [],
       get: [],
       create: [
         schemaHooks.validateData(tagDataValidator),
         schemaHooks.resolveData(tagDataResolver),
-        setUserIDFromUser,
+        setUserIDFromUser
       ],
       patch: [
         schemaHooks.validateData(tagPatchValidator),
         schemaHooks.resolveData(tagPatchResolver),
         timeStamp('updated_at')
       ],
-      remove: [
-        limitToUser
-      ]
+      remove: [limitToUser]
     },
     after: {
       all: []

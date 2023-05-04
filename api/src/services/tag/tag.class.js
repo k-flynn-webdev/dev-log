@@ -14,10 +14,20 @@ export class TagService extends KnexService {
     return result
   }
 
-  async getAll() {
-    return this.db()
-      .select(...REDUCED_TAG_ALIAS)
-      .whereNull('tag.deleted_at')
+  async getReduced(id, params) {
+    const result = await super.get(id, { ...params, $select: REDUCED_TAG_ALIAS })
+
+    if (result.deleted_at) {
+      throw new NotFound('Tag removed')
+    }
+
+    return result
+  }
+
+  async getAllReduced(params) {
+    const result = await super.find({ ...params, $select: REDUCED_TAG_ALIAS, $where: { deleted_at: null } })
+
+    return result
   }
 
   async remove(id, params) {

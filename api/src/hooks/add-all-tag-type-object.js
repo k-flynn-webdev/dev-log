@@ -16,7 +16,9 @@ export const createAllTagTypeObject = (tagList) => {
 export const addAllTagTypeObject = async (context) => {
   context.params.allTagTypeObject = {}
 
-  const getAllTagTypes = await context.app.service(addApiPrefix(context.app, 'tag-type')).getAllReduced()
+  const getAllTagTypes = await context.app
+    .service(addApiPrefix(context.app, 'tag-type'))
+    .getAllReduced({ paginate: false })
 
   context.params.allTagTypeObject = createAllTagTypeObject(getAllTagTypes)
 

@@ -9,7 +9,9 @@ import { prepareTag } from '../helpers/prepare-tag.js'
 export const parseLogForTag = async (context) => {
   if (!context.params.logClean) return context
 
-  const allTag = await context.app.service(addApiPrefix(context.app, 'tag')).getAll()
+  const allTag = await context.app
+    .service(addApiPrefix(context.app, 'tag'))
+    .getAllReduced({ paginate: false })
 
   context.params.logTagFound = allTag.reduce((acc, tag) => {
     if (!tag) return acc

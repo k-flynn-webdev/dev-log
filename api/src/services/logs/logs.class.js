@@ -25,6 +25,7 @@ export class LogService extends KnexService {
         }
       })
 
+      // todo: move this into own methods service
       await this.db().from('log_tag').insert(logTagRows)
     }
 

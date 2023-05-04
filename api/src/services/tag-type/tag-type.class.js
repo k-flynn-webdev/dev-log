@@ -14,10 +14,14 @@ export class TagTypeService extends KnexService {
     return result
   }
 
-  async getAllReduced() {
-    return this.db()
-      .select(...REDUCED_TAG_TYPE_ALIAS)
-      .whereNull('tag_type.deleted_at')
+  async getAllReduced(params) {
+    const result = await super.find({
+      ...params,
+      $select: REDUCED_TAG_TYPE_ALIAS,
+      $where: { deleted_at: null }
+    })
+
+    return result
   }
 
   async remove(id, params) {

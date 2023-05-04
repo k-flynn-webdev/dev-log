@@ -9,7 +9,9 @@ import { cleanLogValue } from '../../hooks/clean-log-value.js'
 import { parseCustomLogTag } from '../../hooks/parse-custom-log-tag.js'
 import { parseLogForTag } from '../../hooks/parse-log-for-tag.js'
 import { createCustomTag } from '../../hooks/create-custom-tag.js'
-import { getRelatedTagType } from '../../hooks/get-related-tag-type.js'
+
+import { addAllTagTypeObject } from '../../hooks/add-all-tag-type-object.js'
+import { resolveTagType } from '../../hooks/resolve-tag-type.js'
 
 import {
   logDataValidator,
@@ -25,6 +27,14 @@ import { LogService, getOptions } from './logs.class.js'
 
 export * from './logs.class.js'
 export * from './logs.schema.js'
+
+const LogCreateUpdateProcess = [
+  cleanLogValue,
+  parseCustomLogTag,
+  parseLogForTag,
+  createCustomTag,
+  timeStamp('updated_at')
+]
 
 // A configure function that registers the service and its hooks via `app.configure`
 export const log = (app) => {
@@ -51,7 +61,8 @@ export const log = (app) => {
       all: [
         schemaHooks.validateQuery(logQueryValidator),
         schemaHooks.resolveQuery(logQueryResolver),
-        limitToUser
+        limitToUser,
+        addAllTagTypeObject
       ],
       find: [],
       get: [],
@@ -59,24 +70,17 @@ export const log = (app) => {
         schemaHooks.validateData(logDataValidator),
         schemaHooks.resolveData(logDataResolver),
         setUserIDFromUser,
-        cleanLogValue,
-        parseCustomLogTag,
-        parseLogForTag,
-        createCustomTag
+        ...LogCreateUpdateProcess
       ],
       patch: [
         schemaHooks.validateData(logPatchValidator),
         schemaHooks.resolveData(logPatchResolver),
-        cleanLogValue,
-        parseCustomLogTag,
-        parseLogForTag,
-        createCustomTag,
-        timeStamp('updated_at')
+        ...LogCreateUpdateProcess
       ],
       remove: []
     },
     after: {
-      all: [getRelatedTagType],
+      all: [resolveTagType],
       find: []
     },
     error: {

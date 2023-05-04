@@ -16,7 +16,7 @@ export const logSchema = {
     user_id: { type: 'number' },
     created_at: { type: 'string', format: 'date-time', nullable: true },
     updated_at: { type: 'string', format: 'date-time', nullable: true },
-    deleted_at: { type: 'string', format: 'date-time', nullable: true },
+    deleted_at: { type: 'string', format: 'date-time', nullable: true }
   }
 }
 export const logResolver = resolve({})

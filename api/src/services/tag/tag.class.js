@@ -25,7 +25,13 @@ export class TagService extends KnexService {
   }
 
   async getAllReduced(params) {
-    const result = await super.find({ ...params, $select: REDUCED_TAG_ALIAS, $where: { deleted_at: null } })
+    const result = await super.find({
+      ...params,
+      query: {
+        $select: REDUCED_TAG_ALIAS,
+        deleted_at: null
+      }
+    })
 
     return result
   }

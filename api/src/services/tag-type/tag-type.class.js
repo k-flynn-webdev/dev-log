@@ -17,8 +17,10 @@ export class TagTypeService extends KnexService {
   async getAllReduced(params) {
     const result = await super.find({
       ...params,
-      $select: REDUCED_TAG_TYPE_ALIAS,
-      $where: { deleted_at: null }
+      query: {
+        $select: REDUCED_TAG_TYPE_ALIAS,
+        deleted_at: null
+      }
     })
 
     return result

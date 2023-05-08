@@ -2,6 +2,17 @@ import { KnexService } from '@feathersjs/knex'
 import { NotFound } from '@feathersjs/errors'
 import { REDUCED_TAG_ALIAS } from '../../constants/global.js'
 
+export const createLogTagCols = (logId, tagsFound) => {
+  if (!logId || !tagsFound || !tagsFound.length) return {}
+
+  return tagsFound.map((tag) => {
+    return {
+      log_id: logId,
+      tag_id: tag.id
+    }
+  })
+}
+
 // By default calls the standard Knex adapter service methods but can be customized with your own functionality.
 export class LogService extends KnexService {
   async get(id, params) {
@@ -18,14 +29,9 @@ export class LogService extends KnexService {
     const log = await super.create(data, params)
 
     if (params.logTagFound.length > 0) {
-      const logTagRows = params.logTagFound.map((tag) => {
-        return {
-          log_id: log.id,
-          tag_id: tag.id
-        }
-      })
+      const logTagRows = createLogTagCols(log.id, params.logTagFound)
 
-      // todo: move this into own methods service
+      // todo: move this into own methods service / investigate
       await this.db().from('log_tag').insert(logTagRows)
     }
 

@@ -9,11 +9,11 @@ import { prepareTag } from '../helpers/prepare-tag.js'
 export const parseLogForTag = async (context) => {
   if (!context.params.logClean) return context
 
-  const allTag = await context.app
+  const allTags = await context.app
     .service(addApiPrefix(context.app, 'tag'))
     .find({ paginate: false, getReduced: true })
 
-  context.params.logTagFound = allTag.reduce((acc, tag) => {
+  context.params.logTagFound = allTags.reduce((acc, tag) => {
     if (!tag) return acc
 
     const tagValueCheck = tag.value.startsWith('#') ? prepareTag(tag.value) : prepareTag(tag.value, '  ')

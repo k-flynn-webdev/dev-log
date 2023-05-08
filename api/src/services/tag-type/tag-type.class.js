@@ -14,14 +14,24 @@ export class TagTypeService extends KnexService {
     return result
   }
 
-  async getAllReduced(params) {
+  async find(params) {
     const result = await super.find({
-      ...params,
       query: {
-        $select: REDUCED_TAG_TYPE_ALIAS,
-        deleted_at: null
-      }
+        deleted_at: null,
+        $select: params.getReduced ? REDUCED_TAG_TYPE_ALIAS : '*'
+      },
+      ...params
     })
+
+    const ERROR_MSG = 'No Tag Type found'
+
+    if (result && result.data && result.data.length === 0) {
+      throw new NotFound(ERROR_MSG)
+    }
+
+    if (result && Array.isArray(result) && result.length === 0) {
+      throw new NotFound(ERROR_MSG)
+    }
 
     return result
   }

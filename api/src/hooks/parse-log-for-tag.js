@@ -2,7 +2,7 @@ import { addApiPrefix } from '../helpers/add-api-prefix.js'
 import { prepareTag } from '../helpers/prepare-tag.js'
 
 /**
- * Compares clean log input against all known tag
+ * Compares clean log input against all known tags
  *
  * @return {function(*): *}
  */
@@ -11,7 +11,7 @@ export const parseLogForTag = async (context) => {
 
   const allTag = await context.app
     .service(addApiPrefix(context.app, 'tag'))
-    .getAllReduced({ paginate: false })
+    .find({ paginate: false, getReduced: true })
 
   context.params.logTagFound = allTag.reduce((acc, tag) => {
     if (!tag) return acc

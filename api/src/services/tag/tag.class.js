@@ -14,24 +14,24 @@ export class TagService extends KnexService {
     return result
   }
 
-  async getReduced(id, params) {
-    const result = await super.get(id, { ...params, $select: REDUCED_TAG_ALIAS })
-
-    if (result.deleted_at) {
-      throw new NotFound('Tag removed')
-    }
-
-    return result
-  }
-
-  async getAllReduced(params) {
+  async find(params) {
     const result = await super.find({
       query: {
-        $select: REDUCED_TAG_ALIAS,
-        deleted_at: null
+        deleted_at: null,
+        $select: params.getReduced ? REDUCED_TAG_ALIAS : '*'
       },
       ...params
     })
+
+    const ERROR_MSG = 'No Tag found'
+
+    if (result && result.data && result.data.length === 0) {
+      throw new NotFound(ERROR_MSG)
+    }
+
+    if (result && Array.isArray(result) && result.length === 0) {
+      throw new NotFound(ERROR_MSG)
+    }
 
     return result
   }

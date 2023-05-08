@@ -18,7 +18,7 @@ export const addAllTagTypeObject = async (context) => {
 
   const getAllTagTypes = await context.app
     .service(addApiPrefix(context.app, 'tag-type'))
-    .getAllReduced({ paginate: false })
+    .find({ paginate: false, getReduced: true })
 
   context.params.allTagTypeObject = createAllTagTypeObject(getAllTagTypes)
 

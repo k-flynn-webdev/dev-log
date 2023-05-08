@@ -26,11 +26,11 @@ export class TagService extends KnexService {
 
   async getAllReduced(params) {
     const result = await super.find({
-      ...params,
       query: {
         $select: REDUCED_TAG_ALIAS,
         deleted_at: null
-      }
+      },
+      ...params
     })
 
     return result

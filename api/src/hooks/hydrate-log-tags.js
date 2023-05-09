@@ -27,15 +27,19 @@ export const createLogIdToTagIdObject = (logs) => {
 
 export const resolveLogTags = (logs, logIdToTagIdObject, allTagObject) => {
   return logs.map((log) => {
-    const tagsRelated = logIdToTagIdObject[log.id].tag.reduce((acc, tagId) => {
+    const newLog = {
+      ...log,
+      tag: []
+    }
+
+    if (!logIdToTagIdObject[log.id]) return newLog
+
+    newLog.tag = logIdToTagIdObject[log.id].tag.reduce((acc, tagId) => {
       if (allTagObject[tagId]) acc.push(allTagObject[tagId])
       return acc
     }, [])
 
-    return {
-      ...log,
-      tag: tagsRelated
-    }
+    return newLog
   })
 }
 

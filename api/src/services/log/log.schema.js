@@ -23,7 +23,7 @@ export const logResolver = resolve({})
 
 export const logExternalResolver = resolve({})
 
-// Schema for creating new logs
+// Schema for creating new log
 export const logDataSchema = {
   $id: 'LogData',
   type: 'object',
@@ -36,7 +36,7 @@ export const logDataSchema = {
 export const logDataValidator = getValidator(logDataSchema, dataValidator)
 export const logDataResolver = resolve({})
 
-// Schema for updating existing logs
+// Schema for updating existing log
 export const logPatchSchema = {
   $id: 'LogPatch',
   type: 'object',

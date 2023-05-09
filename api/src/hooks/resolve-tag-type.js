@@ -1,4 +1,6 @@
 export const addTagTypeToTags = (log, allTagObject) => {
+  if (!log.tag || !log.tag.length) return
+
   log.tag.forEach((tag) => {
     tag.type = allTagObject[tag.type_id]
   })

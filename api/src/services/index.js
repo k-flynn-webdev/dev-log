@@ -1,5 +1,5 @@
 import { user } from './users/users.js'
-import { log } from './logs/logs.js'
+import { log } from './log/log.js'
 import { tag } from './tag/tag.js'
 import { tagType } from './tag-type/tag-type.js'
 import { email } from './email/email.service.js'

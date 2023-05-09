@@ -16,11 +16,11 @@ export class TagService extends KnexService {
 
   async find(params) {
     const result = await super.find({
+      ...params,
       query: {
         deleted_at: null,
         $select: params.getReduced ? REDUCED_TAG_ALIAS : '*'
-      },
-      ...params
+      }
     })
 
     const ERROR_MSG = 'No Tag found'

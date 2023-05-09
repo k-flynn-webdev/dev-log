@@ -12,6 +12,7 @@ import { createCustomTag } from '../../hooks/create-custom-tag.js'
 
 import { addAllTagTypeObject } from '../../hooks/add-all-tag-type-object.js'
 import { resolveTagType } from '../../hooks/resolve-tag-type.js'
+import { hydrateLogTags } from '../../hooks/hydrate-log-tags.js'
 
 import {
   logDataValidator,
@@ -22,11 +23,11 @@ import {
   logDataResolver,
   logPatchResolver,
   logQueryResolver
-} from './logs.schema.js'
-import { LogService, getOptions } from './logs.class.js'
+} from './log.schema.js'
+import { LogService, getOptions } from './log.class.js'
 
-export * from './logs.class.js'
-export * from './logs.schema.js'
+export * from './log.class.js'
+export * from './log.schema.js'
 
 const LogCreateUpdateProcess = [
   cleanLogValue,
@@ -38,7 +39,7 @@ const LogCreateUpdateProcess = [
 
 // A configure function that registers the service and its hooks via `app.configure`
 export const log = (app) => {
-  const servicePath = addApiPrefix(app, 'logs')
+  const servicePath = addApiPrefix(app, 'log')
   // Register our service on the Feathers application
   app.use(servicePath, new LogService(getOptions(app)), {
     // A list of all methods this service exposes externally
@@ -80,7 +81,7 @@ export const log = (app) => {
       remove: []
     },
     after: {
-      all: [resolveTagType],
+      all: [hydrateLogTags, resolveTagType],
       find: []
     },
     error: {

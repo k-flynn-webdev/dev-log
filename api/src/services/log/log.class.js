@@ -71,7 +71,8 @@ export class LogService extends KnexService {
       ...params,
       query: {
         deleted_at: null,
-        $select: params.getReduced ? REDUCED_LOG_ALIAS : '*'
+        $select: params.getReduced ? REDUCED_LOG_ALIAS : '*',
+        ...params.query
       }
     })
 

@@ -19,7 +19,8 @@ export class TagService extends KnexService {
       ...params,
       query: {
         deleted_at: null,
-        $select: params.getReduced ? REDUCED_TAG_ALIAS : '*'
+        $select: params.getReduced ? REDUCED_TAG_ALIAS : '*',
+        ...params.query
       }
     })
 

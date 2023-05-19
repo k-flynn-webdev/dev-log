@@ -55,14 +55,16 @@ export class LogService extends KnexService {
       }
     })
 
-    const ERROR_MSG = 'No Tag found'
+    if (params.paginate) {
+      const ERROR_MSG = 'No Log found'
 
-    if (result && result.data && result.data.length === 0) {
-      throw new NotFound(ERROR_MSG)
-    }
+      if (result && result.data && result.data.length === 0) {
+        throw new NotFound(ERROR_MSG)
+      }
 
-    if (result && Array.isArray(result) && result.length === 0) {
-      throw new NotFound(ERROR_MSG)
+      if (result && Array.isArray(result) && result.length === 0) {
+        throw new NotFound(ERROR_MSG)
+      }
     }
 
     return result

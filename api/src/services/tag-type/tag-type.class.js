@@ -24,14 +24,16 @@ export class TagTypeService extends KnexService {
       }
     })
 
-    const ERROR_MSG = 'No Tag Type found'
+    if (params.paginate) {
+      const ERROR_MSG = 'No Tag Type found'
 
-    if (result && result.data && result.data.length === 0) {
-      throw new NotFound(ERROR_MSG)
-    }
+      if (result && result.data && result.data.length === 0) {
+        throw new NotFound(ERROR_MSG)
+      }
 
-    if (result && Array.isArray(result) && result.length === 0) {
-      throw new NotFound(ERROR_MSG)
+      if (result && Array.isArray(result) && result.length === 0) {
+        throw new NotFound(ERROR_MSG)
+      }
     }
 
     return result

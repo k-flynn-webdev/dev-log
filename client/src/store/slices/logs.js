@@ -11,7 +11,7 @@ const defaultPaginate = {
 }
 
 export const getLogs = createAsyncThunk("logs/get", async (arg, thunkAPI) => {
-  return get("logs", { params: { ...defaultPaginate, ...arg } })
+  return get("log", { params: { ...defaultPaginate, ...arg } })
     .then(res => {
       thunkAPI.dispatch({
         type: "logs/listLogs",
@@ -31,7 +31,7 @@ export const getLogs = createAsyncThunk("logs/get", async (arg, thunkAPI) => {
 export const patchLogAPI = createAsyncThunk(
   "logs/patchAPI",
   async (arg, thunkAPI) => {
-    return patch(`logs/${arg.id}`, { value: arg.value })
+    return patch(`log/${arg.id}`, { value: arg.value })
       .then(res => {
         thunkAPI.dispatch({
           type: "logs/patchLog",
@@ -52,7 +52,7 @@ export const patchLogAPI = createAsyncThunk(
 export const removeLogAPI = createAsyncThunk(
   "logs/removeAPI",
   async (arg, thunkAPI) => {
-    return remove(`logs/${arg.id}`)
+    return remove(`log/${arg.id}`)
       .then(res => {
         thunkAPI.dispatch({
           type: "logs/removeLog",

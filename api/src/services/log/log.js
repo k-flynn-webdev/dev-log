@@ -5,10 +5,14 @@ import { addApiPrefix } from '../../helpers/add-api-prefix.js'
 import { timeStamp } from '../../hooks/time-stamp.js'
 import { setUserIDFromUser } from '../../hooks/set-user-id-from-user.js'
 import { limitToUser } from '../../hooks/limit-to-user.js'
-import { cleanLogValue } from '../../hooks/clean-log-value.js';
-import { parseCustomLogTags } from '../../hooks/parse-custom-log-tags.js';
-import { parseLogForTags } from '../../hooks/parse-log-for-tags.js';
-import { createCustomTags } from '../../hooks/create-custom-tags.js';
+import { cleanLogValue } from '../../hooks/clean-log-value.js'
+import { parseCustomLogTag } from '../../hooks/parse-custom-log-tag.js'
+import { parseLogForTag } from '../../hooks/parse-log-for-tag.js'
+import { createCustomTag } from '../../hooks/create-custom-tag.js'
+
+import { addAllTagTypeObject } from '../../hooks/add-all-tag-type-object.js'
+import { resolveTagType } from '../../hooks/resolve-tag-type.js'
+import { hydrateLogTags } from '../../hooks/hydrate-log-tags.js'
 
 import {
   logDataValidator,
@@ -19,15 +23,23 @@ import {
   logDataResolver,
   logPatchResolver,
   logQueryResolver
-} from './logs.schema.js'
-import { LogService, getOptions } from './logs.class.js'
+} from './log.schema.js'
+import { LogService, getOptions } from './log.class.js'
 
-export * from './logs.class.js'
-export * from './logs.schema.js'
+export * from './log.class.js'
+export * from './log.schema.js'
+
+const LogCreateUpdateProcess = [
+  cleanLogValue,
+  parseCustomLogTag,
+  parseLogForTag,
+  createCustomTag,
+  timeStamp('updated_at')
+]
 
 // A configure function that registers the service and its hooks via `app.configure`
 export const log = (app) => {
-  const servicePath = addApiPrefix(app, 'logs')
+  const servicePath = addApiPrefix(app, 'log')
   // Register our service on the Feathers application
   app.use(servicePath, new LogService(getOptions(app)), {
     // A list of all methods this service exposes externally
@@ -51,6 +63,7 @@ export const log = (app) => {
         schemaHooks.validateQuery(logQueryValidator),
         schemaHooks.resolveQuery(logQueryResolver),
         limitToUser,
+        addAllTagTypeObject
       ],
       find: [],
       get: [],
@@ -58,24 +71,18 @@ export const log = (app) => {
         schemaHooks.validateData(logDataValidator),
         schemaHooks.resolveData(logDataResolver),
         setUserIDFromUser,
-        cleanLogValue,
-        parseCustomLogTags,
-        parseLogForTags,
-        createCustomTags,
+        ...LogCreateUpdateProcess
       ],
       patch: [
         schemaHooks.validateData(logPatchValidator),
         schemaHooks.resolveData(logPatchResolver),
-        cleanLogValue,
-        parseCustomLogTags,
-        parseLogForTags,
-        createCustomTags,
-        timeStamp('updated_at')
+        ...LogCreateUpdateProcess
       ],
       remove: []
     },
     after: {
-      all: []
+      all: [hydrateLogTags, resolveTagType],
+      find: []
     },
     error: {
       all: []

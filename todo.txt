@@ -14,10 +14,21 @@ fe hashtag on tags missing: done
 add log button menu click: done
 add user patch log flow: done
 add user delete log flow: done
+Look into better database schema for tags, type should NOT be just text should be IDs of other parent tags???: done
+Services being too mixed in BE, mixing of data should happen in stages in hooks!! (log class is already mising tag and tagtype in its methods): done
+do a more thorough cleanup of services, started with tagtype and tag, still to do logs properly!!!!: done
+add API hot reload on dev docker: done
 
-dev-log todo:
+dev-log todo
 
-log max input warning at full is'mt looking good
+Landing page:
+
+
+Have working on VPS box
+investigate CI/CD to docker setup
+add CI/CD to docker setup
+
+log max input warning at full is'nt looking good
 
 have a loading page when user might exists, main page flashes
 
@@ -30,14 +41,12 @@ add testing automation on git merge
 
 add favicon for app
 
-add user edit password
+add contact us web form
+
+add user edit password: done
 add user delete account option
-add user request all data option
+add user request all data option GDPR
 
-add user remove tags attached to log option
-
-investigate CI/CD to docker setup
-add CI/CD to docker setup
 
 add user edit profile page
 add user view details page (logs/tags)
@@ -49,7 +58,8 @@ add admin interface for logs
 add admin interface for tags
 add admin view all activity
 
-add user search history
-add get tags as user types input feedback
+
+tag prediction as user types -  feedback effect (make it nice and addictive for adding logs)
+
 implement skins / theme
 icons for well known tags ?

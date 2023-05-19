@@ -15,7 +15,7 @@ export const logTags = state => state.logInput.tags
 export const create = createAsyncThunk(
   "logInput/create",
   async (arg, thunkAPI) => {
-    return post("logs", {
+    return post("log", {
       value: logValue(thunkAPI.getState()),
     })
       .then(res => {

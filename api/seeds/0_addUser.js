@@ -1,5 +1,4 @@
-const USER_ID = 1
-
+export const USER_ID = 1
 export const USER_01 = { name: 'user', email: 'testtest@testtesttest.com' }
 
 /**

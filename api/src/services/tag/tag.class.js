@@ -1,6 +1,6 @@
 import { KnexService } from '@feathersjs/knex'
 import { NotFound } from '@feathersjs/errors'
-import { REDUCED_TAGS_ALIAS } from '../../constants/global.js';
+import { REDUCED_TAG_ALIAS } from '../../constants/global.js'
 
 // By default calls the standard Knex adapter service methods but can be customized with your own functionality.
 export class TagService extends KnexService {
@@ -14,10 +14,29 @@ export class TagService extends KnexService {
     return result
   }
 
-  async getAll() {
-    return this.db()
-        .select(...REDUCED_TAGS_ALIAS)
-        .whereNull('tag.deleted_at' )
+  async find(params) {
+    const result = await super.find({
+      ...params,
+      query: {
+        deleted_at: null,
+        $select: params.getReduced ? REDUCED_TAG_ALIAS : '*',
+        ...params.query
+      }
+    })
+
+    if (params.paginate) {
+      const ERROR_MSG = 'No Tag found'
+
+      if (result && result.data && result.data.length === 0) {
+        throw new NotFound(ERROR_MSG)
+      }
+
+      if (result && Array.isArray(result) && result.length === 0) {
+        throw new NotFound(ERROR_MSG)
+      }
+    }
+
+    return result
   }
 
   async remove(id, params) {

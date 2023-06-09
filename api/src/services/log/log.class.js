@@ -45,6 +45,18 @@ export class LogService extends KnexService {
     return this.db().select('*').from('log_tag').whereIn('log_tag.log_id', logIds)
   }
 
+  async getTotalLogCount(userId) {
+    const tagsTotal = await super.find({
+      query: {
+        deleted_at: null,
+        $limit: 0,
+        user_id: userId
+      }
+    })
+
+    return tagsTotal?.total || 0
+  }
+
   async find(params) {
     const result = await super.find({
       ...params,

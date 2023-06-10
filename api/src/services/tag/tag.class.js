@@ -14,6 +14,18 @@ export class TagService extends KnexService {
     return result
   }
 
+  async getTotalTagCount(userId) {
+    const tagsTotal = await super.find({
+      query: {
+        deleted_at: null,
+        $limit: 0,
+        user_id: userId
+      }
+    })
+
+    return tagsTotal?.total || 0
+  }
+
   async find(params) {
     const result = await super.find({
       ...params,

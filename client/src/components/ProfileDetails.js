@@ -6,8 +6,8 @@ const profileDetailsToShow = {
     label: "Joined",
     render: profile => new Date(profile.created_at).toLocaleDateString(),
   },
-  log_count: { label: "Logs created", render: profile => profile.log_count },
-  tag_count: { label: "Tags created", render: profile => profile.tag_count },
+  log_total: { label: "Logs", render: profile => profile.log_total },
+  tag_total: { label: "Tags", render: profile => profile.tag_total },
 }
 
 function ProfileDetails({ profileDetails }) {

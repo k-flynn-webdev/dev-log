@@ -4,6 +4,8 @@ import { hooks as schemaHooks } from '@feathersjs/schema'
 import { addApiPrefix } from '../../helpers/add-api-prefix.js'
 import { timeStamp } from '../../hooks/time-stamp.js'
 import { disallow, iff, isProvider, preventChanges } from 'feathers-hooks-common'
+import { setUserLogTotal } from '../../hooks/set-user-log-total.js'
+import { setUserTagTotal } from '../../hooks/set-user-tag-total.js'
 
 import {
   userDataValidator,
@@ -74,7 +76,8 @@ export const user = (app) => {
       remove: []
     },
     after: {
-      all: []
+      all: [],
+      find: [setUserLogTotal, setUserTagTotal]
     },
     error: {
       all: []

@@ -148,8 +148,8 @@ export const initProfile = () => {
     name: "",
     email: "",
     meta: "",
-    log_count: 0,
-    tag_count: 0,
+    log_total: 0,
+    tag_total: 0,
     created_at: null,
     updated_at: null,
   }

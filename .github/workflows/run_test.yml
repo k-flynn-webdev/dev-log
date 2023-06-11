@@ -3,7 +3,10 @@ name: Run unit tests for API and CLIENT
 # Sets the events which will trigger the Action
 # `push` = any "push" action to the GitHub "remote",
 # changes to any branch will be considered
-on: [push, pull_request, release]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   # `build` is a user-defined name for this job

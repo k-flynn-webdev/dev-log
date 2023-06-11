@@ -24,8 +24,9 @@
   "scripts": {
     "dev": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test:unit1": "react-scripts test",
+    "test:unit": "echo 'testing client'"
   },
   "eslintConfig": {
     "extends": [

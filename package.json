@@ -15,6 +15,9 @@
   "scripts": {
     "docker:dev": "docker-compose -f docker-compose.yml up -d",
     "docker:dev:rebuild": "docker compose -f docker-compose.yml up -d --build --force-recreate",
+    "test:unit": "npm run test:api:unit && npm run test:client:unit",
+    "test:api:unit": "cd ./api && npm run test:unit",
+    "test:client:unit": "cd ./client && npm run test:unit",
     "lint": "eslint *.js",
     "format": "prettier --ignore-path .gitignore --write ."
   },

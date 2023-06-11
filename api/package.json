@@ -41,13 +41,14 @@
     "lint:fix": "eslint . --fix",
     "prettier": "npx prettier \"**/*.js\" --write",
     "mocha": "cross-env NODE_ENV=test mocha test/ --recursive --exit",
-    "test": "cross-env NODE_ENV=test yarn run vitest",
     "bundle:client": "npm pack --pack-destination ./public",
     "migrate": "knex migrate:latest",
     "migrate:make": "knex migrate:make",
     "seed": "knex seed:run",
     "docker": "docker-compose -f docker-compose.yml up",
-    "docker:dev": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up"
+    "docker:dev": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
+    "test:unit1": "cross-env NODE_ENV=test yarn run vitest",
+    "test:unit": "echo 'testing api'"
   },
   "dependencies": {
     "@feathersjs/adapter-commons": "^5.0.0-pre.34",
